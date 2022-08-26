@@ -79,6 +79,10 @@ namespace NitroStudio2 {
             seqArcSeqPanel.Show();
             seqBankPanel.BringToFront();
             seqBankPanel.Show();
+
+            swavLoopLengthLabel.Visible = swavLoopLengthUpDown.Visible =
+            swavLoopStartLabel.Visible = swavLoopStartUpDown.Visible = false;
+
             kermalisSoundPlayerPanel.Show();
             Player = new Player(Mixer);
             Player.NotePressed += new NotePressedHandler(NotePressed);

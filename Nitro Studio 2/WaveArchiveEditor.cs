@@ -12,11 +12,15 @@ using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
 namespace NitroStudio2 {
-
     /// <summary>
     /// Wave archive editor.
     /// </summary>
     public class WaveArchiveEditor : EditorBase {
+        /// <summary>
+        /// Stores old selected element. 
+        /// Can prevent gui from refreshing when not necessary.
+        /// </summary>
+        TreeNode oldSelection;
 
         /// <summary>
         /// Wave archive.
@@ -107,21 +111,37 @@ namespace NitroStudio2 {
             if (!FileOpen || File == null) {
                 return;
             }
-
-            //Parent is not null.
-            if (tree.SelectedNode.Parent != null) {
-                blankPanel.BringToFront();
-                blankPanel.Show();
-                kermalisSoundPlayerPanel.BringToFront();
-                kermalisSoundPlayerPanel.Show();
-                status.Text = "Wave " + tree.SelectedNode.Index + " Selected. " + (WA.Waves[tree.SelectedNode.Index].Loops ? "(Loops)" : "(Doesn't Loop)") + " File Is " + MainWindow.GetBytesSize(WA.Waves[tree.SelectedNode.Index]) + ".";
-            } else {
+            
+            if (tree.SelectedNode.Parent == null) {
                 HideStuff();
                 noInfoPanel.BringToFront();
                 noInfoPanel.Show();
                 status.Text = "No Valid Info Selected!";
+            } else {
+                Wave cur = WA.Waves[tree.SelectedNode.Index];
+
+                if (oldSelection == null) {
+                    blankPanel.BringToFront();
+                    blankPanel.Show();
+
+                    kermalisSoundPlayerPanel.BringToFront();
+                    kermalisSoundPlayerPanel.Show();
+                }
+
+                if (cur != null) {
+                    kermalisLoopBox.Checked = cur.Loops;
+                    swavLoopStartUpDown.Value = cur.LoopStart / 8 + 1;
+                    swavLoopLengthUpDown.Value = cur.LoopEnd;
+
+                    status.Text = "Wave " + tree.SelectedNode.Index + " Selected. " +
+                        cur.Audio.NumSamples + " samples long " + (cur.Loops ? "(Looping)" : "(Not Looping)") +
+                        ", " + cur.SampleRate + " Hz" +
+                        ", " + MainWindow.GetBytesSize(cur) + ".";
+                }
             }
 
+            //Parent is not null.
+            oldSelection = tree.SelectedNode.Parent;
         }
 
         /// <summary>
@@ -201,7 +221,11 @@ namespace NitroStudio2 {
         /// Loop changed.
         /// </summary>
         public void LoopChanged(object sender, EventArgs e) {
+            swavLoopLengthLabel.Visible = swavLoopLengthUpDown.Visible =
+            swavLoopStartLabel.Visible = swavLoopStartUpDown.Visible =
+
             Player.Loop = kermalisLoopBox.Checked;
+            Player.Stop();
         }
 
         /// <summary>
@@ -239,9 +263,10 @@ namespace NitroStudio2 {
         public void AddWave(int index) {
 
             //Get the file.
-            OpenFileDialog o = new OpenFileDialog();
-            o.Filter = "Supported Audio Files|*.wav;*.swav;*.strm";
-            o.RestoreDirectory = true;
+            OpenFileDialog o = new OpenFileDialog {
+                Filter = "Supported Audio Files|*.wav;*.swav;*.strm",
+                RestoreDirectory = true
+            };
             o.ShowDialog();
 
             //If valid.
@@ -325,9 +350,10 @@ namespace NitroStudio2 {
         public override void NodeReplace() {
 
             //Get the file.
-            OpenFileDialog o = new OpenFileDialog();
-            o.Filter = "Supported Audio Files|*.wav;*.swav;*.strm";
-            o.RestoreDirectory = true;
+            OpenFileDialog o = new OpenFileDialog {
+                Filter = "Supported Audio Files|*.wav;*.swav;*.strm",
+                RestoreDirectory = true
+            };
             o.ShowDialog();
 
             //If valid.

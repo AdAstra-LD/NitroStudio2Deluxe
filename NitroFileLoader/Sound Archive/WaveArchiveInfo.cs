@@ -67,18 +67,24 @@ namespace NitroFileLoader {
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="name">The name.</param>
-        public void WriteTextFormat(string path, string name) {
-
+        public void WriteTextFormat(string path, string name, bool writeWav = false) {
             //SWLS.
             List<string> swls = new List<string>();
             int ind = 0;
             Directory.CreateDirectory(path + "/" + name);
+
             foreach (var w in File.Waves) {
                 swls.Add(name + "/" + ind.ToString("D4") + ".adpcm.swav");
-                w.Write(path + "/" + name + "/" + ind.ToString("D4") + ".adpcm.swav");
-                RiffWave r = new RiffWave();
-                r.FromOtherStreamFile(w);
-                r.Write(path + "/" + name + "/" + ind.ToString("D4") + ".wav");
+
+                string samplePrefix = path + "/" + name + "/" + ind.ToString("D4");
+                w.Write(samplePrefix + ".adpcm.swav");
+
+                if (writeWav) {
+                    RiffWave r = new RiffWave();
+                    r.FromOtherStreamFile(w);
+                    r.Write(samplePrefix + ".wav");
+                }
+
                 ind++;
             }
             System.IO.File.WriteAllLines(path + "/" + name + ".swls", swls);

@@ -149,9 +149,21 @@ namespace NitroFileLoader {
             w.Write(Loops);
             w.Write((ushort)SampleRate);
             ushort nTimeSampleRate = (ushort)(16756991 / SampleRate);
-            if (BackupNTime != 0) { w.Write(BackupNTime); } else { w.Write(nTimeSampleRate); }
-            if (Loops) { w.Write((ushort)(Sample2Offset(LoopStart, pcmFormat) / 4)); } else { w.Write((ushort)(pcmFormat == PcmFormat.Encoded ? 1 : 0)); }
-            if (Loops) { w.Write((uint)((Audio.DataSize - Sample2Offset(LoopStart, pcmFormat)) / 4)); } else { w.Write((uint)((Audio.DataSize - Sample2Offset((uint)(pcmFormat == PcmFormat.Encoded ? 1 : 0), pcmFormat)) / 4)); }
+            
+            if (BackupNTime == 0) {
+                w.Write(nTimeSampleRate);
+            } else {
+                w.Write(BackupNTime);
+            }
+
+            if (Loops) { 
+                w.Write((ushort)(Sample2Offset(LoopStart, pcmFormat) / 4));
+                w.Write((uint)((Audio.DataSize - Sample2Offset(LoopStart, pcmFormat)) / 4));
+
+            } else { 
+                w.Write((ushort)(pcmFormat == PcmFormat.Encoded ? 1 : 0));
+                w.Write((uint)((Audio.DataSize - Sample2Offset((uint)(pcmFormat == PcmFormat.Encoded ? 1 : 0), pcmFormat)) / 4));
+            }
             Audio.Write(w);
 
         }

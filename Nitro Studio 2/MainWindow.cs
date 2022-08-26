@@ -279,7 +279,9 @@ namespace NitroStudio2 {
             //If file open.
             if (!FileOpen || File == null) {
                 HideStuff();
-                if (Player != null) { StopClick(this, null); }
+                if (Player != null) { 
+                    StopClick(this, null); 
+                }
                 return;
             }
 
@@ -316,6 +318,10 @@ namespace NitroStudio2 {
                         indexPanel.Show();
                         forceUniqueFilePanel.Show();
                         kermalisSoundPlayerPanel.Show();
+
+                        swavLoopLengthLabel.Visible = swavLoopLengthUpDown.Visible =
+                        swavLoopStartLabel.Visible = swavLoopStartUpDown.Visible = false;
+
                         seqPanel.Show();
                         var e = SA.Sequences.Where(x => x.Index == GetIdFromNode(tree.SelectedNode)).FirstOrDefault();
                         itemIndexBox.Value = e.Index;
@@ -2986,6 +2992,7 @@ namespace NitroStudio2 {
                     wav.Loops = r.Loops;
                     wav.LoopStart = r.LoopStart;
                     wav.LoopEnd = r.LoopLength == 0 ? (uint)wav.Audio.NumSamples : r.LoopStart + r.LoopLength;
+                    
                     string md5 = wav.Md5Sum;
                     if (!md5s.Contains(md5)) {
                         wavSamples.Add(wav);
@@ -2999,7 +3006,9 @@ namespace NitroStudio2 {
             WaveMapper wm = new WaveMapper(wavSamples, wars);
             wm.ShowDialog();
             var warMap = wm.WarMap;
-            if (warMap == null) { return; }
+            if (warMap == null) { 
+                return; 
+            }
 
             //Add waves.
             Dictionary<int, Tuple<ushort, ushort>> swavMap = new Dictionary<int, Tuple<ushort, ushort>>();

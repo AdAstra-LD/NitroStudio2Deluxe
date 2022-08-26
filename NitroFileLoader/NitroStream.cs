@@ -112,18 +112,14 @@ namespace NitroFileLoader {
             w.Write((uint)0x50);
 
             //Format.
-            PcmFormat pcmFormat = PcmFormat.Encoded;
             uint blockSamples = (uint)Audio.NumSamples;
             uint blockSize = (uint)Audio.DataSize;
             if (Audio.EncodingType.Equals(typeof(PCM8Signed))) {
                 w.Write((byte)PcmFormat.SignedPCM8);
-                pcmFormat = PcmFormat.SignedPCM8;
             } else if (Audio.EncodingType.Equals(typeof(PCM16))) {
                 w.Write((byte)PcmFormat.PCM16);
-                pcmFormat = PcmFormat.PCM16;
             } else if (Audio.EncodingType.Equals(typeof(ImaAdpcm))) {
                 w.Write((byte)PcmFormat.Encoded);
-                pcmFormat = PcmFormat.Encoded;
                 blockSize = (uint)Audio.BlockSize;
                 blockSamples = (blockSize - 4) * 2;
             } else {
@@ -149,15 +145,16 @@ namespace NitroFileLoader {
             Audio.Write(w);
             w.Pad(4);
             long bak2 = w.Position;
+            
             w.Position = bak + 4;
             w.Write((uint)(bak2 - bak));
             w.Position = bak2;
             w.CloseFile();
             bak = w.Position;
+
             w.Position = countOff;
             w.Write((ushort)2);
             w.Position = bak;
-
         }
 
         /// <summary>

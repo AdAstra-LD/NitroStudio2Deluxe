@@ -238,19 +238,22 @@ namespace NitroFileLoader {
                 foreach (var n in inst.NoteInfo) {
 
                     //New region.
-                    Region r = new Region();
+                    Region r = new Region {
+                        //Set note info.
+                        VelocityLow = 0,
+                        VelocityHigh = 127,
+                        NoteLow = lastNote,
+                        NoteHigh = (inst as DirectInstrument != null) ? (byte)127 : (byte)n.Key,
 
-                    //Set note info.
-                    r.VelocityLow = 0;
-                    r.VelocityHigh = 127;
-                    r.NoteLow = lastNote;
-                    r.NoteHigh = (inst as DirectInstrument != null) ? (byte)127 : (byte)n.Key;
+                        ChannelFlags = 1,
+                        DoublePlayback = true,
+                        Layer = 1,
+                        NoTruncation = true,
+                        RootNote = n.BaseNote,
+                    };
+
                     lastNote = (byte)(n.Key + 1);
-                    r.ChannelFlags = 1;
-                    r.DoublePlayback = true;
-                    r.Layer = 1;
-                    r.NoTruncation = true;
-                    r.RootNote = (byte)n.BaseNote;
+
 
                     //Wave data.
                     int wavInd = 0;
@@ -261,6 +264,7 @@ namespace NitroFileLoader {
                                 var p = b.WaveArchives[n.WarId].File.Waves[n.WaveId];
                                 key = (uint)(b.WaveArchives[n.WarId].Index << 16) | n.WaveId;
                             } catch { }
+
                             if (key != 0xFFFFFFFF) {
                                 if (!waveMap.ContainsKey(key)) {
                                     RiffWave pcm = new RiffWave();
