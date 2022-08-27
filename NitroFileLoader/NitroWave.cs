@@ -17,7 +17,9 @@ namespace NitroFileLoader {
         /// Supported encodings.
         /// </summary>
         /// <returns>The supported encodings.</returns>
-        public override Type[] SupportedEncodings() => new Type[] { typeof(ImaAdpcm), typeof(PCM16), typeof(PCM8Signed) };
+        public override Type[] SupportedEncodings() => new Type[] { 
+            typeof(ImaAdpcm), typeof(PCM16), typeof(PCM8Signed) 
+        };
 
         /// <summary>
         /// Name.
@@ -70,6 +72,7 @@ namespace NitroFileLoader {
             var w = ReadShortened(r, dataSize);
             Loops = w.Loops;
             LoopStart = w.LoopStart;
+            LoopLength = w.LoopLength;
             LoopEnd = w.LoopEnd;
             SampleRate = w.SampleRate;
             Audio = w.Audio;
@@ -92,15 +95,15 @@ namespace NitroFileLoader {
             w.SampleRate = r.ReadUInt16();
             w.BackupNTime = r.ReadUInt16();
             w.LoopStart = r.ReadUInt16();
-            r.ReadUInt32(); //Non-loop length.
-
-            //Data size.
-            uint dataSize = length - 12;
-            w.LoopEnd = dataSize * 2;
+            w.LoopLength = r.ReadUInt32();
 
             //Loop start offset is divided by 4 for some reason.
             w.LoopStart = Offset2Samples(w.LoopStart * 4, pcmFormat);
-            w.LoopEnd = Offset2Samples(dataSize, pcmFormat);
+
+            //Data size.
+            uint dataSize = length - 12;
+
+            w.UpdateLoopEnd(pcmFormat, (int)dataSize);
 
             //Switch type.
             Type format = null;
@@ -124,6 +127,29 @@ namespace NitroFileLoader {
 
         }
 
+        public void UpdateLoopEnd(PcmFormat pcmFormat, int dataSize = -1) {
+#if true
+            LoopEnd = LoopStart + Offset2Samples(LoopLength * 4, pcmFormat);
+            if (LoopEnd > Audio.NumSamples) {
+                LoopEnd = dataSize == -1 ? (uint)Audio.NumSamples : (uint)dataSize;
+            }
+#else
+            LoopEnd = dataSize == -1 ? (uint)Audio.NumSamples : (uint)dataSize;
+#endif
+        }
+
+        public PcmFormat GetPcmFormat() {
+            if (Audio.EncodingType.Equals(typeof(PCM8Signed))) {
+                return PcmFormat.SignedPCM8;
+            } else if (Audio.EncodingType.Equals(typeof(PCM16))) {
+                return PcmFormat.PCM16;
+            } else if (Audio.EncodingType.Equals(typeof(ImaAdpcm))) {
+                return PcmFormat.Encoded;
+            } else {
+                throw new Exception("Invalid channel format!");
+            }
+        }
+
         /// <summary>
         /// Write a shortened wave.
         /// </summary>
@@ -131,7 +157,7 @@ namespace NitroFileLoader {
         public void WriteShortened(FileWriter w) {
 
             //Format.
-            PcmFormat pcmFormat = PcmFormat.Encoded;
+            PcmFormat pcmFormat;
             if (Audio.EncodingType.Equals(typeof(PCM8Signed))) {
                 w.Write((byte)PcmFormat.SignedPCM8);
                 pcmFormat = PcmFormat.SignedPCM8;
@@ -158,12 +184,12 @@ namespace NitroFileLoader {
 
             if (Loops) { 
                 w.Write((ushort)(Sample2Offset(LoopStart, pcmFormat) / 4));
-                w.Write((uint)((Audio.DataSize - Sample2Offset(LoopStart, pcmFormat)) / 4));
-
             } else { 
                 w.Write((ushort)(pcmFormat == PcmFormat.Encoded ? 1 : 0));
-                w.Write((uint)((Audio.DataSize - Sample2Offset((uint)(pcmFormat == PcmFormat.Encoded ? 1 : 0), pcmFormat)) / 4));
             }
+
+            w.Write((uint)LoopLength);
+
             Audio.Write(w);
 
         }
@@ -242,7 +268,6 @@ namespace NitroFileLoader {
             return 0;
 
         }
-
     }
 
     /// <summary>

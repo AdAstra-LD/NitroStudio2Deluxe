@@ -264,7 +264,7 @@ namespace NitroStudio2 {
         public Button kermalisPlayButton;
         private Label label21;
         public CheckBox kermalisLoopBox;
-        private Label label22;
+        public Label swavLoopLabel;
         public Panel seqPanel;
         private Label label23;
         private TableLayoutPanel tableLayoutPanel10;
@@ -411,10 +411,15 @@ namespace NitroStudio2 {
         private TableLayoutPanel tableLayoutPanel36;
         public Button exportWavButton;
         public Button exportMidiButton;
-        public NumericUpDown swavLoopLengthUpDown;
-        public NumericUpDown swavLoopStartUpDown;
-        public Label swavLoopLengthLabel;
-        public Label swavLoopStartLabel;
+        private Label label20;
+        public CheckBox swavLoopCheckbox;
+        private TableLayoutPanel loopingTableLayoutPanel;
+        public Button resetLoopingInfoButton;
+        public NumericUpDown loopLengthUpDown;
+        public NumericUpDown loopStartUpDown;
+        public Label loopLengthLabel;
+        public Label loopStartLabel;
+        public Panel loopingPanel;
 
         /// <summary>
         /// Main window.
@@ -602,7 +607,7 @@ namespace NitroStudio2 {
         public void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorBase));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("File Information", 10, 10);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("File Information", 10, 10);
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -833,71 +838,27 @@ namespace NitroStudio2 {
             this.label2 = new System.Windows.Forms.Label();
             this.noInfoPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.loopingPanel = new System.Windows.Forms.Panel();
+            this.loopingTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.resetLoopingInfoButton = new System.Windows.Forms.Button();
+            this.loopLengthUpDown = new System.Windows.Forms.NumericUpDown();
+            this.loopStartUpDown = new System.Windows.Forms.NumericUpDown();
+            this.loopLengthLabel = new System.Windows.Forms.Label();
+            this.loopStartLabel = new System.Windows.Forms.Label();
             this.kermalisSoundPlayerPanel = new System.Windows.Forms.Panel();
             this.kermalisPosition = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.label22 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.swavLoopLabel = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.kermalisStopButton = new System.Windows.Forms.Button();
             this.kermalisPauseButton = new System.Windows.Forms.Button();
             this.kermalisVolumeSlider = new System.Windows.Forms.TrackBar();
+            this.swavLoopCheckbox = new System.Windows.Forms.CheckBox();
             this.kermalisLoopBox = new System.Windows.Forms.CheckBox();
             this.kermalisPlayButton = new System.Windows.Forms.Button();
             this.soundPlayerLabel = new System.Windows.Forms.Label();
             this.pnlPianoKeys = new System.Windows.Forms.Panel();
-            this.bankEditorWars = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
-            this.war3ComboBox = new System.Windows.Forms.ComboBox();
-            this.war3Box = new System.Windows.Forms.NumericUpDown();
-            this.label31 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
-            this.war2ComboBox = new System.Windows.Forms.ComboBox();
-            this.war2Box = new System.Windows.Forms.NumericUpDown();
-            this.label33 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
-            this.war1ComboBox = new System.Windows.Forms.ComboBox();
-            this.war1Box = new System.Windows.Forms.NumericUpDown();
-            this.label34 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
-            this.war0ComboBox = new System.Windows.Forms.ComboBox();
-            this.war0Box = new System.Windows.Forms.NumericUpDown();
-            this.label35 = new System.Windows.Forms.Label();
-            this.tree = new System.Windows.Forms.TreeView();
-            this.treeIcons = new System.Windows.Forms.ImageList(this.components);
-            this.sequenceEditorPanel = new System.Windows.Forms.Panel();
-            this.sequenceEditor = new ScintillaNET.Scintilla();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.currentNote = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rootMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.expandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.collapseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.nodeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addAboveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.addBelowToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.moveUpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.moveDownToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.replaceFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.sarEntryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.sarAddAbove = new System.Windows.Forms.ToolStripMenuItem();
-            this.sarAddBelow = new System.Windows.Forms.ToolStripMenuItem();
-            this.sarMoveUp = new System.Windows.Forms.ToolStripMenuItem();
-            this.sarMoveDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.sarReplace = new System.Windows.Forms.ToolStripMenuItem();
-            this.sarExport = new System.Windows.Forms.ToolStripMenuItem();
-            this.sarRename = new System.Windows.Forms.ToolStripMenuItem();
-            this.sarDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.swavLoopLengthLabel = new System.Windows.Forms.Label();
-            this.swavLoopStartLabel = new System.Windows.Forms.Label();
-            this.swavLoopStartUpDown = new System.Windows.Forms.NumericUpDown();
-            this.swavLoopLengthUpDown = new System.Windows.Forms.NumericUpDown();
             this.pkeyC7 = new Multimedia.UI.PianoKey();
             this.pkeyE7 = new Multimedia.UI.PianoKey();
             this.pkeyCSharp7 = new Multimedia.UI.PianoKey();
@@ -983,6 +944,55 @@ namespace NitroStudio2 {
             this.pkeyASharp5 = new Multimedia.UI.PianoKey();
             this.pkeyB5 = new Multimedia.UI.PianoKey();
             this.pkeyC8 = new Multimedia.UI.PianoKey();
+            this.bankEditorWars = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.war3ComboBox = new System.Windows.Forms.ComboBox();
+            this.war3Box = new System.Windows.Forms.NumericUpDown();
+            this.label31 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
+            this.war2ComboBox = new System.Windows.Forms.ComboBox();
+            this.war2Box = new System.Windows.Forms.NumericUpDown();
+            this.label33 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
+            this.war1ComboBox = new System.Windows.Forms.ComboBox();
+            this.war1Box = new System.Windows.Forms.NumericUpDown();
+            this.label34 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
+            this.war0ComboBox = new System.Windows.Forms.ComboBox();
+            this.war0Box = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.tree = new System.Windows.Forms.TreeView();
+            this.treeIcons = new System.Windows.Forms.ImageList(this.components);
+            this.sequenceEditorPanel = new System.Windows.Forms.Panel();
+            this.sequenceEditor = new ScintillaNET.Scintilla();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.currentNote = new System.Windows.Forms.ToolStripStatusLabel();
+            this.rootMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collapseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.nodeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addAboveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addBelowToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveUpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveDownToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.replaceFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.sarEntryMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sarAddAbove = new System.Windows.Forms.ToolStripMenuItem();
+            this.sarAddBelow = new System.Windows.Forms.ToolStripMenuItem();
+            this.sarMoveUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.sarMoveDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.sarReplace = new System.Windows.Forms.ToolStripMenuItem();
+            this.sarExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.sarRename = new System.Windows.Forms.ToolStripMenuItem();
+            this.sarDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -1072,6 +1082,10 @@ namespace NitroStudio2 {
             ((System.ComponentModel.ISupportInitialize)(this.itemIndexBox)).BeginInit();
             this.settingsPanel.SuspendLayout();
             this.noInfoPanel.SuspendLayout();
+            this.loopingPanel.SuspendLayout();
+            this.loopingTableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loopLengthUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loopStartUpDown)).BeginInit();
             this.kermalisSoundPlayerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kermalisPosition)).BeginInit();
             this.tableLayoutPanel9.SuspendLayout();
@@ -1092,8 +1106,6 @@ namespace NitroStudio2 {
             this.nodeMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.sarEntryMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.swavLoopStartUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.swavLoopLengthUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -1135,7 +1147,7 @@ namespace NitroStudio2 {
             // 
             this.openToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Open;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -1368,6 +1380,7 @@ namespace NitroStudio2 {
             this.splitContainer1.Panel1.Controls.Add(this.indexPanel);
             this.splitContainer1.Panel1.Controls.Add(this.settingsPanel);
             this.splitContainer1.Panel1.Controls.Add(this.noInfoPanel);
+            this.splitContainer1.Panel1.Controls.Add(this.loopingPanel);
             this.splitContainer1.Panel1.Controls.Add(this.kermalisSoundPlayerPanel);
             // 
             // splitContainer1.Panel2
@@ -1376,7 +1389,7 @@ namespace NitroStudio2 {
             this.splitContainer1.Panel2.Controls.Add(this.bankEditorWars);
             this.splitContainer1.Panel2.Controls.Add(this.tree);
             this.splitContainer1.Panel2.Controls.Add(this.sequenceEditorPanel);
-            this.splitContainer1.Size = new System.Drawing.Size(1049, 641);
+            this.splitContainer1.Size = new System.Drawing.Size(1049, 793);
             this.splitContainer1.SplitterDistance = 348;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -1387,9 +1400,9 @@ namespace NitroStudio2 {
             this.seqBankPanel.Controls.Add(this.label28);
             this.seqBankPanel.Controls.Add(this.tableLayoutPanel12);
             this.seqBankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.seqBankPanel.Location = new System.Drawing.Point(0, 390);
+            this.seqBankPanel.Location = new System.Drawing.Point(0, 351);
             this.seqBankPanel.Name = "seqBankPanel";
-            this.seqBankPanel.Size = new System.Drawing.Size(346, 249);
+            this.seqBankPanel.Size = new System.Drawing.Size(346, 440);
             this.seqBankPanel.TabIndex = 18;
             this.seqBankPanel.Visible = false;
             // 
@@ -2401,9 +2414,9 @@ namespace NitroStudio2 {
             this.bankEditorPanel.Controls.Add(this.tableLayoutPanel14);
             this.bankEditorPanel.Controls.Add(this.label30);
             this.bankEditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bankEditorPanel.Location = new System.Drawing.Point(0, 390);
+            this.bankEditorPanel.Location = new System.Drawing.Point(0, 351);
             this.bankEditorPanel.Name = "bankEditorPanel";
-            this.bankEditorPanel.Size = new System.Drawing.Size(346, 249);
+            this.bankEditorPanel.Size = new System.Drawing.Size(346, 440);
             this.bankEditorPanel.TabIndex = 21;
             this.bankEditorPanel.Visible = false;
             // 
@@ -2428,7 +2441,7 @@ namespace NitroStudio2 {
             this.pan});
             this.bankRegions.Location = new System.Drawing.Point(14, 141);
             this.bankRegions.Name = "bankRegions";
-            this.bankRegions.Size = new System.Drawing.Size(319, 99);
+            this.bankRegions.Size = new System.Drawing.Size(319, 290);
             this.bankRegions.TabIndex = 26;
             // 
             // playSampleButton
@@ -3038,7 +3051,7 @@ namespace NitroStudio2 {
             this.seqArcSeqPanel.Controls.Add(this.label29);
             this.seqArcSeqPanel.Controls.Add(this.tableLayoutPanel13);
             this.seqArcSeqPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.seqArcSeqPanel.Location = new System.Drawing.Point(0, 326);
+            this.seqArcSeqPanel.Location = new System.Drawing.Point(0, 287);
             this.seqArcSeqPanel.Name = "seqArcSeqPanel";
             this.seqArcSeqPanel.Size = new System.Drawing.Size(346, 64);
             this.seqArcSeqPanel.TabIndex = 20;
@@ -3100,9 +3113,9 @@ namespace NitroStudio2 {
             // 
             this.seqArcPanel.Controls.Add(this.seqArcOpenFileButton);
             this.seqArcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.seqArcPanel.Location = new System.Drawing.Point(0, 326);
+            this.seqArcPanel.Location = new System.Drawing.Point(0, 287);
             this.seqArcPanel.Name = "seqArcPanel";
-            this.seqArcPanel.Size = new System.Drawing.Size(346, 313);
+            this.seqArcPanel.Size = new System.Drawing.Size(346, 504);
             this.seqArcPanel.TabIndex = 19;
             this.seqArcPanel.Visible = false;
             // 
@@ -3130,9 +3143,9 @@ namespace NitroStudio2 {
             this.seqPanel.Controls.Add(this.tableLayoutPanel10);
             this.seqPanel.Controls.Add(this.label23);
             this.seqPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.seqPanel.Location = new System.Drawing.Point(0, 326);
+            this.seqPanel.Location = new System.Drawing.Point(0, 287);
             this.seqPanel.Name = "seqPanel";
-            this.seqPanel.Size = new System.Drawing.Size(346, 313);
+            this.seqPanel.Size = new System.Drawing.Size(346, 504);
             this.seqPanel.TabIndex = 17;
             this.seqPanel.Visible = false;
             // 
@@ -3329,9 +3342,9 @@ namespace NitroStudio2 {
             this.playerPanel.Controls.Add(this.playerMaxSequencesBox);
             this.playerPanel.Controls.Add(this.label17);
             this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playerPanel.Location = new System.Drawing.Point(0, 326);
+            this.playerPanel.Location = new System.Drawing.Point(0, 287);
             this.playerPanel.Name = "playerPanel";
-            this.playerPanel.Size = new System.Drawing.Size(346, 313);
+            this.playerPanel.Size = new System.Drawing.Size(346, 504);
             this.playerPanel.TabIndex = 15;
             this.playerPanel.Visible = false;
             // 
@@ -3606,9 +3619,9 @@ namespace NitroStudio2 {
             this.stmPanel.Controls.Add(this.stmVolumeBox);
             this.stmPanel.Controls.Add(this.label13);
             this.stmPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stmPanel.Location = new System.Drawing.Point(0, 326);
+            this.stmPanel.Location = new System.Drawing.Point(0, 287);
             this.stmPanel.Name = "stmPanel";
-            this.stmPanel.Size = new System.Drawing.Size(346, 313);
+            this.stmPanel.Size = new System.Drawing.Size(346, 504);
             this.stmPanel.TabIndex = 14;
             this.stmPanel.Visible = false;
             // 
@@ -3746,9 +3759,9 @@ namespace NitroStudio2 {
             this.streamPlayerPanel.Controls.Add(this.label12);
             this.streamPlayerPanel.Controls.Add(this.tableLayoutPanel6);
             this.streamPlayerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.streamPlayerPanel.Location = new System.Drawing.Point(0, 326);
+            this.streamPlayerPanel.Location = new System.Drawing.Point(0, 287);
             this.streamPlayerPanel.Name = "streamPlayerPanel";
-            this.streamPlayerPanel.Size = new System.Drawing.Size(346, 313);
+            this.streamPlayerPanel.Size = new System.Drawing.Size(346, 504);
             this.streamPlayerPanel.TabIndex = 13;
             this.streamPlayerPanel.Visible = false;
             // 
@@ -3849,9 +3862,9 @@ namespace NitroStudio2 {
             // 
             this.grpPanel.Controls.Add(this.grpEntries);
             this.grpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpPanel.Location = new System.Drawing.Point(0, 326);
+            this.grpPanel.Location = new System.Drawing.Point(0, 287);
             this.grpPanel.Name = "grpPanel";
-            this.grpPanel.Size = new System.Drawing.Size(346, 313);
+            this.grpPanel.Size = new System.Drawing.Size(346, 504);
             this.grpPanel.TabIndex = 12;
             this.grpPanel.Visible = false;
             // 
@@ -3866,7 +3879,7 @@ namespace NitroStudio2 {
             this.grpEntries.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpEntries.Location = new System.Drawing.Point(0, 0);
             this.grpEntries.Name = "grpEntries";
-            this.grpEntries.Size = new System.Drawing.Size(346, 313);
+            this.grpEntries.Size = new System.Drawing.Size(346, 504);
             this.grpEntries.TabIndex = 0;
             // 
             // item
@@ -3895,9 +3908,9 @@ namespace NitroStudio2 {
             this.bankPanel.Controls.Add(this.tableLayoutPanel2);
             this.bankPanel.Controls.Add(this.label6);
             this.bankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bankPanel.Location = new System.Drawing.Point(0, 326);
+            this.bankPanel.Location = new System.Drawing.Point(0, 287);
             this.bankPanel.Name = "bankPanel";
-            this.bankPanel.Size = new System.Drawing.Size(346, 313);
+            this.bankPanel.Size = new System.Drawing.Size(346, 504);
             this.bankPanel.TabIndex = 11;
             this.bankPanel.Visible = false;
             // 
@@ -4132,9 +4145,9 @@ namespace NitroStudio2 {
             // blankPanel
             // 
             this.blankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.blankPanel.Location = new System.Drawing.Point(0, 326);
+            this.blankPanel.Location = new System.Drawing.Point(0, 287);
             this.blankPanel.Name = "blankPanel";
-            this.blankPanel.Size = new System.Drawing.Size(346, 313);
+            this.blankPanel.Size = new System.Drawing.Size(346, 504);
             this.blankPanel.TabIndex = 10;
             this.blankPanel.Visible = false;
             // 
@@ -4143,9 +4156,9 @@ namespace NitroStudio2 {
             this.warPanel.Controls.Add(this.loadIndividuallyBox);
             this.warPanel.Controls.Add(this.label9);
             this.warPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.warPanel.Location = new System.Drawing.Point(0, 326);
+            this.warPanel.Location = new System.Drawing.Point(0, 287);
             this.warPanel.Name = "warPanel";
-            this.warPanel.Size = new System.Drawing.Size(346, 313);
+            this.warPanel.Size = new System.Drawing.Size(346, 504);
             this.warPanel.TabIndex = 9;
             this.warPanel.Visible = false;
             // 
@@ -4177,7 +4190,7 @@ namespace NitroStudio2 {
             this.forceUniqueFilePanel.Controls.Add(this.forceUniqueFileBox);
             this.forceUniqueFilePanel.Controls.Add(this.label8);
             this.forceUniqueFilePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.forceUniqueFilePanel.Location = new System.Drawing.Point(0, 287);
+            this.forceUniqueFilePanel.Location = new System.Drawing.Point(0, 248);
             this.forceUniqueFilePanel.Name = "forceUniqueFilePanel";
             this.forceUniqueFilePanel.Size = new System.Drawing.Size(346, 39);
             this.forceUniqueFilePanel.TabIndex = 8;
@@ -4214,7 +4227,7 @@ namespace NitroStudio2 {
             this.indexPanel.Controls.Add(this.itemIndexBox);
             this.indexPanel.Controls.Add(this.label5);
             this.indexPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.indexPanel.Location = new System.Drawing.Point(0, 206);
+            this.indexPanel.Location = new System.Drawing.Point(0, 167);
             this.indexPanel.Name = "indexPanel";
             this.indexPanel.Size = new System.Drawing.Size(346, 81);
             this.indexPanel.TabIndex = 0;
@@ -4252,7 +4265,7 @@ namespace NitroStudio2 {
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Location = new System.Drawing.Point(11, 0);
+            this.label5.Location = new System.Drawing.Point(8, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(322, 20);
             this.label5.TabIndex = 0;
@@ -4268,9 +4281,9 @@ namespace NitroStudio2 {
             this.settingsPanel.Controls.Add(this.writeNamesBox);
             this.settingsPanel.Controls.Add(this.label2);
             this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settingsPanel.Location = new System.Drawing.Point(0, 206);
+            this.settingsPanel.Location = new System.Drawing.Point(0, 167);
             this.settingsPanel.Name = "settingsPanel";
-            this.settingsPanel.Size = new System.Drawing.Size(346, 433);
+            this.settingsPanel.Size = new System.Drawing.Size(346, 624);
             this.settingsPanel.TabIndex = 1;
             this.settingsPanel.Visible = false;
             // 
@@ -4355,9 +4368,9 @@ namespace NitroStudio2 {
             // 
             this.noInfoPanel.Controls.Add(this.label1);
             this.noInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.noInfoPanel.Location = new System.Drawing.Point(0, 206);
+            this.noInfoPanel.Location = new System.Drawing.Point(0, 167);
             this.noInfoPanel.Name = "noInfoPanel";
-            this.noInfoPanel.Size = new System.Drawing.Size(346, 433);
+            this.noInfoPanel.Size = new System.Drawing.Size(346, 624);
             this.noInfoPanel.TabIndex = 0;
             // 
             // label1
@@ -4365,10 +4378,101 @@ namespace NitroStudio2 {
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(346, 433);
+            this.label1.Size = new System.Drawing.Size(346, 624);
             this.label1.TabIndex = 0;
             this.label1.Text = "No Valid Info Selected!";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // loopingPanel
+            // 
+            this.loopingPanel.Controls.Add(this.loopingTableLayoutPanel);
+            this.loopingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loopingPanel.Location = new System.Drawing.Point(0, 167);
+            this.loopingPanel.Name = "loopingPanel";
+            this.loopingPanel.Size = new System.Drawing.Size(346, 624);
+            this.loopingPanel.TabIndex = 14;
+            this.loopingPanel.Visible = false;
+            // 
+            // loopingTableLayoutPanel
+            // 
+            this.loopingTableLayoutPanel.ColumnCount = 2;
+            this.loopingTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.loopingTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.loopingTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.loopingTableLayoutPanel.Controls.Add(this.resetLoopingInfoButton, 0, 2);
+            this.loopingTableLayoutPanel.Controls.Add(this.loopLengthUpDown, 1, 1);
+            this.loopingTableLayoutPanel.Controls.Add(this.loopStartUpDown, 0, 1);
+            this.loopingTableLayoutPanel.Controls.Add(this.loopLengthLabel, 1, 0);
+            this.loopingTableLayoutPanel.Controls.Add(this.loopStartLabel, 0, 0);
+            this.loopingTableLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.loopingTableLayoutPanel.Location = new System.Drawing.Point(0, 5);
+            this.loopingTableLayoutPanel.Name = "loopingTableLayoutPanel";
+            this.loopingTableLayoutPanel.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.loopingTableLayoutPanel.RowCount = 3;
+            this.loopingTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.loopingTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.loopingTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.loopingTableLayoutPanel.Size = new System.Drawing.Size(346, 87);
+            this.loopingTableLayoutPanel.TabIndex = 6;
+            // 
+            // resetLoopingInfoButton
+            // 
+            this.loopingTableLayoutPanel.SetColumnSpan(this.resetLoopingInfoButton, 2);
+            this.resetLoopingInfoButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.resetLoopingInfoButton.Location = new System.Drawing.Point(8, 48);
+            this.resetLoopingInfoButton.Name = "resetLoopingInfoButton";
+            this.resetLoopingInfoButton.Size = new System.Drawing.Size(330, 33);
+            this.resetLoopingInfoButton.TabIndex = 8;
+            this.resetLoopingInfoButton.Text = "Reset Looping Data";
+            this.resetLoopingInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // loopLengthUpDown
+            // 
+            this.loopLengthUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loopLengthUpDown.Location = new System.Drawing.Point(176, 21);
+            this.loopLengthUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.loopLengthUpDown.Name = "loopLengthUpDown";
+            this.loopLengthUpDown.Size = new System.Drawing.Size(162, 20);
+            this.loopLengthUpDown.TabIndex = 7;
+            this.toolTip.SetToolTip(this.loopLengthUpDown, "The index of the item as referenced to by the game.");
+            // 
+            // loopStartUpDown
+            // 
+            this.loopStartUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loopStartUpDown.Location = new System.Drawing.Point(8, 21);
+            this.loopStartUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.loopStartUpDown.Name = "loopStartUpDown";
+            this.loopStartUpDown.Size = new System.Drawing.Size(162, 20);
+            this.loopStartUpDown.TabIndex = 6;
+            this.toolTip.SetToolTip(this.loopStartUpDown, "The index of the item as referenced to by the game.");
+            // 
+            // loopLengthLabel
+            // 
+            this.loopLengthLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loopLengthLabel.Location = new System.Drawing.Point(176, 3);
+            this.loopLengthLabel.Name = "loopLengthLabel";
+            this.loopLengthLabel.Size = new System.Drawing.Size(162, 15);
+            this.loopLengthLabel.TabIndex = 5;
+            this.loopLengthLabel.Text = "Loop Length:";
+            this.loopLengthLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // loopStartLabel
+            // 
+            this.loopStartLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loopStartLabel.Location = new System.Drawing.Point(8, 3);
+            this.loopStartLabel.Name = "loopStartLabel";
+            this.loopStartLabel.Size = new System.Drawing.Size(162, 15);
+            this.loopStartLabel.TabIndex = 4;
+            this.loopStartLabel.Text = "Loop Start:";
+            this.loopStartLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // kermalisSoundPlayerPanel
             // 
@@ -4379,7 +4483,7 @@ namespace NitroStudio2 {
             this.kermalisSoundPlayerPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.kermalisSoundPlayerPanel.Location = new System.Drawing.Point(0, 0);
             this.kermalisSoundPlayerPanel.Name = "kermalisSoundPlayerPanel";
-            this.kermalisSoundPlayerPanel.Size = new System.Drawing.Size(346, 206);
+            this.kermalisSoundPlayerPanel.Size = new System.Drawing.Size(346, 167);
             this.kermalisSoundPlayerPanel.TabIndex = 16;
             this.kermalisSoundPlayerPanel.Visible = false;
             // 
@@ -4388,7 +4492,7 @@ namespace NitroStudio2 {
             this.kermalisPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kermalisPosition.LargeChange = 20;
-            this.kermalisPosition.Location = new System.Drawing.Point(14, 171);
+            this.kermalisPosition.Location = new System.Drawing.Point(14, 127);
             this.kermalisPosition.Maximum = 100;
             this.kermalisPosition.Name = "kermalisPosition";
             this.kermalisPosition.Size = new System.Drawing.Size(319, 45);
@@ -4400,56 +4504,66 @@ namespace NitroStudio2 {
             // 
             this.tableLayoutPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel9.Controls.Add(this.swavLoopLengthUpDown, 1, 4);
-            this.tableLayoutPanel9.Controls.Add(this.swavLoopStartUpDown, 0, 4);
-            this.tableLayoutPanel9.Controls.Add(this.swavLoopLengthLabel, 1, 3);
-            this.tableLayoutPanel9.Controls.Add(this.label22, 1, 1);
-            this.tableLayoutPanel9.Controls.Add(this.swavLoopStartLabel, 0, 3);
+            this.tableLayoutPanel9.ColumnCount = 3;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26F));
+            this.tableLayoutPanel9.Controls.Add(this.label20, 2, 1);
+            this.tableLayoutPanel9.Controls.Add(this.swavLoopLabel, 1, 1);
             this.tableLayoutPanel9.Controls.Add(this.label21, 0, 1);
             this.tableLayoutPanel9.Controls.Add(this.kermalisStopButton, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.kermalisPauseButton, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.kermalisVolumeSlider, 0, 2);
-            this.tableLayoutPanel9.Controls.Add(this.kermalisLoopBox, 1, 2);
+            this.tableLayoutPanel9.Controls.Add(this.swavLoopCheckbox, 1, 2);
+            this.tableLayoutPanel9.Controls.Add(this.kermalisLoopBox, 2, 2);
             this.tableLayoutPanel9.Location = new System.Drawing.Point(14, 49);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 5;
+            this.tableLayoutPanel9.RowCount = 3;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(319, 116);
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(319, 76);
             this.tableLayoutPanel9.TabIndex = 4;
             // 
-            // label22
+            // label20
             // 
-            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Location = new System.Drawing.Point(162, 27);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(154, 15);
-            this.label22.TabIndex = 5;
-            this.label22.Text = "Loop:";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label20.Location = new System.Drawing.Point(238, 27);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(78, 15);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "Preview Loop:";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // swavLoopLabel
+            // 
+            this.swavLoopLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.swavLoopLabel.Location = new System.Drawing.Point(146, 27);
+            this.swavLoopLabel.Name = "swavLoopLabel";
+            this.swavLoopLabel.Size = new System.Drawing.Size(86, 15);
+            this.swavLoopLabel.TabIndex = 5;
+            this.swavLoopLabel.Text = "Looping Sample:";
+            this.swavLoopLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.swavLoopLabel.Visible = false;
             // 
             // label21
             // 
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label21.Location = new System.Drawing.Point(3, 27);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(153, 15);
+            this.label21.Size = new System.Drawing.Size(137, 15);
             this.label21.TabIndex = 4;
             this.label21.Text = "Volume:";
             this.label21.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // kermalisStopButton
             // 
+            this.tableLayoutPanel9.SetColumnSpan(this.kermalisStopButton, 2);
             this.kermalisStopButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kermalisStopButton.Location = new System.Drawing.Point(162, 3);
+            this.kermalisStopButton.Location = new System.Drawing.Point(146, 3);
             this.kermalisStopButton.Name = "kermalisStopButton";
-            this.kermalisStopButton.Size = new System.Drawing.Size(154, 21);
+            this.kermalisStopButton.Size = new System.Drawing.Size(170, 21);
             this.kermalisStopButton.TabIndex = 1;
             this.kermalisStopButton.Text = "Stop";
             this.kermalisStopButton.UseVisualStyleBackColor = true;
@@ -4459,7 +4573,7 @@ namespace NitroStudio2 {
             this.kermalisPauseButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kermalisPauseButton.Location = new System.Drawing.Point(3, 3);
             this.kermalisPauseButton.Name = "kermalisPauseButton";
-            this.kermalisPauseButton.Size = new System.Drawing.Size(153, 21);
+            this.kermalisPauseButton.Size = new System.Drawing.Size(137, 21);
             this.kermalisPauseButton.TabIndex = 0;
             this.kermalisPauseButton.Text = "Pause / Resume";
             this.kermalisPauseButton.UseVisualStyleBackColor = true;
@@ -4471,19 +4585,30 @@ namespace NitroStudio2 {
             this.kermalisVolumeSlider.Location = new System.Drawing.Point(3, 45);
             this.kermalisVolumeSlider.Maximum = 100;
             this.kermalisVolumeSlider.Name = "kermalisVolumeSlider";
-            this.kermalisVolumeSlider.Size = new System.Drawing.Size(153, 21);
+            this.kermalisVolumeSlider.Size = new System.Drawing.Size(137, 28);
             this.kermalisVolumeSlider.SmallChange = 5;
             this.kermalisVolumeSlider.TabIndex = 2;
             this.kermalisVolumeSlider.TickFrequency = 10;
             this.kermalisVolumeSlider.Value = 75;
             // 
+            // swavLoopCheckbox
+            // 
+            this.swavLoopCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.swavLoopCheckbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.swavLoopCheckbox.Location = new System.Drawing.Point(146, 45);
+            this.swavLoopCheckbox.Name = "swavLoopCheckbox";
+            this.swavLoopCheckbox.Size = new System.Drawing.Size(86, 28);
+            this.swavLoopCheckbox.TabIndex = 6;
+            this.swavLoopCheckbox.UseVisualStyleBackColor = true;
+            this.swavLoopCheckbox.Visible = false;
+            // 
             // kermalisLoopBox
             // 
             this.kermalisLoopBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.kermalisLoopBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kermalisLoopBox.Location = new System.Drawing.Point(162, 45);
+            this.kermalisLoopBox.Location = new System.Drawing.Point(238, 45);
             this.kermalisLoopBox.Name = "kermalisLoopBox";
-            this.kermalisLoopBox.Size = new System.Drawing.Size(154, 21);
+            this.kermalisLoopBox.Size = new System.Drawing.Size(78, 28);
             this.kermalisLoopBox.TabIndex = 3;
             this.kermalisLoopBox.UseVisualStyleBackColor = true;
             // 
@@ -4493,7 +4618,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kermalisPlayButton.Location = new System.Drawing.Point(14, 25);
             this.kermalisPlayButton.Name = "kermalisPlayButton";
-            this.kermalisPlayButton.Size = new System.Drawing.Size(319, 20);
+            this.kermalisPlayButton.Size = new System.Drawing.Size(319, 21);
             this.kermalisPlayButton.TabIndex = 3;
             this.kermalisPlayButton.Text = "Play";
             this.kermalisPlayButton.UseVisualStyleBackColor = true;
@@ -4598,579 +4723,11 @@ namespace NitroStudio2 {
             this.pnlPianoKeys.Controls.Add(this.pkeyASharp5);
             this.pnlPianoKeys.Controls.Add(this.pkeyB5);
             this.pnlPianoKeys.Controls.Add(this.pkeyC8);
-            this.pnlPianoKeys.Location = new System.Drawing.Point(88, 579);
+            this.pnlPianoKeys.Location = new System.Drawing.Point(88, 731);
             this.pnlPianoKeys.Name = "pnlPianoKeys";
             this.pnlPianoKeys.Size = new System.Drawing.Size(565, 46);
             this.pnlPianoKeys.TabIndex = 6;
             this.pnlPianoKeys.Visible = false;
-            // 
-            // bankEditorWars
-            // 
-            this.bankEditorWars.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bankEditorWars.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.bankEditorWars.Controls.Add(this.tableLayoutPanel16);
-            this.bankEditorWars.Controls.Add(this.label31);
-            this.bankEditorWars.Controls.Add(this.tableLayoutPanel17);
-            this.bankEditorWars.Controls.Add(this.label33);
-            this.bankEditorWars.Controls.Add(this.tableLayoutPanel18);
-            this.bankEditorWars.Controls.Add(this.label34);
-            this.bankEditorWars.Controls.Add(this.tableLayoutPanel19);
-            this.bankEditorWars.Controls.Add(this.label35);
-            this.bankEditorWars.Location = new System.Drawing.Point(359, 13);
-            this.bankEditorWars.Name = "bankEditorWars";
-            this.bankEditorWars.Size = new System.Drawing.Size(325, 253);
-            this.bankEditorWars.TabIndex = 13;
-            this.bankEditorWars.Visible = false;
-            // 
-            // tableLayoutPanel16
-            // 
-            this.tableLayoutPanel16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel16.ColumnCount = 2;
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel16.Controls.Add(this.war3ComboBox, 0, 0);
-            this.tableLayoutPanel16.Controls.Add(this.war3Box, 1, 0);
-            this.tableLayoutPanel16.Location = new System.Drawing.Point(14, 193);
-            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
-            this.tableLayoutPanel16.RowCount = 1;
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(298, 31);
-            this.tableLayoutPanel16.TabIndex = 13;
-            // 
-            // war3ComboBox
-            // 
-            this.war3ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.war3ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.war3ComboBox.FormattingEnabled = true;
-            this.war3ComboBox.Location = new System.Drawing.Point(3, 3);
-            this.war3ComboBox.Name = "war3ComboBox";
-            this.war3ComboBox.Size = new System.Drawing.Size(247, 21);
-            this.war3ComboBox.TabIndex = 6;
-            this.toolTip.SetToolTip(this.war3ComboBox, "Wave archive to be used for the bank.");
-            // 
-            // war3Box
-            // 
-            this.war3Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.war3Box.Location = new System.Drawing.Point(256, 3);
-            this.war3Box.Maximum = new decimal(new int[] {
-            65534,
-            0,
-            0,
-            0});
-            this.war3Box.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.war3Box.Name = "war3Box";
-            this.war3Box.Size = new System.Drawing.Size(39, 20);
-            this.war3Box.TabIndex = 7;
-            this.toolTip.SetToolTip(this.war3Box, "Id of the wave archive to use for this bank.");
-            // 
-            // label31
-            // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.Location = new System.Drawing.Point(11, 171);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(301, 22);
-            this.label31.TabIndex = 12;
-            this.label31.Text = "Wave Archive 3:";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel17
-            // 
-            this.tableLayoutPanel17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel17.ColumnCount = 2;
-            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel17.Controls.Add(this.war2ComboBox, 0, 0);
-            this.tableLayoutPanel17.Controls.Add(this.war2Box, 1, 0);
-            this.tableLayoutPanel17.Location = new System.Drawing.Point(14, 137);
-            this.tableLayoutPanel17.Name = "tableLayoutPanel17";
-            this.tableLayoutPanel17.RowCount = 1;
-            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel17.Size = new System.Drawing.Size(298, 31);
-            this.tableLayoutPanel17.TabIndex = 11;
-            // 
-            // war2ComboBox
-            // 
-            this.war2ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.war2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.war2ComboBox.FormattingEnabled = true;
-            this.war2ComboBox.Location = new System.Drawing.Point(3, 3);
-            this.war2ComboBox.Name = "war2ComboBox";
-            this.war2ComboBox.Size = new System.Drawing.Size(247, 21);
-            this.war2ComboBox.TabIndex = 6;
-            this.toolTip.SetToolTip(this.war2ComboBox, "Wave archive to be used for the bank.");
-            // 
-            // war2Box
-            // 
-            this.war2Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.war2Box.Location = new System.Drawing.Point(256, 3);
-            this.war2Box.Maximum = new decimal(new int[] {
-            65534,
-            0,
-            0,
-            0});
-            this.war2Box.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.war2Box.Name = "war2Box";
-            this.war2Box.Size = new System.Drawing.Size(39, 20);
-            this.war2Box.TabIndex = 7;
-            this.toolTip.SetToolTip(this.war2Box, "Id of the wave archive to use for this bank.");
-            // 
-            // label33
-            // 
-            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.Location = new System.Drawing.Point(11, 115);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(301, 22);
-            this.label33.TabIndex = 10;
-            this.label33.Text = "Wave Archive 2:";
-            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel18
-            // 
-            this.tableLayoutPanel18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel18.ColumnCount = 2;
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel18.Controls.Add(this.war1ComboBox, 0, 0);
-            this.tableLayoutPanel18.Controls.Add(this.war1Box, 1, 0);
-            this.tableLayoutPanel18.Location = new System.Drawing.Point(14, 81);
-            this.tableLayoutPanel18.Name = "tableLayoutPanel18";
-            this.tableLayoutPanel18.RowCount = 1;
-            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel18.Size = new System.Drawing.Size(298, 31);
-            this.tableLayoutPanel18.TabIndex = 9;
-            // 
-            // war1ComboBox
-            // 
-            this.war1ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.war1ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.war1ComboBox.FormattingEnabled = true;
-            this.war1ComboBox.Location = new System.Drawing.Point(3, 3);
-            this.war1ComboBox.Name = "war1ComboBox";
-            this.war1ComboBox.Size = new System.Drawing.Size(247, 21);
-            this.war1ComboBox.TabIndex = 6;
-            this.toolTip.SetToolTip(this.war1ComboBox, "Wave archive to be used for the bank.");
-            // 
-            // war1Box
-            // 
-            this.war1Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.war1Box.Location = new System.Drawing.Point(256, 3);
-            this.war1Box.Maximum = new decimal(new int[] {
-            65534,
-            0,
-            0,
-            0});
-            this.war1Box.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.war1Box.Name = "war1Box";
-            this.war1Box.Size = new System.Drawing.Size(39, 20);
-            this.war1Box.TabIndex = 7;
-            this.toolTip.SetToolTip(this.war1Box, "Id of the wave archive to use for this bank.");
-            // 
-            // label34
-            // 
-            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label34.Location = new System.Drawing.Point(11, 59);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(301, 22);
-            this.label34.TabIndex = 8;
-            this.label34.Text = "Wave Archive 1:";
-            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel19
-            // 
-            this.tableLayoutPanel19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel19.ColumnCount = 2;
-            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel19.Controls.Add(this.war0ComboBox, 0, 0);
-            this.tableLayoutPanel19.Controls.Add(this.war0Box, 1, 0);
-            this.tableLayoutPanel19.Location = new System.Drawing.Point(14, 25);
-            this.tableLayoutPanel19.Name = "tableLayoutPanel19";
-            this.tableLayoutPanel19.RowCount = 1;
-            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel19.Size = new System.Drawing.Size(298, 31);
-            this.tableLayoutPanel19.TabIndex = 7;
-            // 
-            // war0ComboBox
-            // 
-            this.war0ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.war0ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.war0ComboBox.FormattingEnabled = true;
-            this.war0ComboBox.Location = new System.Drawing.Point(3, 3);
-            this.war0ComboBox.Name = "war0ComboBox";
-            this.war0ComboBox.Size = new System.Drawing.Size(247, 21);
-            this.war0ComboBox.TabIndex = 6;
-            this.toolTip.SetToolTip(this.war0ComboBox, "Wave archive to be used for the bank.");
-            // 
-            // war0Box
-            // 
-            this.war0Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.war0Box.Location = new System.Drawing.Point(256, 3);
-            this.war0Box.Maximum = new decimal(new int[] {
-            65534,
-            0,
-            0,
-            0});
-            this.war0Box.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.war0Box.Name = "war0Box";
-            this.war0Box.Size = new System.Drawing.Size(39, 20);
-            this.war0Box.TabIndex = 7;
-            this.toolTip.SetToolTip(this.war0Box, "Id of the wave archive to use for this bank.");
-            // 
-            // label35
-            // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.Location = new System.Drawing.Point(11, 3);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(301, 22);
-            this.label35.TabIndex = 2;
-            this.label35.Text = "Wave Archive 0:";
-            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tree
-            // 
-            this.tree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tree.ImageIndex = 0;
-            this.tree.ImageList = this.treeIcons;
-            this.tree.Indent = 12;
-            this.tree.Location = new System.Drawing.Point(0, 0);
-            this.tree.Name = "tree";
-            treeNode2.ImageIndex = 10;
-            treeNode2.Name = "fileInfo";
-            treeNode2.SelectedImageIndex = 10;
-            treeNode2.Text = "File Information";
-            this.tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            this.tree.SelectedImageIndex = 0;
-            this.tree.ShowLines = false;
-            this.tree.Size = new System.Drawing.Size(695, 639);
-            this.tree.TabIndex = 0;
-            this.tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseClick);
-            this.tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseDoubleClick);
-            this.tree.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tree_NodeKey);
-            // 
-            // treeIcons
-            // 
-            this.treeIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("treeIcons.ImageStream")));
-            this.treeIcons.TransparentColor = System.Drawing.Color.Transparent;
-            this.treeIcons.Images.SetKeyName(0, "blank.png");
-            this.treeIcons.Images.SetKeyName(1, "version.png");
-            this.treeIcons.Images.SetKeyName(2, "sseq.png");
-            this.treeIcons.Images.SetKeyName(3, "seqArc.png");
-            this.treeIcons.Images.SetKeyName(4, "bank.png");
-            this.treeIcons.Images.SetKeyName(5, "waveArchive.png");
-            this.treeIcons.Images.SetKeyName(6, "player.png");
-            this.treeIcons.Images.SetKeyName(7, "group.png");
-            this.treeIcons.Images.SetKeyName(8, "streamPlayer.png");
-            this.treeIcons.Images.SetKeyName(9, "strm.png");
-            this.treeIcons.Images.SetKeyName(10, "record.png");
-            this.treeIcons.Images.SetKeyName(11, "recordArc.png");
-            this.treeIcons.Images.SetKeyName(12, "lookup.png");
-            this.treeIcons.Images.SetKeyName(13, "recordRegion.png");
-            this.treeIcons.Images.SetKeyName(14, "wave.png");
-            this.treeIcons.Images.SetKeyName(15, "ranged.png");
-            this.treeIcons.Images.SetKeyName(16, "regional.png");
-            this.treeIcons.Images.SetKeyName(17, "psg.png");
-            this.treeIcons.Images.SetKeyName(18, "whiteNoise.png");
-            // 
-            // sequenceEditorPanel
-            // 
-            this.sequenceEditorPanel.Controls.Add(this.sequenceEditor);
-            this.sequenceEditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sequenceEditorPanel.Location = new System.Drawing.Point(0, 0);
-            this.sequenceEditorPanel.Name = "sequenceEditorPanel";
-            this.sequenceEditorPanel.Size = new System.Drawing.Size(695, 639);
-            this.sequenceEditorPanel.TabIndex = 3;
-            this.sequenceEditorPanel.Visible = false;
-            // 
-            // sequenceEditor
-            // 
-            this.sequenceEditor.CaretPeriod = 500;
-            this.sequenceEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sequenceEditor.Location = new System.Drawing.Point(0, 0);
-            this.sequenceEditor.Name = "sequenceEditor";
-            this.sequenceEditor.Size = new System.Drawing.Size(695, 639);
-            this.sequenceEditor.TabIndex = 0;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.RestoreDirectory = true;
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.status,
-            this.currentNote});
-            this.statusStrip.Location = new System.Drawing.Point(0, 665);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1049, 22);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // status
-            // 
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(125, 17);
-            this.status.Text = "No Valid Info Selected!";
-            // 
-            // currentNote
-            // 
-            this.currentNote.Name = "currentNote";
-            this.currentNote.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.currentNote.Size = new System.Drawing.Size(0, 17);
-            // 
-            // rootMenu
-            // 
-            this.rootMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.expandToolStripMenuItem,
-            this.collapseToolStripMenuItem});
-            this.rootMenu.Name = "rootMenu";
-            this.rootMenu.Size = new System.Drawing.Size(120, 70);
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.New;
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.addToolStripMenuItem.Text = "Add";
-            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
-            // 
-            // expandToolStripMenuItem
-            // 
-            this.expandToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Save;
-            this.expandToolStripMenuItem.Name = "expandToolStripMenuItem";
-            this.expandToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.expandToolStripMenuItem.Text = "Expand";
-            this.expandToolStripMenuItem.Click += new System.EventHandler(this.expandToolStripMenuItem_Click);
-            // 
-            // collapseToolStripMenuItem
-            // 
-            this.collapseToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Save_As;
-            this.collapseToolStripMenuItem.Name = "collapseToolStripMenuItem";
-            this.collapseToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.collapseToolStripMenuItem.Text = "Collapse";
-            this.collapseToolStripMenuItem.Click += new System.EventHandler(this.collapseToolStripMenuItem_Click);
-            // 
-            // nodeMenu
-            // 
-            this.nodeMenu.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.nodeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addAboveToolStripMenuItem1,
-            this.addBelowToolStripMenuItem1,
-            this.moveUpToolStripMenuItem1,
-            this.moveDownToolStripMenuItem1,
-            this.replaceFileToolStripMenuItem,
-            this.exportToolStripMenuItem1,
-            this.deleteToolStripMenuItem1});
-            this.nodeMenu.Name = "contextMenuStrip1";
-            this.nodeMenu.Size = new System.Drawing.Size(139, 158);
-            // 
-            // addAboveToolStripMenuItem1
-            // 
-            this.addAboveToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.New;
-            this.addAboveToolStripMenuItem1.Name = "addAboveToolStripMenuItem1";
-            this.addAboveToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
-            this.addAboveToolStripMenuItem1.Text = "Add Above";
-            this.addAboveToolStripMenuItem1.Click += new System.EventHandler(this.addAboveToolStripMenuItem1_Click);
-            // 
-            // addBelowToolStripMenuItem1
-            // 
-            this.addBelowToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Open;
-            this.addBelowToolStripMenuItem1.Name = "addBelowToolStripMenuItem1";
-            this.addBelowToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
-            this.addBelowToolStripMenuItem1.Text = "Add Below";
-            this.addBelowToolStripMenuItem1.Click += new System.EventHandler(this.addBelowToolStripMenuItem1_Click);
-            // 
-            // moveUpToolStripMenuItem1
-            // 
-            this.moveUpToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Save;
-            this.moveUpToolStripMenuItem1.Name = "moveUpToolStripMenuItem1";
-            this.moveUpToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
-            this.moveUpToolStripMenuItem1.Text = "Move Up";
-            this.moveUpToolStripMenuItem1.Click += new System.EventHandler(this.moveUpToolStripMenuItem1_Click);
-            // 
-            // moveDownToolStripMenuItem1
-            // 
-            this.moveDownToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Save_As;
-            this.moveDownToolStripMenuItem1.Name = "moveDownToolStripMenuItem1";
-            this.moveDownToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
-            this.moveDownToolStripMenuItem1.Text = "Move Down";
-            this.moveDownToolStripMenuItem1.Click += new System.EventHandler(this.moveDownToolStripMenuItem1_Click);
-            // 
-            // replaceFileToolStripMenuItem
-            // 
-            this.replaceFileToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Import;
-            this.replaceFileToolStripMenuItem.Name = "replaceFileToolStripMenuItem";
-            this.replaceFileToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.replaceFileToolStripMenuItem.Text = "Replace";
-            this.replaceFileToolStripMenuItem.Click += new System.EventHandler(this.replaceFileToolStripMenuItem_Click);
-            // 
-            // exportToolStripMenuItem1
-            // 
-            this.exportToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Export;
-            this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
-            this.exportToolStripMenuItem1.Text = "Export";
-            this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
-            // 
-            // deleteToolStripMenuItem1
-            // 
-            this.deleteToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Close;
-            this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
-            this.deleteToolStripMenuItem1.Text = "Delete";
-            this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
-            // 
-            // sarEntryMenu
-            // 
-            this.sarEntryMenu.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.sarEntryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sarAddAbove,
-            this.sarAddBelow,
-            this.sarMoveUp,
-            this.sarMoveDown,
-            this.sarReplace,
-            this.sarExport,
-            this.sarRename,
-            this.sarDelete});
-            this.sarEntryMenu.Name = "contextMenuStrip1";
-            this.sarEntryMenu.Size = new System.Drawing.Size(139, 180);
-            // 
-            // sarAddAbove
-            // 
-            this.sarAddAbove.Image = global::NitroStudio2.Properties.Resources.New;
-            this.sarAddAbove.Name = "sarAddAbove";
-            this.sarAddAbove.Size = new System.Drawing.Size(138, 22);
-            this.sarAddAbove.Text = "Add Above";
-            this.sarAddAbove.Click += new System.EventHandler(this.SarAddAbove_Click);
-            // 
-            // sarAddBelow
-            // 
-            this.sarAddBelow.Image = global::NitroStudio2.Properties.Resources.Open;
-            this.sarAddBelow.Name = "sarAddBelow";
-            this.sarAddBelow.Size = new System.Drawing.Size(138, 22);
-            this.sarAddBelow.Text = "Add Below";
-            this.sarAddBelow.Click += new System.EventHandler(this.SarAddBelow_Click);
-            // 
-            // sarMoveUp
-            // 
-            this.sarMoveUp.Image = global::NitroStudio2.Properties.Resources.Save;
-            this.sarMoveUp.Name = "sarMoveUp";
-            this.sarMoveUp.Size = new System.Drawing.Size(138, 22);
-            this.sarMoveUp.Text = "Move Up";
-            this.sarMoveUp.Click += new System.EventHandler(this.SarMoveUp_Click);
-            // 
-            // sarMoveDown
-            // 
-            this.sarMoveDown.Image = global::NitroStudio2.Properties.Resources.Save_As;
-            this.sarMoveDown.Name = "sarMoveDown";
-            this.sarMoveDown.Size = new System.Drawing.Size(138, 22);
-            this.sarMoveDown.Text = "Move Down";
-            this.sarMoveDown.Click += new System.EventHandler(this.SarMoveDown_Click);
-            // 
-            // sarReplace
-            // 
-            this.sarReplace.Image = global::NitroStudio2.Properties.Resources.Import;
-            this.sarReplace.Name = "sarReplace";
-            this.sarReplace.Size = new System.Drawing.Size(138, 22);
-            this.sarReplace.Text = "Replace";
-            this.sarReplace.Click += new System.EventHandler(this.SarReplace_Click);
-            // 
-            // sarExport
-            // 
-            this.sarExport.Image = global::NitroStudio2.Properties.Resources.Export;
-            this.sarExport.Name = "sarExport";
-            this.sarExport.Size = new System.Drawing.Size(138, 22);
-            this.sarExport.Text = "Export";
-            this.sarExport.Click += new System.EventHandler(this.SarExport_Click);
-            // 
-            // sarRename
-            // 
-            this.sarRename.Image = global::NitroStudio2.Properties.Resources.Rename;
-            this.sarRename.Name = "sarRename";
-            this.sarRename.Size = new System.Drawing.Size(138, 22);
-            this.sarRename.Text = "Rename";
-            this.sarRename.Click += new System.EventHandler(this.SarRename_Click);
-            // 
-            // sarDelete
-            // 
-            this.sarDelete.Image = global::NitroStudio2.Properties.Resources.Close;
-            this.sarDelete.Name = "sarDelete";
-            this.sarDelete.Size = new System.Drawing.Size(138, 22);
-            this.sarDelete.Text = "Delete";
-            this.sarDelete.Click += new System.EventHandler(this.SarDelete_Click);
-            // 
-            // swavLoopLengthLabel
-            // 
-            this.swavLoopLengthLabel.Location = new System.Drawing.Point(162, 69);
-            this.swavLoopLengthLabel.Name = "swavLoopLengthLabel";
-            this.swavLoopLengthLabel.Size = new System.Drawing.Size(154, 15);
-            this.swavLoopLengthLabel.TabIndex = 5;
-            this.swavLoopLengthLabel.Text = "Loop Length:";
-            this.swavLoopLengthLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // swavLoopStartLabel
-            // 
-            this.swavLoopStartLabel.Location = new System.Drawing.Point(3, 69);
-            this.swavLoopStartLabel.Name = "swavLoopStartLabel";
-            this.swavLoopStartLabel.Size = new System.Drawing.Size(153, 15);
-            this.swavLoopStartLabel.TabIndex = 4;
-            this.swavLoopStartLabel.Text = "Loop Start:";
-            this.swavLoopStartLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // swavLoopStartUpDown
-            // 
-            this.swavLoopStartUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.swavLoopStartUpDown.Location = new System.Drawing.Point(3, 87);
-            this.swavLoopStartUpDown.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.swavLoopStartUpDown.Name = "swavLoopStartUpDown";
-            this.swavLoopStartUpDown.Size = new System.Drawing.Size(153, 20);
-            this.swavLoopStartUpDown.TabIndex = 6;
-            this.toolTip.SetToolTip(this.swavLoopStartUpDown, "The index of the item as referenced to by the game.");
-            // 
-            // swavLoopLengthUpDown
-            // 
-            this.swavLoopLengthUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.swavLoopLengthUpDown.Location = new System.Drawing.Point(162, 87);
-            this.swavLoopLengthUpDown.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.swavLoopLengthUpDown.Name = "swavLoopLengthUpDown";
-            this.swavLoopLengthUpDown.Size = new System.Drawing.Size(154, 20);
-            this.swavLoopLengthUpDown.TabIndex = 7;
-            this.toolTip.SetToolTip(this.swavLoopLengthUpDown, "The index of the item as referenced to by the game.");
             // 
             // pkeyC7
             // 
@@ -6235,9 +5792,529 @@ namespace NitroStudio2 {
             this.pkeyC8.TabIndex = 60;
             this.pkeyC8.StateChanged += new System.EventHandler(this.PianoChanged);
             // 
+            // bankEditorWars
+            // 
+            this.bankEditorWars.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bankEditorWars.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bankEditorWars.Controls.Add(this.tableLayoutPanel16);
+            this.bankEditorWars.Controls.Add(this.label31);
+            this.bankEditorWars.Controls.Add(this.tableLayoutPanel17);
+            this.bankEditorWars.Controls.Add(this.label33);
+            this.bankEditorWars.Controls.Add(this.tableLayoutPanel18);
+            this.bankEditorWars.Controls.Add(this.label34);
+            this.bankEditorWars.Controls.Add(this.tableLayoutPanel19);
+            this.bankEditorWars.Controls.Add(this.label35);
+            this.bankEditorWars.Location = new System.Drawing.Point(359, 13);
+            this.bankEditorWars.Name = "bankEditorWars";
+            this.bankEditorWars.Size = new System.Drawing.Size(325, 240);
+            this.bankEditorWars.TabIndex = 13;
+            this.bankEditorWars.Visible = false;
+            // 
+            // tableLayoutPanel16
+            // 
+            this.tableLayoutPanel16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel16.ColumnCount = 2;
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel16.Controls.Add(this.war3ComboBox, 0, 0);
+            this.tableLayoutPanel16.Controls.Add(this.war3Box, 1, 0);
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(14, 193);
+            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
+            this.tableLayoutPanel16.RowCount = 1;
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(298, 31);
+            this.tableLayoutPanel16.TabIndex = 13;
+            // 
+            // war3ComboBox
+            // 
+            this.war3ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.war3ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.war3ComboBox.FormattingEnabled = true;
+            this.war3ComboBox.Location = new System.Drawing.Point(3, 3);
+            this.war3ComboBox.Name = "war3ComboBox";
+            this.war3ComboBox.Size = new System.Drawing.Size(247, 21);
+            this.war3ComboBox.TabIndex = 6;
+            this.toolTip.SetToolTip(this.war3ComboBox, "Wave archive to be used for the bank.");
+            // 
+            // war3Box
+            // 
+            this.war3Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.war3Box.Location = new System.Drawing.Point(256, 3);
+            this.war3Box.Maximum = new decimal(new int[] {
+            65534,
+            0,
+            0,
+            0});
+            this.war3Box.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.war3Box.Name = "war3Box";
+            this.war3Box.Size = new System.Drawing.Size(39, 20);
+            this.war3Box.TabIndex = 7;
+            this.toolTip.SetToolTip(this.war3Box, "Id of the wave archive to use for this bank.");
+            // 
+            // label31
+            // 
+            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label31.Location = new System.Drawing.Point(11, 171);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(301, 22);
+            this.label31.TabIndex = 12;
+            this.label31.Text = "Wave Archive 3:";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel17
+            // 
+            this.tableLayoutPanel17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel17.ColumnCount = 2;
+            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel17.Controls.Add(this.war2ComboBox, 0, 0);
+            this.tableLayoutPanel17.Controls.Add(this.war2Box, 1, 0);
+            this.tableLayoutPanel17.Location = new System.Drawing.Point(14, 137);
+            this.tableLayoutPanel17.Name = "tableLayoutPanel17";
+            this.tableLayoutPanel17.RowCount = 1;
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(298, 31);
+            this.tableLayoutPanel17.TabIndex = 11;
+            // 
+            // war2ComboBox
+            // 
+            this.war2ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.war2ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.war2ComboBox.FormattingEnabled = true;
+            this.war2ComboBox.Location = new System.Drawing.Point(3, 3);
+            this.war2ComboBox.Name = "war2ComboBox";
+            this.war2ComboBox.Size = new System.Drawing.Size(247, 21);
+            this.war2ComboBox.TabIndex = 6;
+            this.toolTip.SetToolTip(this.war2ComboBox, "Wave archive to be used for the bank.");
+            // 
+            // war2Box
+            // 
+            this.war2Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.war2Box.Location = new System.Drawing.Point(256, 3);
+            this.war2Box.Maximum = new decimal(new int[] {
+            65534,
+            0,
+            0,
+            0});
+            this.war2Box.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.war2Box.Name = "war2Box";
+            this.war2Box.Size = new System.Drawing.Size(39, 20);
+            this.war2Box.TabIndex = 7;
+            this.toolTip.SetToolTip(this.war2Box, "Id of the wave archive to use for this bank.");
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.Location = new System.Drawing.Point(11, 115);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(301, 22);
+            this.label33.TabIndex = 10;
+            this.label33.Text = "Wave Archive 2:";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel18
+            // 
+            this.tableLayoutPanel18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel18.ColumnCount = 2;
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel18.Controls.Add(this.war1ComboBox, 0, 0);
+            this.tableLayoutPanel18.Controls.Add(this.war1Box, 1, 0);
+            this.tableLayoutPanel18.Location = new System.Drawing.Point(14, 81);
+            this.tableLayoutPanel18.Name = "tableLayoutPanel18";
+            this.tableLayoutPanel18.RowCount = 1;
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel18.Size = new System.Drawing.Size(298, 31);
+            this.tableLayoutPanel18.TabIndex = 9;
+            // 
+            // war1ComboBox
+            // 
+            this.war1ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.war1ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.war1ComboBox.FormattingEnabled = true;
+            this.war1ComboBox.Location = new System.Drawing.Point(3, 3);
+            this.war1ComboBox.Name = "war1ComboBox";
+            this.war1ComboBox.Size = new System.Drawing.Size(247, 21);
+            this.war1ComboBox.TabIndex = 6;
+            this.toolTip.SetToolTip(this.war1ComboBox, "Wave archive to be used for the bank.");
+            // 
+            // war1Box
+            // 
+            this.war1Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.war1Box.Location = new System.Drawing.Point(256, 3);
+            this.war1Box.Maximum = new decimal(new int[] {
+            65534,
+            0,
+            0,
+            0});
+            this.war1Box.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.war1Box.Name = "war1Box";
+            this.war1Box.Size = new System.Drawing.Size(39, 20);
+            this.war1Box.TabIndex = 7;
+            this.toolTip.SetToolTip(this.war1Box, "Id of the wave archive to use for this bank.");
+            // 
+            // label34
+            // 
+            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label34.Location = new System.Drawing.Point(11, 59);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(301, 22);
+            this.label34.TabIndex = 8;
+            this.label34.Text = "Wave Archive 1:";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel19
+            // 
+            this.tableLayoutPanel19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel19.ColumnCount = 2;
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel19.Controls.Add(this.war0ComboBox, 0, 0);
+            this.tableLayoutPanel19.Controls.Add(this.war0Box, 1, 0);
+            this.tableLayoutPanel19.Location = new System.Drawing.Point(14, 25);
+            this.tableLayoutPanel19.Name = "tableLayoutPanel19";
+            this.tableLayoutPanel19.RowCount = 1;
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel19.Size = new System.Drawing.Size(298, 31);
+            this.tableLayoutPanel19.TabIndex = 7;
+            // 
+            // war0ComboBox
+            // 
+            this.war0ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.war0ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.war0ComboBox.FormattingEnabled = true;
+            this.war0ComboBox.Location = new System.Drawing.Point(3, 3);
+            this.war0ComboBox.Name = "war0ComboBox";
+            this.war0ComboBox.Size = new System.Drawing.Size(247, 21);
+            this.war0ComboBox.TabIndex = 6;
+            this.toolTip.SetToolTip(this.war0ComboBox, "Wave archive to be used for the bank.");
+            // 
+            // war0Box
+            // 
+            this.war0Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.war0Box.Location = new System.Drawing.Point(256, 3);
+            this.war0Box.Maximum = new decimal(new int[] {
+            65534,
+            0,
+            0,
+            0});
+            this.war0Box.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.war0Box.Name = "war0Box";
+            this.war0Box.Size = new System.Drawing.Size(39, 20);
+            this.war0Box.TabIndex = 7;
+            this.toolTip.SetToolTip(this.war0Box, "Id of the wave archive to use for this bank.");
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.Location = new System.Drawing.Point(11, 3);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(301, 22);
+            this.label35.TabIndex = 2;
+            this.label35.Text = "Wave Archive 0:";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tree
+            // 
+            this.tree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tree.ImageIndex = 0;
+            this.tree.ImageList = this.treeIcons;
+            this.tree.Indent = 12;
+            this.tree.Location = new System.Drawing.Point(0, 0);
+            this.tree.Name = "tree";
+            treeNode1.ImageIndex = 10;
+            treeNode1.Name = "fileInfo";
+            treeNode1.SelectedImageIndex = 10;
+            treeNode1.Text = "File Information";
+            this.tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.tree.SelectedImageIndex = 0;
+            this.tree.ShowLines = false;
+            this.tree.Size = new System.Drawing.Size(695, 791);
+            this.tree.TabIndex = 0;
+            this.tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseClick);
+            this.tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseDoubleClick);
+            this.tree.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tree_NodeKey);
+            // 
+            // treeIcons
+            // 
+            this.treeIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("treeIcons.ImageStream")));
+            this.treeIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.treeIcons.Images.SetKeyName(0, "blank.png");
+            this.treeIcons.Images.SetKeyName(1, "version.png");
+            this.treeIcons.Images.SetKeyName(2, "sseq.png");
+            this.treeIcons.Images.SetKeyName(3, "seqArc.png");
+            this.treeIcons.Images.SetKeyName(4, "bank.png");
+            this.treeIcons.Images.SetKeyName(5, "waveArchive.png");
+            this.treeIcons.Images.SetKeyName(6, "player.png");
+            this.treeIcons.Images.SetKeyName(7, "group.png");
+            this.treeIcons.Images.SetKeyName(8, "streamPlayer.png");
+            this.treeIcons.Images.SetKeyName(9, "strm.png");
+            this.treeIcons.Images.SetKeyName(10, "record.png");
+            this.treeIcons.Images.SetKeyName(11, "recordArc.png");
+            this.treeIcons.Images.SetKeyName(12, "lookup.png");
+            this.treeIcons.Images.SetKeyName(13, "recordRegion.png");
+            this.treeIcons.Images.SetKeyName(14, "wave.png");
+            this.treeIcons.Images.SetKeyName(15, "ranged.png");
+            this.treeIcons.Images.SetKeyName(16, "regional.png");
+            this.treeIcons.Images.SetKeyName(17, "psg.png");
+            this.treeIcons.Images.SetKeyName(18, "whiteNoise.png");
+            // 
+            // sequenceEditorPanel
+            // 
+            this.sequenceEditorPanel.Controls.Add(this.sequenceEditor);
+            this.sequenceEditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sequenceEditorPanel.Location = new System.Drawing.Point(0, 0);
+            this.sequenceEditorPanel.Name = "sequenceEditorPanel";
+            this.sequenceEditorPanel.Size = new System.Drawing.Size(695, 791);
+            this.sequenceEditorPanel.TabIndex = 3;
+            this.sequenceEditorPanel.Visible = false;
+            // 
+            // sequenceEditor
+            // 
+            this.sequenceEditor.CaretPeriod = 500;
+            this.sequenceEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sequenceEditor.Location = new System.Drawing.Point(0, 0);
+            this.sequenceEditor.Name = "sequenceEditor";
+            this.sequenceEditor.Size = new System.Drawing.Size(695, 791);
+            this.sequenceEditor.TabIndex = 0;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.RestoreDirectory = true;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.status,
+            this.currentNote});
+            this.statusStrip.Location = new System.Drawing.Point(0, 817);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1049, 22);
+            this.statusStrip.TabIndex = 2;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // status
+            // 
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(125, 17);
+            this.status.Text = "No Valid Info Selected!";
+            // 
+            // currentNote
+            // 
+            this.currentNote.Name = "currentNote";
+            this.currentNote.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.currentNote.Size = new System.Drawing.Size(0, 17);
+            // 
+            // rootMenu
+            // 
+            this.rootMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.expandToolStripMenuItem,
+            this.collapseToolStripMenuItem});
+            this.rootMenu.Name = "rootMenu";
+            this.rootMenu.Size = new System.Drawing.Size(120, 70);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.New;
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.addToolStripMenuItem.Text = "Add";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            // 
+            // expandToolStripMenuItem
+            // 
+            this.expandToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Save;
+            this.expandToolStripMenuItem.Name = "expandToolStripMenuItem";
+            this.expandToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.expandToolStripMenuItem.Text = "Expand";
+            this.expandToolStripMenuItem.Click += new System.EventHandler(this.expandToolStripMenuItem_Click);
+            // 
+            // collapseToolStripMenuItem
+            // 
+            this.collapseToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Save_As;
+            this.collapseToolStripMenuItem.Name = "collapseToolStripMenuItem";
+            this.collapseToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.collapseToolStripMenuItem.Text = "Collapse";
+            this.collapseToolStripMenuItem.Click += new System.EventHandler(this.collapseToolStripMenuItem_Click);
+            // 
+            // nodeMenu
+            // 
+            this.nodeMenu.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.nodeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addAboveToolStripMenuItem1,
+            this.addBelowToolStripMenuItem1,
+            this.moveUpToolStripMenuItem1,
+            this.moveDownToolStripMenuItem1,
+            this.replaceFileToolStripMenuItem,
+            this.exportToolStripMenuItem1,
+            this.deleteToolStripMenuItem1});
+            this.nodeMenu.Name = "contextMenuStrip1";
+            this.nodeMenu.Size = new System.Drawing.Size(139, 158);
+            // 
+            // addAboveToolStripMenuItem1
+            // 
+            this.addAboveToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.New;
+            this.addAboveToolStripMenuItem1.Name = "addAboveToolStripMenuItem1";
+            this.addAboveToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.addAboveToolStripMenuItem1.Text = "Add Above";
+            this.addAboveToolStripMenuItem1.Click += new System.EventHandler(this.addAboveToolStripMenuItem1_Click);
+            // 
+            // addBelowToolStripMenuItem1
+            // 
+            this.addBelowToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Open;
+            this.addBelowToolStripMenuItem1.Name = "addBelowToolStripMenuItem1";
+            this.addBelowToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.addBelowToolStripMenuItem1.Text = "Add Below";
+            this.addBelowToolStripMenuItem1.Click += new System.EventHandler(this.addBelowToolStripMenuItem1_Click);
+            // 
+            // moveUpToolStripMenuItem1
+            // 
+            this.moveUpToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Save;
+            this.moveUpToolStripMenuItem1.Name = "moveUpToolStripMenuItem1";
+            this.moveUpToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.moveUpToolStripMenuItem1.Text = "Move Up";
+            this.moveUpToolStripMenuItem1.Click += new System.EventHandler(this.moveUpToolStripMenuItem1_Click);
+            // 
+            // moveDownToolStripMenuItem1
+            // 
+            this.moveDownToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Save_As;
+            this.moveDownToolStripMenuItem1.Name = "moveDownToolStripMenuItem1";
+            this.moveDownToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.moveDownToolStripMenuItem1.Text = "Move Down";
+            this.moveDownToolStripMenuItem1.Click += new System.EventHandler(this.moveDownToolStripMenuItem1_Click);
+            // 
+            // replaceFileToolStripMenuItem
+            // 
+            this.replaceFileToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Import;
+            this.replaceFileToolStripMenuItem.Name = "replaceFileToolStripMenuItem";
+            this.replaceFileToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.replaceFileToolStripMenuItem.Text = "Replace";
+            this.replaceFileToolStripMenuItem.Click += new System.EventHandler(this.replaceFileToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem1
+            // 
+            this.exportToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Export;
+            this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.exportToolStripMenuItem1.Text = "Export";
+            this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
+            // 
+            // deleteToolStripMenuItem1
+            // 
+            this.deleteToolStripMenuItem1.Image = global::NitroStudio2.Properties.Resources.Close;
+            this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.deleteToolStripMenuItem1.Text = "Delete";
+            this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
+            // 
+            // sarEntryMenu
+            // 
+            this.sarEntryMenu.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.sarEntryMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sarAddAbove,
+            this.sarAddBelow,
+            this.sarMoveUp,
+            this.sarMoveDown,
+            this.sarReplace,
+            this.sarExport,
+            this.sarRename,
+            this.sarDelete});
+            this.sarEntryMenu.Name = "contextMenuStrip1";
+            this.sarEntryMenu.Size = new System.Drawing.Size(139, 180);
+            // 
+            // sarAddAbove
+            // 
+            this.sarAddAbove.Image = global::NitroStudio2.Properties.Resources.New;
+            this.sarAddAbove.Name = "sarAddAbove";
+            this.sarAddAbove.Size = new System.Drawing.Size(138, 22);
+            this.sarAddAbove.Text = "Add Above";
+            this.sarAddAbove.Click += new System.EventHandler(this.SarAddAbove_Click);
+            // 
+            // sarAddBelow
+            // 
+            this.sarAddBelow.Image = global::NitroStudio2.Properties.Resources.Open;
+            this.sarAddBelow.Name = "sarAddBelow";
+            this.sarAddBelow.Size = new System.Drawing.Size(138, 22);
+            this.sarAddBelow.Text = "Add Below";
+            this.sarAddBelow.Click += new System.EventHandler(this.SarAddBelow_Click);
+            // 
+            // sarMoveUp
+            // 
+            this.sarMoveUp.Image = global::NitroStudio2.Properties.Resources.Save;
+            this.sarMoveUp.Name = "sarMoveUp";
+            this.sarMoveUp.Size = new System.Drawing.Size(138, 22);
+            this.sarMoveUp.Text = "Move Up";
+            this.sarMoveUp.Click += new System.EventHandler(this.SarMoveUp_Click);
+            // 
+            // sarMoveDown
+            // 
+            this.sarMoveDown.Image = global::NitroStudio2.Properties.Resources.Save_As;
+            this.sarMoveDown.Name = "sarMoveDown";
+            this.sarMoveDown.Size = new System.Drawing.Size(138, 22);
+            this.sarMoveDown.Text = "Move Down";
+            this.sarMoveDown.Click += new System.EventHandler(this.SarMoveDown_Click);
+            // 
+            // sarReplace
+            // 
+            this.sarReplace.Image = global::NitroStudio2.Properties.Resources.Import;
+            this.sarReplace.Name = "sarReplace";
+            this.sarReplace.Size = new System.Drawing.Size(138, 22);
+            this.sarReplace.Text = "Replace";
+            this.sarReplace.Click += new System.EventHandler(this.SarReplace_Click);
+            // 
+            // sarExport
+            // 
+            this.sarExport.Image = global::NitroStudio2.Properties.Resources.Export;
+            this.sarExport.Name = "sarExport";
+            this.sarExport.Size = new System.Drawing.Size(138, 22);
+            this.sarExport.Text = "Export";
+            this.sarExport.Click += new System.EventHandler(this.SarExport_Click);
+            // 
+            // sarRename
+            // 
+            this.sarRename.Image = global::NitroStudio2.Properties.Resources.Rename;
+            this.sarRename.Name = "sarRename";
+            this.sarRename.Size = new System.Drawing.Size(138, 22);
+            this.sarRename.Text = "Rename";
+            this.sarRename.Click += new System.EventHandler(this.SarRename_Click);
+            // 
+            // sarDelete
+            // 
+            this.sarDelete.Image = global::NitroStudio2.Properties.Resources.Close;
+            this.sarDelete.Name = "sarDelete";
+            this.sarDelete.Size = new System.Drawing.Size(138, 22);
+            this.sarDelete.Text = "Delete";
+            this.sarDelete.Click += new System.EventHandler(this.SarDelete_Click);
+            // 
             // EditorBase
             // 
-            this.ClientSize = new System.Drawing.Size(1049, 687);
+            this.ClientSize = new System.Drawing.Size(1049, 839);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.statusStrip);
@@ -6336,6 +6413,10 @@ namespace NitroStudio2 {
             ((System.ComponentModel.ISupportInitialize)(this.itemIndexBox)).EndInit();
             this.settingsPanel.ResumeLayout(false);
             this.noInfoPanel.ResumeLayout(false);
+            this.loopingPanel.ResumeLayout(false);
+            this.loopingTableLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.loopLengthUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loopStartUpDown)).EndInit();
             this.kermalisSoundPlayerPanel.ResumeLayout(false);
             this.kermalisSoundPlayerPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kermalisPosition)).EndInit();
@@ -6359,8 +6440,6 @@ namespace NitroStudio2 {
             this.nodeMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.sarEntryMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.swavLoopStartUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.swavLoopLengthUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -8407,7 +8486,6 @@ namespace NitroStudio2 {
                 }
             }
         }
-
     }
 
 }

@@ -318,10 +318,7 @@ namespace NitroStudio2 {
                         indexPanel.Show();
                         forceUniqueFilePanel.Show();
                         kermalisSoundPlayerPanel.Show();
-
-                        swavLoopLengthLabel.Visible = swavLoopLengthUpDown.Visible =
-                        swavLoopStartLabel.Visible = swavLoopStartUpDown.Visible = false;
-
+                        loopingPanel.Show();
                         seqPanel.Show();
                         var e = SA.Sequences.Where(x => x.Index == GetIdFromNode(tree.SelectedNode)).FirstOrDefault();
                         itemIndexBox.Value = e.Index;

@@ -1,5 +1,6 @@
 ﻿using GotaSoundIO.IO;
 using GotaSoundIO.Sound;
+using NAudio.Wave;
 using NitroFileLoader;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,16 @@ namespace NitroStudio2 {
     /// </summary>
     public class WaveArchiveEditor : EditorBase {
         /// <summary>
+        /// Determines whether a different SWAV element has been selected, 
+        /// since the Wave Player was started.
+        /// </summary>
+        bool selectionChangedAfterPlaying = false;
+
+        /// <summary>
         /// Stores old selected element. 
         /// Can prevent gui from refreshing when not necessary.
         /// </summary>
-        TreeNode oldSelection;
+        TreeNode oldSelection = null;
 
         /// <summary>
         /// Wave archive.
@@ -78,16 +85,28 @@ namespace NitroStudio2 {
             tree.Nodes.Add("root", "Wave Archive", 5, 5);
             UpdateNodes();
             tree.Nodes[0].Expand();
+
+            SampleLoopModeChange(null, null);
+
+            swavLoopLabel.Visible = swavLoopCheckbox.Visible = kermalisLoopBox.Visible = true;
+
+
             FormClosing += new FormClosingEventHandler(WAClosing);
             soundPlayerLabel.Text = "Sound Player Deluxe™";
             kermalisPlayButton.Click += new EventHandler(PlayClick);
             kermalisPauseButton.Click += new EventHandler(PauseClick);
             kermalisStopButton.Click += new EventHandler(StopClick);
             kermalisVolumeSlider.ValueChanged += new EventHandler(VolumeChanged);
-            kermalisLoopBox.CheckedChanged += new EventHandler(LoopChanged);
+            swavLoopCheckbox.CheckedChanged += new EventHandler(SampleLoopModeChange);
+            kermalisLoopBox.CheckedChanged += new EventHandler(LoopPlaybackChanged);
             kermalisPosition.MouseUp += new MouseEventHandler(PositionMouseUp);
             kermalisPosition.MouseDown += new MouseEventHandler(PositionMouseDown);
+
+            loopStartUpDown.ValueChanged += new EventHandler(LoopStartChanged);
+            loopLengthUpDown.ValueChanged += new EventHandler(LoopLengthChanged);
+
             tree.KeyPress += new KeyPressEventHandler(KeyPress);
+            
             Timer.Tick += PositionTick;
             Timer.Interval = 10;
             Timer.Start();
@@ -117,8 +136,13 @@ namespace NitroStudio2 {
                 noInfoPanel.BringToFront();
                 noInfoPanel.Show();
                 status.Text = "No Valid Info Selected!";
+                oldSelection = null;
             } else {
-                Wave cur = WA.Waves[tree.SelectedNode.Index];
+                if (oldSelection != tree.SelectedNode) {
+                    if (Player.SoundOut.PlaybackState.Equals(PlaybackState.Playing)) {
+                        selectionChangedAfterPlaying = true;
+                    }
+                }
 
                 if (oldSelection == null) {
                     blankPanel.BringToFront();
@@ -128,20 +152,23 @@ namespace NitroStudio2 {
                     kermalisSoundPlayerPanel.Show();
                 }
 
+                Wave cur = WA.Waves[tree.SelectedNode.Index];
+
                 if (cur != null) {
-                    kermalisLoopBox.Checked = cur.Loops;
-                    swavLoopStartUpDown.Value = cur.LoopStart / 8 + 1;
-                    swavLoopLengthUpDown.Value = cur.LoopEnd;
+                    swavLoopCheckbox.Checked = cur.Loops;
+
+                    PcmFormat pcmf = cur.GetPcmFormat();
+                    loopStartUpDown.Value = Wave.Sample2Offset(cur.LoopStart, pcmf) / 4;
+                    loopLengthUpDown.Value = cur.LoopLength;
 
                     status.Text = "Wave " + tree.SelectedNode.Index + " Selected. " +
                         cur.Audio.NumSamples + " samples long " + (cur.Loops ? "(Looping)" : "(Not Looping)") +
                         ", " + cur.SampleRate + " Hz" +
                         ", " + MainWindow.GetBytesSize(cur) + ".";
                 }
-            }
 
-            //Parent is not null.
-            oldSelection = tree.SelectedNode.Parent;
+                oldSelection = tree.SelectedNode;
+            }
         }
 
         /// <summary>
@@ -161,7 +188,6 @@ namespace NitroStudio2 {
                     tree.Nodes[0].Nodes.Add("wave" + i, "Wave " + i, 14, 14);
                     tree.Nodes[0].Nodes["wave" + i].ContextMenuStrip = nodeMenu;
                 }
-
             } else {
 
                 //Remove context menus.
@@ -173,7 +199,6 @@ namespace NitroStudio2 {
 
             //End update.
             EndUpdateNodes();
-
         }
 
         /// <summary>
@@ -187,6 +212,8 @@ namespace NitroStudio2 {
         /// Play click.
         /// </summary>
         public void PlayClick(object sender, EventArgs e) {
+            selectionChangedAfterPlaying = false;
+
             Player.SoundOut.Stop();
             Player.Stop();
             Player.LoadStream(WA.Waves[tree.SelectedNode.Index]);
@@ -206,8 +233,10 @@ namespace NitroStudio2 {
         /// <summary>
         /// Stop click.
         /// </summary>
-        public void StopClick(object sender, EventArgs e) {
+        public void StopClick(object sender, EventArgs e) { 
             Player.SoundOut.Stop();
+            Player.SetPosition(0);
+            PositionTick(sender, e);
         }
 
         /// <summary>
@@ -218,14 +247,28 @@ namespace NitroStudio2 {
         }
 
         /// <summary>
-        /// Loop changed.
+        /// Loop playback mode changed.
         /// </summary>
-        public void LoopChanged(object sender, EventArgs e) {
-            swavLoopLengthLabel.Visible = swavLoopLengthUpDown.Visible =
-            swavLoopStartLabel.Visible = swavLoopStartUpDown.Visible =
-
+        public void LoopPlaybackChanged(object sender, EventArgs e) {
             Player.Loop = kermalisLoopBox.Checked;
-            Player.Stop();
+
+            SampleLoopModeChange(sender, e);
+
+            StopClick(sender, e);
+        }
+
+        /// <summary>
+        /// Sample looping settings changed.
+        /// </summary>
+        public void SampleLoopModeChange(object sender, EventArgs e) {
+            if (swavLoopCheckbox.Checked | kermalisLoopBox.Checked) {
+                loopingPanel.BringToFront();
+                loopingPanel.Show();
+            } else {
+                loopingPanel.Visible = false;
+                loopingPanel.Hide();
+                loopingPanel.SendToBack();
+            }
         }
 
         /// <summary>
@@ -233,7 +276,8 @@ namespace NitroStudio2 {
         /// </summary>
         public void PositionTick(object sender, EventArgs e) {
             if (Player != null && PositionBarFree) {
-                kermalisPosition.Value = Player.GetPosition() > kermalisPosition.Maximum ? kermalisPosition.Maximum : (int)Player.GetPosition();
+                uint pos = Player.GetPosition();
+                kermalisPosition.Value = pos > kermalisPosition.Maximum ? kermalisPosition.Maximum : (int)pos;
             }
         }
 
@@ -255,6 +299,32 @@ namespace NitroStudio2 {
                 PositionBarFree = true;
             }
         }
+
+        /// <summary>
+        /// Up-Down numeric value changed.
+        /// </summary>
+        public void LoopStartChanged(object sender, EventArgs e) {
+            Wave cur = WA.Waves[tree.SelectedNode.Index];
+            cur.LoopStart = Wave.Offset2Samples((uint)(sender as NumericUpDown).Value * 4, cur.GetPcmFormat());
+            
+            if (Player.SoundOut.PlaybackState.Equals(PlaybackState.Playing)) {
+                PlayClick(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// Up-Down numeric value changed.
+        /// </summary>
+        public void LoopLengthChanged(object sender, EventArgs e) {
+            Wave cur = WA.Waves[tree.SelectedNode.Index];
+            cur.LoopLength = (uint)(sender as NumericUpDown).Value;
+            cur.UpdateLoopEnd(cur.GetPcmFormat());
+
+            if (Player.SoundOut.PlaybackState.Equals(PlaybackState.Playing)) {
+                PlayClick(sender, e);
+            }
+        }
+
 
         /// <summary>
         /// Add a wave at an index.
@@ -394,10 +464,11 @@ namespace NitroStudio2 {
         public override void NodeExport() {
 
             //Get the file.
-            SaveFileDialog s = new SaveFileDialog();
-            s.Filter = "Supported Audio Files|*.wav;*.swav;*.strm|Wave|*.wav|Sound Wave|*.swav|Sound Stream|*.strm";
-            s.RestoreDirectory = true;
-            s.FileName = "Wave " + tree.SelectedNode.Index + ".swav";
+            SaveFileDialog s = new SaveFileDialog {
+                Filter = "Supported Audio Files|*.wav;*.swav;*.strm|Wave|*.wav|Sound Wave|*.swav|Sound Stream|*.strm",
+                RestoreDirectory = true,
+                FileName = "Wave " + tree.SelectedNode.Index + ".swav"
+            };
             s.ShowDialog();
 
             //If valid.
@@ -444,7 +515,11 @@ namespace NitroStudio2 {
         /// </summary>
         public void KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == ' ' && tree.SelectedNode.Parent != null) {
-                PlayClick(sender, e);
+                if (!selectionChangedAfterPlaying && Player.SoundOut.PlaybackState.Equals(PlaybackState.Playing)) {
+                    StopClick(sender, e);
+                } else {
+                    PlayClick(sender, e);
+                }
             }
         }
 
