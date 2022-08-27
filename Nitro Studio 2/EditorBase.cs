@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ScintillaNET;
-using System.Diagnostics;
 using GotaSequenceLib;
 using GotaSoundIO.IO;
 using Multimedia.UI;
@@ -1389,7 +1385,7 @@ namespace NitroStudio2 {
             this.splitContainer1.Panel2.Controls.Add(this.bankEditorWars);
             this.splitContainer1.Panel2.Controls.Add(this.tree);
             this.splitContainer1.Panel2.Controls.Add(this.sequenceEditorPanel);
-            this.splitContainer1.Size = new System.Drawing.Size(1049, 793);
+            this.splitContainer1.Size = new System.Drawing.Size(1049, 641);
             this.splitContainer1.SplitterDistance = 348;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -1402,7 +1398,7 @@ namespace NitroStudio2 {
             this.seqBankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seqBankPanel.Location = new System.Drawing.Point(0, 351);
             this.seqBankPanel.Name = "seqBankPanel";
-            this.seqBankPanel.Size = new System.Drawing.Size(346, 440);
+            this.seqBankPanel.Size = new System.Drawing.Size(346, 288);
             this.seqBankPanel.TabIndex = 18;
             this.seqBankPanel.Visible = false;
             // 
@@ -2416,7 +2412,7 @@ namespace NitroStudio2 {
             this.bankEditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bankEditorPanel.Location = new System.Drawing.Point(0, 351);
             this.bankEditorPanel.Name = "bankEditorPanel";
-            this.bankEditorPanel.Size = new System.Drawing.Size(346, 440);
+            this.bankEditorPanel.Size = new System.Drawing.Size(346, 288);
             this.bankEditorPanel.TabIndex = 21;
             this.bankEditorPanel.Visible = false;
             // 
@@ -2441,7 +2437,7 @@ namespace NitroStudio2 {
             this.pan});
             this.bankRegions.Location = new System.Drawing.Point(14, 141);
             this.bankRegions.Name = "bankRegions";
-            this.bankRegions.Size = new System.Drawing.Size(319, 290);
+            this.bankRegions.Size = new System.Drawing.Size(319, 138);
             this.bankRegions.TabIndex = 26;
             // 
             // playSampleButton
@@ -3115,7 +3111,7 @@ namespace NitroStudio2 {
             this.seqArcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seqArcPanel.Location = new System.Drawing.Point(0, 287);
             this.seqArcPanel.Name = "seqArcPanel";
-            this.seqArcPanel.Size = new System.Drawing.Size(346, 504);
+            this.seqArcPanel.Size = new System.Drawing.Size(346, 352);
             this.seqArcPanel.TabIndex = 19;
             this.seqArcPanel.Visible = false;
             // 
@@ -3145,7 +3141,7 @@ namespace NitroStudio2 {
             this.seqPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seqPanel.Location = new System.Drawing.Point(0, 287);
             this.seqPanel.Name = "seqPanel";
-            this.seqPanel.Size = new System.Drawing.Size(346, 504);
+            this.seqPanel.Size = new System.Drawing.Size(346, 352);
             this.seqPanel.TabIndex = 17;
             this.seqPanel.Visible = false;
             // 
@@ -3344,7 +3340,7 @@ namespace NitroStudio2 {
             this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.playerPanel.Location = new System.Drawing.Point(0, 287);
             this.playerPanel.Name = "playerPanel";
-            this.playerPanel.Size = new System.Drawing.Size(346, 504);
+            this.playerPanel.Size = new System.Drawing.Size(346, 352);
             this.playerPanel.TabIndex = 15;
             this.playerPanel.Visible = false;
             // 
@@ -3621,7 +3617,7 @@ namespace NitroStudio2 {
             this.stmPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.stmPanel.Location = new System.Drawing.Point(0, 287);
             this.stmPanel.Name = "stmPanel";
-            this.stmPanel.Size = new System.Drawing.Size(346, 504);
+            this.stmPanel.Size = new System.Drawing.Size(346, 352);
             this.stmPanel.TabIndex = 14;
             this.stmPanel.Visible = false;
             // 
@@ -3761,7 +3757,7 @@ namespace NitroStudio2 {
             this.streamPlayerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.streamPlayerPanel.Location = new System.Drawing.Point(0, 287);
             this.streamPlayerPanel.Name = "streamPlayerPanel";
-            this.streamPlayerPanel.Size = new System.Drawing.Size(346, 504);
+            this.streamPlayerPanel.Size = new System.Drawing.Size(346, 352);
             this.streamPlayerPanel.TabIndex = 13;
             this.streamPlayerPanel.Visible = false;
             // 
@@ -3864,7 +3860,7 @@ namespace NitroStudio2 {
             this.grpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpPanel.Location = new System.Drawing.Point(0, 287);
             this.grpPanel.Name = "grpPanel";
-            this.grpPanel.Size = new System.Drawing.Size(346, 504);
+            this.grpPanel.Size = new System.Drawing.Size(346, 352);
             this.grpPanel.TabIndex = 12;
             this.grpPanel.Visible = false;
             // 
@@ -3879,7 +3875,7 @@ namespace NitroStudio2 {
             this.grpEntries.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpEntries.Location = new System.Drawing.Point(0, 0);
             this.grpEntries.Name = "grpEntries";
-            this.grpEntries.Size = new System.Drawing.Size(346, 504);
+            this.grpEntries.Size = new System.Drawing.Size(346, 352);
             this.grpEntries.TabIndex = 0;
             // 
             // item
@@ -3910,7 +3906,7 @@ namespace NitroStudio2 {
             this.bankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bankPanel.Location = new System.Drawing.Point(0, 287);
             this.bankPanel.Name = "bankPanel";
-            this.bankPanel.Size = new System.Drawing.Size(346, 504);
+            this.bankPanel.Size = new System.Drawing.Size(346, 352);
             this.bankPanel.TabIndex = 11;
             this.bankPanel.Visible = false;
             // 
@@ -4147,7 +4143,7 @@ namespace NitroStudio2 {
             this.blankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.blankPanel.Location = new System.Drawing.Point(0, 287);
             this.blankPanel.Name = "blankPanel";
-            this.blankPanel.Size = new System.Drawing.Size(346, 504);
+            this.blankPanel.Size = new System.Drawing.Size(346, 352);
             this.blankPanel.TabIndex = 10;
             this.blankPanel.Visible = false;
             // 
@@ -4158,7 +4154,7 @@ namespace NitroStudio2 {
             this.warPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.warPanel.Location = new System.Drawing.Point(0, 287);
             this.warPanel.Name = "warPanel";
-            this.warPanel.Size = new System.Drawing.Size(346, 504);
+            this.warPanel.Size = new System.Drawing.Size(346, 352);
             this.warPanel.TabIndex = 9;
             this.warPanel.Visible = false;
             // 
@@ -4283,7 +4279,7 @@ namespace NitroStudio2 {
             this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.settingsPanel.Location = new System.Drawing.Point(0, 167);
             this.settingsPanel.Name = "settingsPanel";
-            this.settingsPanel.Size = new System.Drawing.Size(346, 624);
+            this.settingsPanel.Size = new System.Drawing.Size(346, 472);
             this.settingsPanel.TabIndex = 1;
             this.settingsPanel.Visible = false;
             // 
@@ -4370,7 +4366,7 @@ namespace NitroStudio2 {
             this.noInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.noInfoPanel.Location = new System.Drawing.Point(0, 167);
             this.noInfoPanel.Name = "noInfoPanel";
-            this.noInfoPanel.Size = new System.Drawing.Size(346, 624);
+            this.noInfoPanel.Size = new System.Drawing.Size(346, 472);
             this.noInfoPanel.TabIndex = 0;
             // 
             // label1
@@ -4378,7 +4374,7 @@ namespace NitroStudio2 {
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(346, 624);
+            this.label1.Size = new System.Drawing.Size(346, 472);
             this.label1.TabIndex = 0;
             this.label1.Text = "No Valid Info Selected!";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4389,7 +4385,7 @@ namespace NitroStudio2 {
             this.loopingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loopingPanel.Location = new System.Drawing.Point(0, 167);
             this.loopingPanel.Name = "loopingPanel";
-            this.loopingPanel.Size = new System.Drawing.Size(346, 624);
+            this.loopingPanel.Size = new System.Drawing.Size(346, 472);
             this.loopingPanel.TabIndex = 14;
             this.loopingPanel.Visible = false;
             // 
@@ -4723,7 +4719,7 @@ namespace NitroStudio2 {
             this.pnlPianoKeys.Controls.Add(this.pkeyASharp5);
             this.pnlPianoKeys.Controls.Add(this.pkeyB5);
             this.pnlPianoKeys.Controls.Add(this.pkeyC8);
-            this.pnlPianoKeys.Location = new System.Drawing.Point(88, 731);
+            this.pnlPianoKeys.Location = new System.Drawing.Point(88, 579);
             this.pnlPianoKeys.Name = "pnlPianoKeys";
             this.pnlPianoKeys.Size = new System.Drawing.Size(565, 46);
             this.pnlPianoKeys.TabIndex = 6;
@@ -6054,7 +6050,7 @@ namespace NitroStudio2 {
             treeNode1});
             this.tree.SelectedImageIndex = 0;
             this.tree.ShowLines = false;
-            this.tree.Size = new System.Drawing.Size(695, 791);
+            this.tree.Size = new System.Drawing.Size(695, 639);
             this.tree.TabIndex = 0;
             this.tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseClick);
             this.tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseDoubleClick);
@@ -6090,7 +6086,7 @@ namespace NitroStudio2 {
             this.sequenceEditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sequenceEditorPanel.Location = new System.Drawing.Point(0, 0);
             this.sequenceEditorPanel.Name = "sequenceEditorPanel";
-            this.sequenceEditorPanel.Size = new System.Drawing.Size(695, 791);
+            this.sequenceEditorPanel.Size = new System.Drawing.Size(695, 639);
             this.sequenceEditorPanel.TabIndex = 3;
             this.sequenceEditorPanel.Visible = false;
             // 
@@ -6100,7 +6096,7 @@ namespace NitroStudio2 {
             this.sequenceEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sequenceEditor.Location = new System.Drawing.Point(0, 0);
             this.sequenceEditor.Name = "sequenceEditor";
-            this.sequenceEditor.Size = new System.Drawing.Size(695, 791);
+            this.sequenceEditor.Size = new System.Drawing.Size(695, 639);
             this.sequenceEditor.TabIndex = 0;
             // 
             // openFileDialog
@@ -6112,7 +6108,7 @@ namespace NitroStudio2 {
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status,
             this.currentNote});
-            this.statusStrip.Location = new System.Drawing.Point(0, 817);
+            this.statusStrip.Location = new System.Drawing.Point(0, 665);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1049, 22);
             this.statusStrip.TabIndex = 2;
@@ -6314,7 +6310,7 @@ namespace NitroStudio2 {
             // 
             // EditorBase
             // 
-            this.ClientSize = new System.Drawing.Size(1049, 839);
+            this.ClientSize = new System.Drawing.Size(1049, 687);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.statusStrip);

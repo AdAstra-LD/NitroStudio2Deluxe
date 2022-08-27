@@ -22,7 +22,7 @@ namespace NitroStudio2 {
         public LoopPointsDialog(RiffWave r) : this (r.Loops, r.LoopStart, r.LoopEnd, r.LoopLength) { }
         public LoopPointsDialog(bool looping, uint loopStart, uint loopEnd, uint loopLength = 0) : this(){
             bool backupDisableHandlers = disableHandlers;
-            disableHandlers = true;
+            this.disableHandlers = true;
 
             if (loopStart == 0 && loopEnd == 0 && loopLength == 0) {
                 if (looping) {
@@ -48,11 +48,11 @@ namespace NitroStudio2 {
                 loopLength = loopEnd - loopStart;
             }
             
-            loopStartNumericUpDown.Value = originalLoopStart = loopStart;
-            loopEndNumericUpDown.Value = originalLoopEnd = loopEnd;
-            loopLengthNumericUpDown.Value = originalLoopLength = loopLength;
+            loopStartNumericUpDown.Value = this.originalLoopStart = this.loopStart = loopStart;
+            loopEndNumericUpDown.Value = this.originalLoopEnd = this.loopEnd = loopEnd;
+            loopLengthNumericUpDown.Value = this.originalLoopLength = this.loopLength = loopLength;
 
-            disableHandlers = backupDisableHandlers;
+            this.disableHandlers = backupDisableHandlers;
         }
 
         private void confirmButton_Click(object sender, EventArgs e) {
