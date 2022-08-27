@@ -10,6 +10,7 @@ using System.Drawing;
 using NitroFileLoader;
 using GotaSoundBank.SF2;
 using GotaSoundBank.DLS;
+using static NitroStudio2.CreateStreamTool;
 
 namespace NitroStudio2 {
 
@@ -1277,7 +1278,7 @@ namespace NitroStudio2 {
             this.creaveWaveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("creaveWaveToolStripMenuItem.Image")));
             this.creaveWaveToolStripMenuItem.Name = "creaveWaveToolStripMenuItem";
             this.creaveWaveToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.creaveWaveToolStripMenuItem.Text = "Creave Wave";
+            this.creaveWaveToolStripMenuItem.Text = "Create Wave && Edit Loop";
             this.creaveWaveToolStripMenuItem.Click += new System.EventHandler(this.CreaveWaveToolStripMenuItem_Click);
             // 
             // createStreamToolStripMenuItem
@@ -8216,12 +8217,12 @@ namespace NitroStudio2 {
         }
 
         private void CreaveWaveToolStripMenuItem_Click(object sender, EventArgs e) {
-            CreateStreamTool ed = new CreateStreamTool(true);
+            CreateStreamTool ed = new CreateStreamTool(Mode.SwavMode);
             ed.Show();
         }
 
         private void CreateStreamToolStripMenuItem_Click(object sender, EventArgs e) {
-            CreateStreamTool ed = new CreateStreamTool(false);
+            CreateStreamTool ed = new CreateStreamTool(Mode.StreamMode);
             ed.Show();
         }
 
@@ -8253,7 +8254,7 @@ namespace NitroStudio2 {
         /// <param name="end">End note.</param>
         public void ColorRegion(Color color, byte start, byte end) {
             for (byte b = start; b <= end; b++) {
-                var n = GetKey((Notes)b);
+                PianoKey n = GetKey((Notes)b);
                 if (n != null) {
                     if (n.Shape == PianoKeyShape.RectShape && n != pkeyC8) {
                         n.KeyOffColor = Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B);
@@ -8452,14 +8453,16 @@ namespace NitroStudio2 {
         }
 
         private void sF2ToDLSToolStripMenuItem_Click(object sender, EventArgs e) {
-            OpenFileDialog o = new OpenFileDialog();
-            o.RestoreDirectory = true;
-            o.Filter = "Sound Font|*.sf2";
+            OpenFileDialog o = new OpenFileDialog {
+                RestoreDirectory = true,
+                Filter = "Sound Font|*.sf2"
+            };
             if (o.ShowDialog() == DialogResult.OK) {
-                SaveFileDialog s = new SaveFileDialog();
-                s.Filter = "Downloadable Sounds|*.dls";
-                s.RestoreDirectory = true;
-                s.FileName = Path.GetFileNameWithoutExtension(o.FileName) + ".dls";
+                SaveFileDialog s = new SaveFileDialog {
+                    Filter = "Downloadable Sounds|*.dls",
+                    RestoreDirectory = true,
+                    FileName = Path.GetFileNameWithoutExtension(o.FileName) + ".dls"
+                };
                 if (s.ShowDialog() == DialogResult.OK) {
                     var h = new SoundFont(o.FileName);
                     new DownloadableSounds(h).Write(s.FileName);
@@ -8468,14 +8471,16 @@ namespace NitroStudio2 {
         }
 
         private void dLSToSF2ToolStripMenuItem_Click(object sender, EventArgs e) {
-            OpenFileDialog o = new OpenFileDialog();
-            o.RestoreDirectory = true;
-            o.Filter = "Downloadable Sounds|*.dls";
+            OpenFileDialog o = new OpenFileDialog {
+                RestoreDirectory = true,
+                Filter = "Downloadable Sounds|*.dls"
+            };
             if (o.ShowDialog() == DialogResult.OK) {
-                SaveFileDialog s = new SaveFileDialog();
-                s.Filter = "Sound Font|*.sf2";
-                s.RestoreDirectory = true;
-                s.FileName = Path.GetFileNameWithoutExtension(o.FileName) + ".sf2";
+                SaveFileDialog s = new SaveFileDialog {
+                    Filter = "Sound Font|*.sf2",
+                    RestoreDirectory = true,
+                    FileName = Path.GetFileNameWithoutExtension(o.FileName) + ".sf2"
+                };
                 if (s.ShowDialog() == DialogResult.OK) {
                     var h = new DownloadableSounds(o.FileName);
                     new SoundFont(h).Write(s.FileName);

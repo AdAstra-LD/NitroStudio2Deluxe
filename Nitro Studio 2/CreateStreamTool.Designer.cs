@@ -32,8 +32,8 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.outFileBox = new System.Windows.Forms.TextBox();
             this.outFileButton = new System.Windows.Forms.Button();
-            this.outputFormat = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.outputFormatComboBox = new System.Windows.Forms.ComboBox();
+            this.formatLabel = new System.Windows.Forms.Label();
             this.exportButton = new System.Windows.Forms.Button();
             this.loopingTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.loopEndLabel = new System.Windows.Forms.Label();
@@ -149,31 +149,31 @@
             this.outFileButton.UseVisualStyleBackColor = true;
             this.outFileButton.Click += new System.EventHandler(this.outFileButton_Click);
             // 
-            // outputFormat
+            // outputFormatComboBox
             // 
-            this.outputFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.outputFormatComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.outputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.outputFormat.FormattingEnabled = true;
-            this.outputFormat.Items.AddRange(new object[] {
+            this.outputFormatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.outputFormatComboBox.FormattingEnabled = true;
+            this.outputFormatComboBox.Items.AddRange(new object[] {
             "PCM8",
             "PCM16",
             "IMA-ADPCM"});
-            this.outputFormat.Location = new System.Drawing.Point(12, 240);
-            this.outputFormat.Name = "outputFormat";
-            this.outputFormat.Size = new System.Drawing.Size(377, 21);
-            this.outputFormat.TabIndex = 4;
+            this.outputFormatComboBox.Location = new System.Drawing.Point(12, 240);
+            this.outputFormatComboBox.Name = "outputFormatComboBox";
+            this.outputFormatComboBox.Size = new System.Drawing.Size(377, 21);
+            this.outputFormatComboBox.TabIndex = 4;
             // 
-            // label3
+            // formatLabel
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.formatLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Location = new System.Drawing.Point(12, 218);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(377, 19);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Format:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.formatLabel.Location = new System.Drawing.Point(12, 218);
+            this.formatLabel.Name = "formatLabel";
+            this.formatLabel.Size = new System.Drawing.Size(377, 19);
+            this.formatLabel.TabIndex = 5;
+            this.formatLabel.Text = "Format:";
+            this.formatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // exportButton
             // 
@@ -334,8 +334,8 @@
             this.ClientSize = new System.Drawing.Size(401, 317);
             this.Controls.Add(this.loopingTableLayoutPanel);
             this.Controls.Add(this.exportButton);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.outputFormat);
+            this.Controls.Add(this.formatLabel);
+            this.Controls.Add(this.outputFormatComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.label1);
@@ -371,8 +371,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox outFileBox;
         private System.Windows.Forms.Button outFileButton;
-        private System.Windows.Forms.ComboBox outputFormat;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox outputFormatComboBox;
+        private System.Windows.Forms.Label formatLabel;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.TableLayoutPanel loopingTableLayoutPanel;
         private System.Windows.Forms.Label loopEndLabel;

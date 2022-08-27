@@ -15,21 +15,30 @@ namespace NitroStudio2 {
     public partial class CreateStreamTool : Form {
 
         /// <summary>
-        /// Swav mode.
+        /// Operation mode enumeration.
         /// </summary>
-        bool SwavMode;
+        public enum Mode : byte {
+            SwavMode,
+            StreamMode,
+        };
+
+        /// <summary>
+        /// Operation mode.
+        /// </summary>
+        public Mode mode;
 
         /// <summary>
         /// User-loaded sound file.
         /// </summary>
         SoundFile inp;
 
-
-        public CreateStreamTool(bool swavMode) {
+        public CreateStreamTool(Mode m) {
             InitializeComponent();
-            outputFormat.SelectedIndex = 2;
-            SwavMode = swavMode;
-            if (SwavMode) {
+            outputFormatComboBox.SelectedIndex = 2;
+
+            this.mode = m;
+
+            if (m.Equals(Mode.SwavMode)) {
                 Text = "Create Wave";
                 Icon = Properties.Resources.Wav;
                 loopingTableLayoutPanel.Enabled = true;
@@ -37,22 +46,38 @@ namespace NitroStudio2 {
         }
 
         private void impFileButton_Click(object sender, EventArgs e) {
-            OpenFileDialog o = new OpenFileDialog {
+            OpenFileDialog open = new OpenFileDialog {
                 RestoreDirectory = true,
                 Filter = "Supported Sound Files|*.wav;*.swav;*.strm"
             };
-            o.ShowDialog();
-            if (!string.IsNullOrWhiteSpace(o.FileName)) {
-                impFileBox.Text = o.FileName;
-                impFileBox.SelectionStart = outFileBox.Text.Length;
-                impFileBox.ScrollToCaret();
-                impFileBox.Refresh();
+
+            open.ShowDialog();
+
+            if (string.IsNullOrWhiteSpace(open.FileName)) {
+                return;
             }
 
-            if (SwavMode && Path.GetExtension(o.FileName).ToLowerInvariant().Equals(".swav")) {
-                inp = new Wave();
-                inp.Read(o.FileName);
+            impFileBox.Text = open.FileName;
+            impFileBox.SelectionStart = outFileBox.Text.Length;
+            impFileBox.ScrollToCaret();
+            impFileBox.Refresh();
 
+            //Switch input file.
+            switch (Path.GetExtension(impFileBox.Text)) {
+                case ".swav":
+                    inp = new Wave();
+                    break;
+                case ".strm":
+                    inp = new NitroFileLoader.Stream();
+                    break;
+                default:
+                    inp = new RiffWave();
+                    break;
+            }
+            inp.Read(open.FileName);
+
+
+            if (mode != Mode.StreamMode) {
                 bool backupDisableHandlers = disableHandlers;
                 disableHandlers = true;
 
@@ -89,14 +114,24 @@ namespace NitroStudio2 {
         }
 
         private void outFileButton_Click(object sender, EventArgs e) {
-            SaveFileDialog s = new SaveFileDialog {
+            SaveFileDialog save = new SaveFileDialog {
                 RestoreDirectory = true,
-                Filter = SwavMode ? "Sound Wave|*.swav" : "Sound Stream|*.strm"
+                Filter = mode == Mode.StreamMode ? "Sound Stream|*.strm" : "Supported Sound Files|*.wav;*.swav"
             };
-            s.ShowDialog();
 
-            if (!string.IsNullOrWhiteSpace(s.FileName)) {
-                outFileBox.Text = s.FileName;
+            save.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(save.FileName)) {
+                if (save.FileName.Equals(impFileBox.Text)) {
+                    MessageBox.Show("Input and output paths must be different!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (Path.GetExtension(save.FileName).Equals(".wav")) {
+                    outputFormatComboBox.Enabled = formatLabel.Enabled = false;
+                }
+
+                outFileBox.Text = save.FileName;
                 outFileBox.SelectionStart = outFileBox.Text.Length;
                 outFileBox.ScrollToCaret();
                 outFileBox.Refresh();
@@ -113,25 +148,9 @@ namespace NitroStudio2 {
                 return;
             }
 
-            //Switch input file.
-            if (inp is null) {
-                switch (Path.GetExtension(impFileBox.Text)) {
-                    case ".swav":
-                        inp = new Wave();
-                        break;
-                    case ".strm":
-                        inp = new NitroFileLoader.Stream();
-                        break;
-                    default:
-                        inp = new RiffWave();
-                        break;
-                }
-                inp.Read(impFileBox.Text);
-            }
-
             //Get conversion type.
             Type convType;
-            switch (outputFormat.SelectedIndex) {
+            switch (outputFormatComboBox.SelectedIndex) {
                 case 0:
                     convType = typeof(PCM8Signed);
                     break;
@@ -143,23 +162,39 @@ namespace NitroStudio2 {
                     break;
             }
 
-            //Sound file.
-            SoundFile s;
-            if (SwavMode) {
-                s = new Wave();
-            } else {
-                s = new NitroFileLoader.Stream();
+
+            //Output Sound file.
+            SoundFile output;
+            switch (Path.GetExtension(outFileBox.Text)) {
+                case ".swav":
+                    output = new Wave();
+
+                    //Convert the file.
+                    output.FromOtherStreamFile(inp, convType);
+                    break;
+                case ".strm":
+                    output = new NitroFileLoader.Stream();
+
+                    //Convert the file.
+                    output.FromOtherStreamFile(inp, convType);
+                    break;
+                case ".wav":
+                    output = new RiffWave();
+
+                    //Convert the file.
+                    output.FromOtherStreamFile(inp);
+                    break;
+                default:
+                    throw new Exception("Unrecognized operation mode!");
             }
 
-            //Convert the file.
-            s.FromOtherStreamFile(inp, convType);
-
             //Save the file.
-            s.Write(outFileBox.Text);
+            output.Write(outFileBox.Text);
+
+            MessageBox.Show("File has been written.", "Operation completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private bool disableHandlers = false;
-
 
         public uint originalLoopStart { private set; get; }
         public uint originalLoopLength { private set; get; }
