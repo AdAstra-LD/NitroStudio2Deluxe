@@ -86,10 +86,7 @@ namespace NitroStudio2 {
             UpdateNodes();
             tree.Nodes[0].Expand();
 
-            SampleLoopModeChange(null, null);
-
             swavLoopLabel.Visible = swavLoopCheckbox.Visible = kermalisLoopBox.Visible = true;
-
 
             FormClosing += new FormClosingEventHandler(WAClosing);
             soundPlayerLabel.Text = "Sound Player Deluxe™";
@@ -168,6 +165,8 @@ namespace NitroStudio2 {
                 }
 
                 oldSelection = tree.SelectedNode;
+                SampleLoopModeChange(null, null);
+
             }
         }
 
@@ -216,7 +215,7 @@ namespace NitroStudio2 {
 
             Player.SoundOut.Stop();
             Player.Stop();
-            Player.LoadStream(WA.Waves[tree.SelectedNode.Index]);
+            Player.LoadStream(WA.Waves[tree.SelectedNode.Index], forceLoop: kermalisLoopBox.Checked);
             kermalisPosition.Maximum = (int)Player.GetLength();
             kermalisPosition.TickFrequency = kermalisPosition.Maximum / 10;
             kermalisPosition.LargeChange = kermalisPosition.Maximum / 20;
@@ -261,6 +260,12 @@ namespace NitroStudio2 {
         /// Sample looping settings changed.
         /// </summary>
         public void SampleLoopModeChange(object sender, EventArgs e) {
+            if (swavLoopCheckbox.Checked) {
+                Wave cur = WA.Waves[tree.SelectedNode.Index];
+                if (cur != null) {
+                    cur.Loops = true;
+                }
+            }
             if (swavLoopCheckbox.Checked | kermalisLoopBox.Checked) {
                 loopingPanel.BringToFront();
                 loopingPanel.Show();
@@ -347,6 +352,17 @@ namespace NitroStudio2 {
                 switch (Path.GetExtension(o.FileName)) {
                     case ".wav":
                         RiffWave r = new RiffWave(o.FileName);
+                        LoopPointsDialog lpd = new LoopPointsDialog(r);
+                        lpd.Show();
+
+                        if (lpd.DialogResult.Equals(DialogResult.Yes)) {
+                            r.LoopStart = lpd.loopStart;
+                            r.LoopEnd = lpd.loopStart;
+                            r.LoopStart = lpd.loopStart;
+                        } else {
+                            r.Loops = false;
+                        }
+
                         w.FromOtherStreamFile(r);
                         break;
                     case ".swav":
@@ -434,6 +450,18 @@ namespace NitroStudio2 {
                 switch (Path.GetExtension(o.FileName)) {
                     case ".wav":
                         RiffWave r = new RiffWave(o.FileName);
+                        
+                        LoopPointsDialog lpd = new LoopPointsDialog(r);
+                        lpd.ShowDialog();
+
+                        if (lpd.useLoop && lpd.DialogResult.Equals(DialogResult.Yes)) {
+                            r.LoopStart = lpd.loopStart;
+                            r.LoopEnd = lpd.loopEnd;
+                            r.LoopLength = lpd.loopLength / 8;
+                        } else if (lpd.DialogResult.Equals(DialogResult.No)){
+                            r.Loops = false;
+                        }
+
                         w.FromOtherStreamFile(r);
                         break;
                     case ".swav":
