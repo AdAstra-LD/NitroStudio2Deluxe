@@ -65,7 +65,7 @@ namespace NitroStudio2 {
                     } else {
                         useLoopRadioButton.Checked = false;
                         discardLoopRadioButton.Checked = true;
-                        this.Text = TextBackup + " - " + "You can choose to set loop points";
+                        this.Text = TextBackup + " - " + "You can set loop points";
                     }
                 }
 
@@ -115,6 +115,7 @@ namespace NitroStudio2 {
         }
 
         private void exportButton_Click(object sender, EventArgs e) {
+
             if (impFileBox.Text.Equals("")) {
                 MessageBox.Show("No Input File Selected!");
                 return;
@@ -138,6 +139,17 @@ namespace NitroStudio2 {
                     break;
             }
 
+            bool LoopsBackup = inp.Loops;
+            uint LoopStartBackup = inp.LoopStart;
+            uint LoopEndBackup = inp.LoopEnd;
+            uint LoopLengthBackup = inp.LoopLength;
+
+            if (discardLoopRadioButton.Checked) {
+                inp.Loops = false;
+                inp.LoopStart = originalLoopStart;
+                inp.LoopEnd = originalLoopEnd;
+                inp.LoopLength = originalLoopLength;
+            }
 
             //Output Sound file.
             SoundFile output;
@@ -145,8 +157,12 @@ namespace NitroStudio2 {
                 case ".swav":
                     output = new Wave();
 
-                    //Convert the file.
-                    output.FromOtherStreamFile(inp, convType);
+                    if (convType.Equals(inp.Audio.EncodingType)) {
+                        output.FromOtherStreamFile(inp);
+                    } else {
+                        //Convert the file.
+                        output.FromOtherStreamFile(inp, convType);
+                    }
                     break;
                 case ".strm":
                     output = new NitroFileLoader.Stream();
@@ -162,6 +178,13 @@ namespace NitroStudio2 {
                     break;
                 default:
                     throw new Exception("Unrecognized operation mode!");
+            }
+
+            if (discardLoopRadioButton.Checked) {
+                inp.Loops = LoopsBackup;
+                inp.LoopStart = LoopStartBackup;
+                inp.LoopEnd = LoopEndBackup;
+                inp.LoopLength = LoopLengthBackup;
             }
 
             //Save the file.
