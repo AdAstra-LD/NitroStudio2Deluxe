@@ -228,9 +228,10 @@ namespace NitroFileLoader {
             foreach (var inst in Instruments) {
 
                 //New instrument.
-                GotaSoundBank.DLS.Instrument im = new GotaSoundBank.DLS.Instrument();
-                im.BankId = (uint)(inst.Index / 128);
-                im.InstrumentId = (uint)(inst.Index % 128);
+                GotaSoundBank.DLS.Instrument im = new GotaSoundBank.DLS.Instrument {
+                    BankId = (uint)(inst.Index / 128),
+                    InstrumentId = (uint)(inst.Index % 128)
+                };
                 im.Name = "Instrument " + im.InstrumentId;
 
                 //Add regions.
@@ -301,21 +302,38 @@ namespace NitroFileLoader {
                     if (r.Loops) {
                         r.LoopStart = d.Waves[wavInd].LoopStart;
                         r.LoopLength = d.Waves[wavInd].LoopEnd - d.Waves[wavInd].LoopStart;
-                        if (r.LoopLength < 0) { r.LoopLength = 0; }
+
+                        if (r.LoopLength < 0) { 
+                            r.LoopLength = 0; 
+                        }
                     }
 
                     //Articulator.
                     Articulator ar = new Articulator();
-                    ar.Connections.Add(new Connection() { DestinationConnection = DestinationConnection.EG1AttackTime, Scale = n.Attack >= 127 ? int.MinValue : MillisecondsToTimecents(AttackTable[n.Attack]) * 65536 });
-                    ar.Connections.Add(new Connection() { DestinationConnection = DestinationConnection.EG1DecayTime, Scale = n.Decay >= 127 ? int.MinValue : MillisecondsToTimecents(MaxReleaseTimes[n.Decay]) * 65536 });
-                    ar.Connections.Add(new Connection() { DestinationConnection = DestinationConnection.EG1SustainLevel, Scale = (int)Math.Round(Sustain2Fraction(n.Sustain) * 1000, MidpointRounding.AwayFromZero) * 65536 });
-                    ar.Connections.Add(new Connection() { DestinationConnection = DestinationConnection.EG1ReleaseTime, Scale = n.Release >= 127 ? int.MinValue : MillisecondsToTimecents(MaxReleaseTimes[n.Release]) * 65536 });
-                    ar.Connections.Add(new Connection() { DestinationConnection = DestinationConnection.Pan, Scale = GetPan(n.Pan) * 65536 });
+                    ar.Connections.Add(new Connection() { 
+                        DestinationConnection = DestinationConnection.EG1AttackTime, 
+                        Scale = n.Attack >= 127 ? int.MinValue : MillisecondsToTimecents(AttackTable[n.Attack]) * 65536 
+                    });
+                    ar.Connections.Add(new Connection() { 
+                        DestinationConnection = DestinationConnection.EG1DecayTime, 
+                        Scale = n.Decay >= 127 ? int.MinValue : MillisecondsToTimecents(MaxReleaseTimes[n.Decay]) * 65536 
+                    });
+                    ar.Connections.Add(new Connection() { 
+                        DestinationConnection = DestinationConnection.EG1SustainLevel, 
+                        Scale = (int)Math.Round(Sustain2Fraction(n.Sustain) * 1000, MidpointRounding.AwayFromZero) * 65536
+                    });
+                    ar.Connections.Add(new Connection() { 
+                        DestinationConnection = DestinationConnection.EG1ReleaseTime, 
+                        Scale = n.Release >= 127 ? int.MinValue : MillisecondsToTimecents(MaxReleaseTimes[n.Release]) * 65536 
+                    });
+                    ar.Connections.Add(new Connection() { 
+                        DestinationConnection = DestinationConnection.Pan, 
+                        Scale = GetPan(n.Pan) * 65536 
+                    });
                     r.Articulators.Add(ar);
 
                     //Add region.
                     im.Regions.Add(r);
-
                 }
 
                 //Add the instrument.
