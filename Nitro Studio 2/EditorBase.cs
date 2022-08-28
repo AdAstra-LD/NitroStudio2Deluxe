@@ -10,7 +10,7 @@ using System.Drawing;
 using NitroFileLoader;
 using GotaSoundBank.SF2;
 using GotaSoundBank.DLS;
-using static NitroStudio2.CreateStreamTool;
+using static NitroStudio2.AudioConverter;
 
 namespace NitroStudio2 {
 
@@ -321,8 +321,7 @@ namespace NitroStudio2 {
         private ToolStripMenuItem sequenceEditorToolStripMenuItem;
         private ToolStripMenuItem sequenceArchiveEditorToolStripMenuItem;
         private ToolStripMenuItem bankEditorToolStripMenuItem;
-        private ToolStripMenuItem createStreamToolStripMenuItem;
-        private ToolStripMenuItem creaveWaveToolStripMenuItem;
+        private ToolStripMenuItem audioConverterToolStripMenuItem;
         private ToolStripMenuItem waveArchiveEditorToolStripMenuItem;
         public ToolStripStatusLabel currentNote;
         private TableLayoutPanel tableLayoutPanel1;
@@ -623,8 +622,7 @@ namespace NitroStudio2 {
             this.bankEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.waveArchiveEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bankGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.creaveWaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createStreamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.audioConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSDKProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sF2ToDLSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dLSToSF2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1222,8 +1220,7 @@ namespace NitroStudio2 {
             this.bankEditorToolStripMenuItem,
             this.waveArchiveEditorToolStripMenuItem,
             this.bankGeneratorToolStripMenuItem,
-            this.creaveWaveToolStripMenuItem,
-            this.createStreamToolStripMenuItem,
+            this.audioConverterToolStripMenuItem,
             this.exportSDKProjectToolStripMenuItem,
             this.sF2ToDLSToolStripMenuItem,
             this.dLSToSF2ToolStripMenuItem,
@@ -1237,7 +1234,7 @@ namespace NitroStudio2 {
             // 
             this.sequenceEditorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sequenceEditorToolStripMenuItem.Image")));
             this.sequenceEditorToolStripMenuItem.Name = "sequenceEditorToolStripMenuItem";
-            this.sequenceEditorToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.sequenceEditorToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.sequenceEditorToolStripMenuItem.Text = "Sequence Editor";
             this.sequenceEditorToolStripMenuItem.Click += new System.EventHandler(this.SequenceEditorToolStripMenuItem_Click);
             // 
@@ -1273,21 +1270,13 @@ namespace NitroStudio2 {
             this.bankGeneratorToolStripMenuItem.Text = "Bank Generator";
             this.bankGeneratorToolStripMenuItem.Click += new System.EventHandler(this.BankGeneratorToolStripMenuItem_Click);
             // 
-            // creaveWaveToolStripMenuItem
+            // audioConverterToolStripMenuItem
             // 
-            this.creaveWaveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("creaveWaveToolStripMenuItem.Image")));
-            this.creaveWaveToolStripMenuItem.Name = "creaveWaveToolStripMenuItem";
-            this.creaveWaveToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.creaveWaveToolStripMenuItem.Text = "Create Wave && Edit Loop";
-            this.creaveWaveToolStripMenuItem.Click += new System.EventHandler(this.CreaveWaveToolStripMenuItem_Click);
-            // 
-            // createStreamToolStripMenuItem
-            // 
-            this.createStreamToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("createStreamToolStripMenuItem.Image")));
-            this.createStreamToolStripMenuItem.Name = "createStreamToolStripMenuItem";
-            this.createStreamToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.createStreamToolStripMenuItem.Text = "Create Stream";
-            this.createStreamToolStripMenuItem.Click += new System.EventHandler(this.CreateStreamToolStripMenuItem_Click);
+            this.audioConverterToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("audioConverterToolStripMenuItem.Image")));
+            this.audioConverterToolStripMenuItem.Name = "audioConverterToolStripMenuItem";
+            this.audioConverterToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.audioConverterToolStripMenuItem.Text = "Audio Converter && Loop Editor";
+            this.audioConverterToolStripMenuItem.Click += new System.EventHandler(this.AudioConverterToolStripMenuItem_Click);
             // 
             // exportSDKProjectToolStripMenuItem
             // 
@@ -1387,7 +1376,7 @@ namespace NitroStudio2 {
             this.splitContainer1.Panel2.Controls.Add(this.tree);
             this.splitContainer1.Panel2.Controls.Add(this.sequenceEditorPanel);
             this.splitContainer1.Size = new System.Drawing.Size(1049, 641);
-            this.splitContainer1.SplitterDistance = 348;
+            this.splitContainer1.SplitterDistance = 354;
             this.splitContainer1.TabIndex = 1;
             // 
             // seqBankPanel
@@ -1399,7 +1388,7 @@ namespace NitroStudio2 {
             this.seqBankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seqBankPanel.Location = new System.Drawing.Point(0, 351);
             this.seqBankPanel.Name = "seqBankPanel";
-            this.seqBankPanel.Size = new System.Drawing.Size(346, 288);
+            this.seqBankPanel.Size = new System.Drawing.Size(352, 288);
             this.seqBankPanel.TabIndex = 18;
             this.seqBankPanel.Visible = false;
             // 
@@ -1416,16 +1405,16 @@ namespace NitroStudio2 {
             this.tableLayoutPanel36.Name = "tableLayoutPanel36";
             this.tableLayoutPanel36.RowCount = 1;
             this.tableLayoutPanel36.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel36.Size = new System.Drawing.Size(319, 25);
+            this.tableLayoutPanel36.Size = new System.Drawing.Size(325, 25);
             this.tableLayoutPanel36.TabIndex = 30;
             // 
             // exportWavButton
             // 
             this.exportWavButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exportWavButton.Location = new System.Drawing.Point(159, 0);
+            this.exportWavButton.Location = new System.Drawing.Point(162, 0);
             this.exportWavButton.Margin = new System.Windows.Forms.Padding(0);
             this.exportWavButton.Name = "exportWavButton";
-            this.exportWavButton.Size = new System.Drawing.Size(160, 25);
+            this.exportWavButton.Size = new System.Drawing.Size(163, 25);
             this.exportWavButton.TabIndex = 5;
             this.exportWavButton.Text = "Export WAV";
             this.exportWavButton.UseVisualStyleBackColor = true;
@@ -1436,7 +1425,7 @@ namespace NitroStudio2 {
             this.exportMidiButton.Location = new System.Drawing.Point(0, 0);
             this.exportMidiButton.Margin = new System.Windows.Forms.Padding(0);
             this.exportMidiButton.Name = "exportMidiButton";
-            this.exportMidiButton.Size = new System.Drawing.Size(159, 25);
+            this.exportMidiButton.Size = new System.Drawing.Size(162, 25);
             this.exportMidiButton.TabIndex = 4;
             this.exportMidiButton.Text = "Export MIDI";
             this.exportMidiButton.UseVisualStyleBackColor = true;
@@ -1475,7 +1464,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel20.Size = new System.Drawing.Size(319, 176);
+            this.tableLayoutPanel20.Size = new System.Drawing.Size(325, 176);
             this.tableLayoutPanel20.TabIndex = 28;
             // 
             // tableLayoutPanel35
@@ -1488,13 +1477,13 @@ namespace NitroStudio2 {
             this.tableLayoutPanel35.Controls.Add(this.track15Picture, 2, 0);
             this.tableLayoutPanel35.Controls.Add(this.track15Solo, 1, 0);
             this.tableLayoutPanel35.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel35.Location = new System.Drawing.Point(159, 154);
+            this.tableLayoutPanel35.Location = new System.Drawing.Point(162, 154);
             this.tableLayoutPanel35.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel35.Name = "tableLayoutPanel35";
             this.tableLayoutPanel35.RowCount = 1;
             this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel35.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel35.Size = new System.Drawing.Size(160, 22);
+            this.tableLayoutPanel35.Size = new System.Drawing.Size(163, 22);
             this.tableLayoutPanel35.TabIndex = 41;
             // 
             // track15Box
@@ -1505,7 +1494,7 @@ namespace NitroStudio2 {
             this.track15Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track15Box.Location = new System.Drawing.Point(3, 3);
             this.track15Box.Name = "track15Box";
-            this.track15Box.Size = new System.Drawing.Size(74, 16);
+            this.track15Box.Size = new System.Drawing.Size(75, 16);
             this.track15Box.TabIndex = 2;
             this.track15Box.Text = "Track 15:";
             this.track15Box.UseVisualStyleBackColor = true;
@@ -1515,17 +1504,17 @@ namespace NitroStudio2 {
             this.track15Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track15Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track15Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track15Picture.Location = new System.Drawing.Point(120, 0);
+            this.track15Picture.Location = new System.Drawing.Point(121, 0);
             this.track15Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track15Picture.Name = "track15Picture";
-            this.track15Picture.Size = new System.Drawing.Size(40, 22);
+            this.track15Picture.Size = new System.Drawing.Size(42, 22);
             this.track15Picture.TabIndex = 0;
             this.track15Picture.TabStop = false;
             // 
             // track15Solo
             // 
             this.track15Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track15Solo.Location = new System.Drawing.Point(80, 0);
+            this.track15Solo.Location = new System.Drawing.Point(81, 0);
             this.track15Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track15Solo.Name = "track15Solo";
             this.track15Solo.Size = new System.Drawing.Size(40, 22);
@@ -1543,13 +1532,13 @@ namespace NitroStudio2 {
             this.tableLayoutPanel34.Controls.Add(this.track13Picture, 2, 0);
             this.tableLayoutPanel34.Controls.Add(this.track13Solo, 1, 0);
             this.tableLayoutPanel34.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel34.Location = new System.Drawing.Point(159, 132);
+            this.tableLayoutPanel34.Location = new System.Drawing.Point(162, 132);
             this.tableLayoutPanel34.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel34.Name = "tableLayoutPanel34";
             this.tableLayoutPanel34.RowCount = 1;
             this.tableLayoutPanel34.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel34.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel34.Size = new System.Drawing.Size(160, 22);
+            this.tableLayoutPanel34.Size = new System.Drawing.Size(163, 22);
             this.tableLayoutPanel34.TabIndex = 40;
             // 
             // track13Box
@@ -1560,7 +1549,7 @@ namespace NitroStudio2 {
             this.track13Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track13Box.Location = new System.Drawing.Point(3, 3);
             this.track13Box.Name = "track13Box";
-            this.track13Box.Size = new System.Drawing.Size(74, 16);
+            this.track13Box.Size = new System.Drawing.Size(75, 16);
             this.track13Box.TabIndex = 2;
             this.track13Box.Text = "Track 13:";
             this.track13Box.UseVisualStyleBackColor = true;
@@ -1570,17 +1559,17 @@ namespace NitroStudio2 {
             this.track13Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track13Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track13Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track13Picture.Location = new System.Drawing.Point(120, 0);
+            this.track13Picture.Location = new System.Drawing.Point(121, 0);
             this.track13Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track13Picture.Name = "track13Picture";
-            this.track13Picture.Size = new System.Drawing.Size(40, 22);
+            this.track13Picture.Size = new System.Drawing.Size(42, 22);
             this.track13Picture.TabIndex = 0;
             this.track13Picture.TabStop = false;
             // 
             // track13Solo
             // 
             this.track13Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track13Solo.Location = new System.Drawing.Point(80, 0);
+            this.track13Solo.Location = new System.Drawing.Point(81, 0);
             this.track13Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track13Solo.Name = "track13Solo";
             this.track13Solo.Size = new System.Drawing.Size(40, 22);
@@ -1598,13 +1587,13 @@ namespace NitroStudio2 {
             this.tableLayoutPanel33.Controls.Add(this.track11Picture, 2, 0);
             this.tableLayoutPanel33.Controls.Add(this.track11Solo, 1, 0);
             this.tableLayoutPanel33.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel33.Location = new System.Drawing.Point(159, 110);
+            this.tableLayoutPanel33.Location = new System.Drawing.Point(162, 110);
             this.tableLayoutPanel33.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel33.Name = "tableLayoutPanel33";
             this.tableLayoutPanel33.RowCount = 1;
             this.tableLayoutPanel33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel33.Size = new System.Drawing.Size(160, 22);
+            this.tableLayoutPanel33.Size = new System.Drawing.Size(163, 22);
             this.tableLayoutPanel33.TabIndex = 39;
             // 
             // track11Box
@@ -1615,7 +1604,7 @@ namespace NitroStudio2 {
             this.track11Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track11Box.Location = new System.Drawing.Point(3, 3);
             this.track11Box.Name = "track11Box";
-            this.track11Box.Size = new System.Drawing.Size(74, 16);
+            this.track11Box.Size = new System.Drawing.Size(75, 16);
             this.track11Box.TabIndex = 2;
             this.track11Box.Text = "Track 11:";
             this.track11Box.UseVisualStyleBackColor = true;
@@ -1625,17 +1614,17 @@ namespace NitroStudio2 {
             this.track11Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track11Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track11Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track11Picture.Location = new System.Drawing.Point(120, 0);
+            this.track11Picture.Location = new System.Drawing.Point(121, 0);
             this.track11Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track11Picture.Name = "track11Picture";
-            this.track11Picture.Size = new System.Drawing.Size(40, 22);
+            this.track11Picture.Size = new System.Drawing.Size(42, 22);
             this.track11Picture.TabIndex = 0;
             this.track11Picture.TabStop = false;
             // 
             // track11Solo
             // 
             this.track11Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track11Solo.Location = new System.Drawing.Point(80, 0);
+            this.track11Solo.Location = new System.Drawing.Point(81, 0);
             this.track11Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track11Solo.Name = "track11Solo";
             this.track11Solo.Size = new System.Drawing.Size(40, 22);
@@ -1653,13 +1642,13 @@ namespace NitroStudio2 {
             this.tableLayoutPanel32.Controls.Add(this.track9Picture, 2, 0);
             this.tableLayoutPanel32.Controls.Add(this.track9Solo, 1, 0);
             this.tableLayoutPanel32.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel32.Location = new System.Drawing.Point(159, 88);
+            this.tableLayoutPanel32.Location = new System.Drawing.Point(162, 88);
             this.tableLayoutPanel32.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel32.Name = "tableLayoutPanel32";
             this.tableLayoutPanel32.RowCount = 1;
             this.tableLayoutPanel32.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel32.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel32.Size = new System.Drawing.Size(160, 22);
+            this.tableLayoutPanel32.Size = new System.Drawing.Size(163, 22);
             this.tableLayoutPanel32.TabIndex = 38;
             // 
             // track9Box
@@ -1670,7 +1659,7 @@ namespace NitroStudio2 {
             this.track9Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track9Box.Location = new System.Drawing.Point(3, 3);
             this.track9Box.Name = "track9Box";
-            this.track9Box.Size = new System.Drawing.Size(74, 16);
+            this.track9Box.Size = new System.Drawing.Size(75, 16);
             this.track9Box.TabIndex = 2;
             this.track9Box.Text = "Track 9:";
             this.track9Box.UseVisualStyleBackColor = true;
@@ -1680,17 +1669,17 @@ namespace NitroStudio2 {
             this.track9Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track9Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track9Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track9Picture.Location = new System.Drawing.Point(120, 0);
+            this.track9Picture.Location = new System.Drawing.Point(121, 0);
             this.track9Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track9Picture.Name = "track9Picture";
-            this.track9Picture.Size = new System.Drawing.Size(40, 22);
+            this.track9Picture.Size = new System.Drawing.Size(42, 22);
             this.track9Picture.TabIndex = 0;
             this.track9Picture.TabStop = false;
             // 
             // track9Solo
             // 
             this.track9Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track9Solo.Location = new System.Drawing.Point(80, 0);
+            this.track9Solo.Location = new System.Drawing.Point(81, 0);
             this.track9Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track9Solo.Name = "track9Solo";
             this.track9Solo.Size = new System.Drawing.Size(40, 22);
@@ -1708,13 +1697,13 @@ namespace NitroStudio2 {
             this.tableLayoutPanel31.Controls.Add(this.track7Picture, 2, 0);
             this.tableLayoutPanel31.Controls.Add(this.track7Solo, 1, 0);
             this.tableLayoutPanel31.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel31.Location = new System.Drawing.Point(159, 66);
+            this.tableLayoutPanel31.Location = new System.Drawing.Point(162, 66);
             this.tableLayoutPanel31.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel31.Name = "tableLayoutPanel31";
             this.tableLayoutPanel31.RowCount = 1;
             this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel31.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel31.Size = new System.Drawing.Size(160, 22);
+            this.tableLayoutPanel31.Size = new System.Drawing.Size(163, 22);
             this.tableLayoutPanel31.TabIndex = 37;
             // 
             // track7Box
@@ -1725,7 +1714,7 @@ namespace NitroStudio2 {
             this.track7Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track7Box.Location = new System.Drawing.Point(3, 3);
             this.track7Box.Name = "track7Box";
-            this.track7Box.Size = new System.Drawing.Size(74, 16);
+            this.track7Box.Size = new System.Drawing.Size(75, 16);
             this.track7Box.TabIndex = 2;
             this.track7Box.Text = "Track 7:";
             this.track7Box.UseVisualStyleBackColor = true;
@@ -1735,17 +1724,17 @@ namespace NitroStudio2 {
             this.track7Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track7Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track7Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track7Picture.Location = new System.Drawing.Point(120, 0);
+            this.track7Picture.Location = new System.Drawing.Point(121, 0);
             this.track7Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track7Picture.Name = "track7Picture";
-            this.track7Picture.Size = new System.Drawing.Size(40, 22);
+            this.track7Picture.Size = new System.Drawing.Size(42, 22);
             this.track7Picture.TabIndex = 0;
             this.track7Picture.TabStop = false;
             // 
             // track7Solo
             // 
             this.track7Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track7Solo.Location = new System.Drawing.Point(80, 0);
+            this.track7Solo.Location = new System.Drawing.Point(81, 0);
             this.track7Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track7Solo.Name = "track7Solo";
             this.track7Solo.Size = new System.Drawing.Size(40, 22);
@@ -1763,13 +1752,13 @@ namespace NitroStudio2 {
             this.tableLayoutPanel30.Controls.Add(this.track5Picture, 2, 0);
             this.tableLayoutPanel30.Controls.Add(this.track5Solo, 1, 0);
             this.tableLayoutPanel30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel30.Location = new System.Drawing.Point(159, 44);
+            this.tableLayoutPanel30.Location = new System.Drawing.Point(162, 44);
             this.tableLayoutPanel30.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel30.Name = "tableLayoutPanel30";
             this.tableLayoutPanel30.RowCount = 1;
             this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel30.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel30.Size = new System.Drawing.Size(160, 22);
+            this.tableLayoutPanel30.Size = new System.Drawing.Size(163, 22);
             this.tableLayoutPanel30.TabIndex = 36;
             // 
             // track5Box
@@ -1780,7 +1769,7 @@ namespace NitroStudio2 {
             this.track5Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track5Box.Location = new System.Drawing.Point(3, 3);
             this.track5Box.Name = "track5Box";
-            this.track5Box.Size = new System.Drawing.Size(74, 16);
+            this.track5Box.Size = new System.Drawing.Size(75, 16);
             this.track5Box.TabIndex = 2;
             this.track5Box.Text = "Track 5:";
             this.track5Box.UseVisualStyleBackColor = true;
@@ -1790,17 +1779,17 @@ namespace NitroStudio2 {
             this.track5Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track5Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track5Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track5Picture.Location = new System.Drawing.Point(120, 0);
+            this.track5Picture.Location = new System.Drawing.Point(121, 0);
             this.track5Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track5Picture.Name = "track5Picture";
-            this.track5Picture.Size = new System.Drawing.Size(40, 22);
+            this.track5Picture.Size = new System.Drawing.Size(42, 22);
             this.track5Picture.TabIndex = 0;
             this.track5Picture.TabStop = false;
             // 
             // track5Solo
             // 
             this.track5Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track5Solo.Location = new System.Drawing.Point(80, 0);
+            this.track5Solo.Location = new System.Drawing.Point(81, 0);
             this.track5Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track5Solo.Name = "track5Solo";
             this.track5Solo.Size = new System.Drawing.Size(40, 22);
@@ -1818,13 +1807,13 @@ namespace NitroStudio2 {
             this.tableLayoutPanel29.Controls.Add(this.track3Picture, 2, 0);
             this.tableLayoutPanel29.Controls.Add(this.track3Solo, 1, 0);
             this.tableLayoutPanel29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel29.Location = new System.Drawing.Point(159, 22);
+            this.tableLayoutPanel29.Location = new System.Drawing.Point(162, 22);
             this.tableLayoutPanel29.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel29.Name = "tableLayoutPanel29";
             this.tableLayoutPanel29.RowCount = 1;
             this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel29.Size = new System.Drawing.Size(160, 22);
+            this.tableLayoutPanel29.Size = new System.Drawing.Size(163, 22);
             this.tableLayoutPanel29.TabIndex = 35;
             // 
             // track3Box
@@ -1835,7 +1824,7 @@ namespace NitroStudio2 {
             this.track3Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track3Box.Location = new System.Drawing.Point(3, 3);
             this.track3Box.Name = "track3Box";
-            this.track3Box.Size = new System.Drawing.Size(74, 16);
+            this.track3Box.Size = new System.Drawing.Size(75, 16);
             this.track3Box.TabIndex = 2;
             this.track3Box.Text = "Track 3:";
             this.track3Box.UseVisualStyleBackColor = true;
@@ -1845,17 +1834,17 @@ namespace NitroStudio2 {
             this.track3Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track3Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track3Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track3Picture.Location = new System.Drawing.Point(120, 0);
+            this.track3Picture.Location = new System.Drawing.Point(121, 0);
             this.track3Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track3Picture.Name = "track3Picture";
-            this.track3Picture.Size = new System.Drawing.Size(40, 22);
+            this.track3Picture.Size = new System.Drawing.Size(42, 22);
             this.track3Picture.TabIndex = 0;
             this.track3Picture.TabStop = false;
             // 
             // track3Solo
             // 
             this.track3Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track3Solo.Location = new System.Drawing.Point(80, 0);
+            this.track3Solo.Location = new System.Drawing.Point(81, 0);
             this.track3Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track3Solo.Name = "track3Solo";
             this.track3Solo.Size = new System.Drawing.Size(40, 22);
@@ -1878,7 +1867,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel28.Name = "tableLayoutPanel28";
             this.tableLayoutPanel28.RowCount = 1;
             this.tableLayoutPanel28.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel28.Size = new System.Drawing.Size(159, 22);
+            this.tableLayoutPanel28.Size = new System.Drawing.Size(162, 22);
             this.tableLayoutPanel28.TabIndex = 34;
             // 
             // track14Box
@@ -1889,7 +1878,7 @@ namespace NitroStudio2 {
             this.track14Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track14Box.Location = new System.Drawing.Point(3, 3);
             this.track14Box.Name = "track14Box";
-            this.track14Box.Size = new System.Drawing.Size(73, 16);
+            this.track14Box.Size = new System.Drawing.Size(75, 16);
             this.track14Box.TabIndex = 2;
             this.track14Box.Text = "Track 14:";
             this.track14Box.UseVisualStyleBackColor = true;
@@ -1899,7 +1888,7 @@ namespace NitroStudio2 {
             this.track14Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track14Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track14Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track14Picture.Location = new System.Drawing.Point(118, 0);
+            this.track14Picture.Location = new System.Drawing.Point(121, 0);
             this.track14Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track14Picture.Name = "track14Picture";
             this.track14Picture.Size = new System.Drawing.Size(41, 22);
@@ -1909,10 +1898,10 @@ namespace NitroStudio2 {
             // track14Solo
             // 
             this.track14Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track14Solo.Location = new System.Drawing.Point(79, 0);
+            this.track14Solo.Location = new System.Drawing.Point(81, 0);
             this.track14Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track14Solo.Name = "track14Solo";
-            this.track14Solo.Size = new System.Drawing.Size(39, 22);
+            this.track14Solo.Size = new System.Drawing.Size(40, 22);
             this.track14Solo.TabIndex = 3;
             this.track14Solo.Text = "Solo";
             this.track14Solo.UseVisualStyleBackColor = true;
@@ -1932,7 +1921,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel27.Name = "tableLayoutPanel27";
             this.tableLayoutPanel27.RowCount = 1;
             this.tableLayoutPanel27.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel27.Size = new System.Drawing.Size(159, 22);
+            this.tableLayoutPanel27.Size = new System.Drawing.Size(162, 22);
             this.tableLayoutPanel27.TabIndex = 33;
             // 
             // track12Box
@@ -1943,7 +1932,7 @@ namespace NitroStudio2 {
             this.track12Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track12Box.Location = new System.Drawing.Point(3, 3);
             this.track12Box.Name = "track12Box";
-            this.track12Box.Size = new System.Drawing.Size(73, 16);
+            this.track12Box.Size = new System.Drawing.Size(75, 16);
             this.track12Box.TabIndex = 2;
             this.track12Box.Text = "Track 12:";
             this.track12Box.UseVisualStyleBackColor = true;
@@ -1953,7 +1942,7 @@ namespace NitroStudio2 {
             this.track12Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track12Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track12Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track12Picture.Location = new System.Drawing.Point(118, 0);
+            this.track12Picture.Location = new System.Drawing.Point(121, 0);
             this.track12Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track12Picture.Name = "track12Picture";
             this.track12Picture.Size = new System.Drawing.Size(41, 22);
@@ -1963,10 +1952,10 @@ namespace NitroStudio2 {
             // track12Solo
             // 
             this.track12Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track12Solo.Location = new System.Drawing.Point(79, 0);
+            this.track12Solo.Location = new System.Drawing.Point(81, 0);
             this.track12Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track12Solo.Name = "track12Solo";
-            this.track12Solo.Size = new System.Drawing.Size(39, 22);
+            this.track12Solo.Size = new System.Drawing.Size(40, 22);
             this.track12Solo.TabIndex = 3;
             this.track12Solo.Text = "Solo";
             this.track12Solo.UseVisualStyleBackColor = true;
@@ -1986,7 +1975,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel26.Name = "tableLayoutPanel26";
             this.tableLayoutPanel26.RowCount = 1;
             this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel26.Size = new System.Drawing.Size(159, 22);
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(162, 22);
             this.tableLayoutPanel26.TabIndex = 32;
             // 
             // track10Box
@@ -1997,7 +1986,7 @@ namespace NitroStudio2 {
             this.track10Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track10Box.Location = new System.Drawing.Point(3, 3);
             this.track10Box.Name = "track10Box";
-            this.track10Box.Size = new System.Drawing.Size(73, 16);
+            this.track10Box.Size = new System.Drawing.Size(75, 16);
             this.track10Box.TabIndex = 2;
             this.track10Box.Text = "Track 10:";
             this.track10Box.UseVisualStyleBackColor = true;
@@ -2007,7 +1996,7 @@ namespace NitroStudio2 {
             this.track10Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track10Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track10Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track10Picture.Location = new System.Drawing.Point(118, 0);
+            this.track10Picture.Location = new System.Drawing.Point(121, 0);
             this.track10Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track10Picture.Name = "track10Picture";
             this.track10Picture.Size = new System.Drawing.Size(41, 22);
@@ -2017,10 +2006,10 @@ namespace NitroStudio2 {
             // track10Solo
             // 
             this.track10Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track10Solo.Location = new System.Drawing.Point(79, 0);
+            this.track10Solo.Location = new System.Drawing.Point(81, 0);
             this.track10Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track10Solo.Name = "track10Solo";
-            this.track10Solo.Size = new System.Drawing.Size(39, 22);
+            this.track10Solo.Size = new System.Drawing.Size(40, 22);
             this.track10Solo.TabIndex = 3;
             this.track10Solo.Text = "Solo";
             this.track10Solo.UseVisualStyleBackColor = true;
@@ -2040,7 +2029,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel25.Name = "tableLayoutPanel25";
             this.tableLayoutPanel25.RowCount = 1;
             this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel25.Size = new System.Drawing.Size(159, 22);
+            this.tableLayoutPanel25.Size = new System.Drawing.Size(162, 22);
             this.tableLayoutPanel25.TabIndex = 31;
             // 
             // track8Box
@@ -2051,7 +2040,7 @@ namespace NitroStudio2 {
             this.track8Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track8Box.Location = new System.Drawing.Point(3, 3);
             this.track8Box.Name = "track8Box";
-            this.track8Box.Size = new System.Drawing.Size(73, 16);
+            this.track8Box.Size = new System.Drawing.Size(75, 16);
             this.track8Box.TabIndex = 2;
             this.track8Box.Text = "Track 8:";
             this.track8Box.UseVisualStyleBackColor = true;
@@ -2061,7 +2050,7 @@ namespace NitroStudio2 {
             this.track8Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track8Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track8Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track8Picture.Location = new System.Drawing.Point(118, 0);
+            this.track8Picture.Location = new System.Drawing.Point(121, 0);
             this.track8Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track8Picture.Name = "track8Picture";
             this.track8Picture.Size = new System.Drawing.Size(41, 22);
@@ -2071,10 +2060,10 @@ namespace NitroStudio2 {
             // track8Solo
             // 
             this.track8Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track8Solo.Location = new System.Drawing.Point(79, 0);
+            this.track8Solo.Location = new System.Drawing.Point(81, 0);
             this.track8Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track8Solo.Name = "track8Solo";
-            this.track8Solo.Size = new System.Drawing.Size(39, 22);
+            this.track8Solo.Size = new System.Drawing.Size(40, 22);
             this.track8Solo.TabIndex = 3;
             this.track8Solo.Text = "Solo";
             this.track8Solo.UseVisualStyleBackColor = true;
@@ -2094,7 +2083,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel24.Name = "tableLayoutPanel24";
             this.tableLayoutPanel24.RowCount = 1;
             this.tableLayoutPanel24.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel24.Size = new System.Drawing.Size(159, 22);
+            this.tableLayoutPanel24.Size = new System.Drawing.Size(162, 22);
             this.tableLayoutPanel24.TabIndex = 30;
             // 
             // track6Box
@@ -2105,7 +2094,7 @@ namespace NitroStudio2 {
             this.track6Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track6Box.Location = new System.Drawing.Point(3, 3);
             this.track6Box.Name = "track6Box";
-            this.track6Box.Size = new System.Drawing.Size(73, 16);
+            this.track6Box.Size = new System.Drawing.Size(75, 16);
             this.track6Box.TabIndex = 2;
             this.track6Box.Text = "Track 6:";
             this.track6Box.UseVisualStyleBackColor = true;
@@ -2115,7 +2104,7 @@ namespace NitroStudio2 {
             this.track6Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track6Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track6Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track6Picture.Location = new System.Drawing.Point(118, 0);
+            this.track6Picture.Location = new System.Drawing.Point(121, 0);
             this.track6Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track6Picture.Name = "track6Picture";
             this.track6Picture.Size = new System.Drawing.Size(41, 22);
@@ -2125,10 +2114,10 @@ namespace NitroStudio2 {
             // track6Solo
             // 
             this.track6Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track6Solo.Location = new System.Drawing.Point(79, 0);
+            this.track6Solo.Location = new System.Drawing.Point(81, 0);
             this.track6Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track6Solo.Name = "track6Solo";
-            this.track6Solo.Size = new System.Drawing.Size(39, 22);
+            this.track6Solo.Size = new System.Drawing.Size(40, 22);
             this.track6Solo.TabIndex = 3;
             this.track6Solo.Text = "Solo";
             this.track6Solo.UseVisualStyleBackColor = true;
@@ -2148,7 +2137,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel23.Name = "tableLayoutPanel23";
             this.tableLayoutPanel23.RowCount = 1;
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(159, 22);
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(162, 22);
             this.tableLayoutPanel23.TabIndex = 29;
             // 
             // track4Box
@@ -2159,7 +2148,7 @@ namespace NitroStudio2 {
             this.track4Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track4Box.Location = new System.Drawing.Point(3, 3);
             this.track4Box.Name = "track4Box";
-            this.track4Box.Size = new System.Drawing.Size(73, 16);
+            this.track4Box.Size = new System.Drawing.Size(75, 16);
             this.track4Box.TabIndex = 2;
             this.track4Box.Text = "Track 4:";
             this.track4Box.UseVisualStyleBackColor = true;
@@ -2169,7 +2158,7 @@ namespace NitroStudio2 {
             this.track4Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track4Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track4Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track4Picture.Location = new System.Drawing.Point(118, 0);
+            this.track4Picture.Location = new System.Drawing.Point(121, 0);
             this.track4Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track4Picture.Name = "track4Picture";
             this.track4Picture.Size = new System.Drawing.Size(41, 22);
@@ -2179,10 +2168,10 @@ namespace NitroStudio2 {
             // track4Solo
             // 
             this.track4Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track4Solo.Location = new System.Drawing.Point(79, 0);
+            this.track4Solo.Location = new System.Drawing.Point(81, 0);
             this.track4Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track4Solo.Name = "track4Solo";
-            this.track4Solo.Size = new System.Drawing.Size(39, 22);
+            this.track4Solo.Size = new System.Drawing.Size(40, 22);
             this.track4Solo.TabIndex = 3;
             this.track4Solo.Text = "Solo";
             this.track4Solo.UseVisualStyleBackColor = true;
@@ -2202,7 +2191,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
             this.tableLayoutPanel22.RowCount = 1;
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(159, 22);
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(162, 22);
             this.tableLayoutPanel22.TabIndex = 28;
             // 
             // track2Box
@@ -2213,7 +2202,7 @@ namespace NitroStudio2 {
             this.track2Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track2Box.Location = new System.Drawing.Point(3, 3);
             this.track2Box.Name = "track2Box";
-            this.track2Box.Size = new System.Drawing.Size(73, 16);
+            this.track2Box.Size = new System.Drawing.Size(75, 16);
             this.track2Box.TabIndex = 2;
             this.track2Box.Text = "Track 2:";
             this.track2Box.UseVisualStyleBackColor = true;
@@ -2223,7 +2212,7 @@ namespace NitroStudio2 {
             this.track2Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track2Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track2Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track2Picture.Location = new System.Drawing.Point(118, 0);
+            this.track2Picture.Location = new System.Drawing.Point(121, 0);
             this.track2Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track2Picture.Name = "track2Picture";
             this.track2Picture.Size = new System.Drawing.Size(41, 22);
@@ -2233,10 +2222,10 @@ namespace NitroStudio2 {
             // track2Solo
             // 
             this.track2Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track2Solo.Location = new System.Drawing.Point(79, 0);
+            this.track2Solo.Location = new System.Drawing.Point(81, 0);
             this.track2Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track2Solo.Name = "track2Solo";
-            this.track2Solo.Size = new System.Drawing.Size(39, 22);
+            this.track2Solo.Size = new System.Drawing.Size(40, 22);
             this.track2Solo.TabIndex = 3;
             this.track2Solo.Text = "Solo";
             this.track2Solo.UseVisualStyleBackColor = true;
@@ -2251,13 +2240,13 @@ namespace NitroStudio2 {
             this.tableLayoutPanel21.Controls.Add(this.track1Picture, 2, 0);
             this.tableLayoutPanel21.Controls.Add(this.track1Solo, 1, 0);
             this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel21.Location = new System.Drawing.Point(159, 0);
+            this.tableLayoutPanel21.Location = new System.Drawing.Point(162, 0);
             this.tableLayoutPanel21.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
             this.tableLayoutPanel21.RowCount = 1;
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel21.Size = new System.Drawing.Size(160, 22);
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(163, 22);
             this.tableLayoutPanel21.TabIndex = 27;
             // 
             // track1Box
@@ -2268,7 +2257,7 @@ namespace NitroStudio2 {
             this.track1Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track1Box.Location = new System.Drawing.Point(3, 3);
             this.track1Box.Name = "track1Box";
-            this.track1Box.Size = new System.Drawing.Size(74, 16);
+            this.track1Box.Size = new System.Drawing.Size(75, 16);
             this.track1Box.TabIndex = 2;
             this.track1Box.Text = "Track 1:";
             this.track1Box.UseVisualStyleBackColor = true;
@@ -2278,17 +2267,17 @@ namespace NitroStudio2 {
             this.track1Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track1Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track1Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track1Picture.Location = new System.Drawing.Point(120, 0);
+            this.track1Picture.Location = new System.Drawing.Point(121, 0);
             this.track1Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track1Picture.Name = "track1Picture";
-            this.track1Picture.Size = new System.Drawing.Size(40, 22);
+            this.track1Picture.Size = new System.Drawing.Size(42, 22);
             this.track1Picture.TabIndex = 0;
             this.track1Picture.TabStop = false;
             // 
             // track1Solo
             // 
             this.track1Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track1Solo.Location = new System.Drawing.Point(80, 0);
+            this.track1Solo.Location = new System.Drawing.Point(81, 0);
             this.track1Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track1Solo.Name = "track1Solo";
             this.track1Solo.Size = new System.Drawing.Size(40, 22);
@@ -2311,7 +2300,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(159, 22);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(162, 22);
             this.tableLayoutPanel1.TabIndex = 26;
             // 
             // track0Box
@@ -2322,7 +2311,7 @@ namespace NitroStudio2 {
             this.track0Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.track0Box.Location = new System.Drawing.Point(3, 3);
             this.track0Box.Name = "track0Box";
-            this.track0Box.Size = new System.Drawing.Size(73, 16);
+            this.track0Box.Size = new System.Drawing.Size(75, 16);
             this.track0Box.TabIndex = 2;
             this.track0Box.Text = "Track 0:";
             this.track0Box.UseVisualStyleBackColor = true;
@@ -2332,7 +2321,7 @@ namespace NitroStudio2 {
             this.track0Picture.BackgroundImage = global::NitroStudio2.Properties.Resources.Idle;
             this.track0Picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.track0Picture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track0Picture.Location = new System.Drawing.Point(118, 0);
+            this.track0Picture.Location = new System.Drawing.Point(121, 0);
             this.track0Picture.Margin = new System.Windows.Forms.Padding(0);
             this.track0Picture.Name = "track0Picture";
             this.track0Picture.Size = new System.Drawing.Size(41, 22);
@@ -2342,10 +2331,10 @@ namespace NitroStudio2 {
             // track0Solo
             // 
             this.track0Solo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.track0Solo.Location = new System.Drawing.Point(79, 0);
+            this.track0Solo.Location = new System.Drawing.Point(81, 0);
             this.track0Solo.Margin = new System.Windows.Forms.Padding(0);
             this.track0Solo.Name = "track0Solo";
-            this.track0Solo.Size = new System.Drawing.Size(39, 22);
+            this.track0Solo.Size = new System.Drawing.Size(40, 22);
             this.track0Solo.TabIndex = 3;
             this.track0Solo.Text = "Solo";
             this.track0Solo.UseVisualStyleBackColor = true;
@@ -2356,7 +2345,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.Location = new System.Drawing.Point(11, 3);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(322, 20);
+            this.label28.Size = new System.Drawing.Size(328, 20);
             this.label28.TabIndex = 25;
             this.label28.Text = "Preview Bank:";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2374,7 +2363,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 1;
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel12.TabIndex = 24;
             // 
             // seqEditorBankComboBox
@@ -2384,21 +2373,21 @@ namespace NitroStudio2 {
             this.seqEditorBankComboBox.FormattingEnabled = true;
             this.seqEditorBankComboBox.Location = new System.Drawing.Point(3, 3);
             this.seqEditorBankComboBox.Name = "seqEditorBankComboBox";
-            this.seqEditorBankComboBox.Size = new System.Drawing.Size(265, 21);
+            this.seqEditorBankComboBox.Size = new System.Drawing.Size(270, 21);
             this.seqEditorBankComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.seqEditorBankComboBox, "Bank to use with the sequence.");
             // 
             // seqEditorBankBox
             // 
             this.seqEditorBankBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.seqEditorBankBox.Location = new System.Drawing.Point(274, 3);
+            this.seqEditorBankBox.Location = new System.Drawing.Point(279, 3);
             this.seqEditorBankBox.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.seqEditorBankBox.Name = "seqEditorBankBox";
-            this.seqEditorBankBox.Size = new System.Drawing.Size(42, 20);
+            this.seqEditorBankBox.Size = new System.Drawing.Size(43, 20);
             this.seqEditorBankBox.TabIndex = 7;
             this.toolTip.SetToolTip(this.seqEditorBankBox, "Id of the bank to use with the sequence.");
             // 
@@ -2413,7 +2402,7 @@ namespace NitroStudio2 {
             this.bankEditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bankEditorPanel.Location = new System.Drawing.Point(0, 351);
             this.bankEditorPanel.Name = "bankEditorPanel";
-            this.bankEditorPanel.Size = new System.Drawing.Size(346, 288);
+            this.bankEditorPanel.Size = new System.Drawing.Size(352, 288);
             this.bankEditorPanel.TabIndex = 21;
             this.bankEditorPanel.Visible = false;
             // 
@@ -2438,7 +2427,7 @@ namespace NitroStudio2 {
             this.pan});
             this.bankRegions.Location = new System.Drawing.Point(14, 141);
             this.bankRegions.Name = "bankRegions";
-            this.bankRegions.Size = new System.Drawing.Size(319, 138);
+            this.bankRegions.Size = new System.Drawing.Size(325, 138);
             this.bankRegions.TabIndex = 26;
             // 
             // playSampleButton
@@ -2794,7 +2783,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.Location = new System.Drawing.Point(11, 118);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(322, 20);
+            this.label32.Size = new System.Drawing.Size(328, 20);
             this.label32.TabIndex = 25;
             this.label32.Text = "Regions:";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2812,7 +2801,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
             this.tableLayoutPanel15.RowCount = 1;
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel15.TabIndex = 24;
             // 
             // drumSetStartRangeComboBox
@@ -2951,21 +2940,21 @@ namespace NitroStudio2 {
             "gn9"});
             this.drumSetStartRangeComboBox.Location = new System.Drawing.Point(3, 3);
             this.drumSetStartRangeComboBox.Name = "drumSetStartRangeComboBox";
-            this.drumSetStartRangeComboBox.Size = new System.Drawing.Size(265, 21);
+            this.drumSetStartRangeComboBox.Size = new System.Drawing.Size(270, 21);
             this.drumSetStartRangeComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.drumSetStartRangeComboBox, "What note to start the drum set range at.");
             // 
             // drumSetStartRangeBox
             // 
             this.drumSetStartRangeBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drumSetStartRangeBox.Location = new System.Drawing.Point(274, 3);
+            this.drumSetStartRangeBox.Location = new System.Drawing.Point(279, 3);
             this.drumSetStartRangeBox.Maximum = new decimal(new int[] {
             127,
             0,
             0,
             0});
             this.drumSetStartRangeBox.Name = "drumSetStartRangeBox";
-            this.drumSetStartRangeBox.Size = new System.Drawing.Size(42, 20);
+            this.drumSetStartRangeBox.Size = new System.Drawing.Size(43, 20);
             this.drumSetStartRangeBox.TabIndex = 7;
             this.toolTip.SetToolTip(this.drumSetStartRangeBox, "What note to start the drum set range at.");
             // 
@@ -2975,7 +2964,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.drumSetRangeStartLabel.Location = new System.Drawing.Point(8, 61);
             this.drumSetRangeStartLabel.Name = "drumSetRangeStartLabel";
-            this.drumSetRangeStartLabel.Size = new System.Drawing.Size(322, 20);
+            this.drumSetRangeStartLabel.Size = new System.Drawing.Size(328, 20);
             this.drumSetRangeStartLabel.TabIndex = 3;
             this.drumSetRangeStartLabel.Text = "Drum Set Range Start:";
             this.drumSetRangeStartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2995,16 +2984,16 @@ namespace NitroStudio2 {
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 1;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(319, 28);
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(325, 28);
             this.tableLayoutPanel14.TabIndex = 2;
             this.toolTip.SetToolTip(this.tableLayoutPanel14, "Type of instrument.");
             // 
             // keySplitBox
             // 
             this.keySplitBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.keySplitBox.Location = new System.Drawing.Point(215, 3);
+            this.keySplitBox.Location = new System.Drawing.Point(219, 3);
             this.keySplitBox.Name = "keySplitBox";
-            this.keySplitBox.Size = new System.Drawing.Size(101, 22);
+            this.keySplitBox.Size = new System.Drawing.Size(103, 22);
             this.keySplitBox.TabIndex = 2;
             this.keySplitBox.TabStop = true;
             this.keySplitBox.Text = "Key Split";
@@ -3013,9 +3002,9 @@ namespace NitroStudio2 {
             // drumSetBox
             // 
             this.drumSetBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drumSetBox.Location = new System.Drawing.Point(109, 3);
+            this.drumSetBox.Location = new System.Drawing.Point(111, 3);
             this.drumSetBox.Name = "drumSetBox";
-            this.drumSetBox.Size = new System.Drawing.Size(100, 22);
+            this.drumSetBox.Size = new System.Drawing.Size(102, 22);
             this.drumSetBox.TabIndex = 1;
             this.drumSetBox.TabStop = true;
             this.drumSetBox.Text = "Drum Set";
@@ -3026,7 +3015,7 @@ namespace NitroStudio2 {
             this.directBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.directBox.Location = new System.Drawing.Point(3, 3);
             this.directBox.Name = "directBox";
-            this.directBox.Size = new System.Drawing.Size(100, 22);
+            this.directBox.Size = new System.Drawing.Size(102, 22);
             this.directBox.TabIndex = 0;
             this.directBox.TabStop = true;
             this.directBox.Text = "Direct";
@@ -3038,7 +3027,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label30.Location = new System.Drawing.Point(11, 3);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(322, 20);
+            this.label30.Size = new System.Drawing.Size(328, 20);
             this.label30.TabIndex = 1;
             this.label30.Text = "Instrument Type:";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3050,7 +3039,7 @@ namespace NitroStudio2 {
             this.seqArcSeqPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.seqArcSeqPanel.Location = new System.Drawing.Point(0, 287);
             this.seqArcSeqPanel.Name = "seqArcSeqPanel";
-            this.seqArcSeqPanel.Size = new System.Drawing.Size(346, 64);
+            this.seqArcSeqPanel.Size = new System.Drawing.Size(352, 64);
             this.seqArcSeqPanel.TabIndex = 20;
             this.seqArcSeqPanel.Visible = false;
             // 
@@ -3060,7 +3049,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label29.Location = new System.Drawing.Point(11, 3);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(322, 20);
+            this.label29.Size = new System.Drawing.Size(328, 20);
             this.label29.TabIndex = 25;
             this.label29.Text = "Preview Sequence:";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3078,7 +3067,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 1;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel13.TabIndex = 24;
             // 
             // seqArcSeqComboBox
@@ -3088,21 +3077,21 @@ namespace NitroStudio2 {
             this.seqArcSeqComboBox.FormattingEnabled = true;
             this.seqArcSeqComboBox.Location = new System.Drawing.Point(3, 3);
             this.seqArcSeqComboBox.Name = "seqArcSeqComboBox";
-            this.seqArcSeqComboBox.Size = new System.Drawing.Size(265, 21);
+            this.seqArcSeqComboBox.Size = new System.Drawing.Size(270, 21);
             this.seqArcSeqComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.seqArcSeqComboBox, "Sequence to play.");
             // 
             // seqArcSeqBox
             // 
             this.seqArcSeqBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.seqArcSeqBox.Location = new System.Drawing.Point(274, 3);
+            this.seqArcSeqBox.Location = new System.Drawing.Point(279, 3);
             this.seqArcSeqBox.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.seqArcSeqBox.Name = "seqArcSeqBox";
-            this.seqArcSeqBox.Size = new System.Drawing.Size(42, 20);
+            this.seqArcSeqBox.Size = new System.Drawing.Size(43, 20);
             this.seqArcSeqBox.TabIndex = 7;
             this.toolTip.SetToolTip(this.seqArcSeqBox, "Id of the sequence to play.");
             // 
@@ -3112,7 +3101,7 @@ namespace NitroStudio2 {
             this.seqArcPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seqArcPanel.Location = new System.Drawing.Point(0, 287);
             this.seqArcPanel.Name = "seqArcPanel";
-            this.seqArcPanel.Size = new System.Drawing.Size(346, 352);
+            this.seqArcPanel.Size = new System.Drawing.Size(352, 352);
             this.seqArcPanel.TabIndex = 19;
             this.seqArcPanel.Visible = false;
             // 
@@ -3122,7 +3111,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.seqArcOpenFileButton.Location = new System.Drawing.Point(14, 6);
             this.seqArcOpenFileButton.Name = "seqArcOpenFileButton";
-            this.seqArcOpenFileButton.Size = new System.Drawing.Size(319, 25);
+            this.seqArcOpenFileButton.Size = new System.Drawing.Size(325, 25);
             this.seqArcOpenFileButton.TabIndex = 1;
             this.seqArcOpenFileButton.Text = "Open File";
             this.seqArcOpenFileButton.UseVisualStyleBackColor = true;
@@ -3142,7 +3131,7 @@ namespace NitroStudio2 {
             this.seqPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.seqPanel.Location = new System.Drawing.Point(0, 287);
             this.seqPanel.Name = "seqPanel";
-            this.seqPanel.Size = new System.Drawing.Size(346, 352);
+            this.seqPanel.Size = new System.Drawing.Size(352, 352);
             this.seqPanel.TabIndex = 17;
             this.seqPanel.Visible = false;
             // 
@@ -3159,7 +3148,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 1;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel11.TabIndex = 23;
             // 
             // seqPlayerComboBox
@@ -3169,21 +3158,21 @@ namespace NitroStudio2 {
             this.seqPlayerComboBox.FormattingEnabled = true;
             this.seqPlayerComboBox.Location = new System.Drawing.Point(3, 3);
             this.seqPlayerComboBox.Name = "seqPlayerComboBox";
-            this.seqPlayerComboBox.Size = new System.Drawing.Size(265, 21);
+            this.seqPlayerComboBox.Size = new System.Drawing.Size(270, 21);
             this.seqPlayerComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.seqPlayerComboBox, "Player to play the sequence.");
             // 
             // seqPlayerBox
             // 
             this.seqPlayerBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.seqPlayerBox.Location = new System.Drawing.Point(274, 3);
+            this.seqPlayerBox.Location = new System.Drawing.Point(279, 3);
             this.seqPlayerBox.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
             this.seqPlayerBox.Name = "seqPlayerBox";
-            this.seqPlayerBox.Size = new System.Drawing.Size(42, 20);
+            this.seqPlayerBox.Size = new System.Drawing.Size(43, 20);
             this.seqPlayerBox.TabIndex = 7;
             this.toolTip.SetToolTip(this.seqPlayerBox, "Id of the player to play the sequence.");
             // 
@@ -3193,7 +3182,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label27.Location = new System.Drawing.Point(11, 198);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(322, 22);
+            this.label27.Size = new System.Drawing.Size(328, 22);
             this.label27.TabIndex = 22;
             this.label27.Text = "Player:";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3209,7 +3198,7 @@ namespace NitroStudio2 {
             0,
             0});
             this.seqPlayerPriorityBox.Name = "seqPlayerPriorityBox";
-            this.seqPlayerPriorityBox.Size = new System.Drawing.Size(319, 20);
+            this.seqPlayerPriorityBox.Size = new System.Drawing.Size(325, 20);
             this.seqPlayerPriorityBox.TabIndex = 21;
             this.toolTip.SetToolTip(this.seqPlayerPriorityBox, "If the sounds can not all be played at once, the one with the highest priority wi" +
         "ll play.");
@@ -3220,7 +3209,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label26.Location = new System.Drawing.Point(11, 152);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(322, 22);
+            this.label26.Size = new System.Drawing.Size(328, 22);
             this.label26.TabIndex = 20;
             this.label26.Text = "Player Priority:";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3236,7 +3225,7 @@ namespace NitroStudio2 {
             0,
             0});
             this.seqChannelPriorityBox.Name = "seqChannelPriorityBox";
-            this.seqChannelPriorityBox.Size = new System.Drawing.Size(319, 20);
+            this.seqChannelPriorityBox.Size = new System.Drawing.Size(325, 20);
             this.seqChannelPriorityBox.TabIndex = 19;
             this.toolTip.SetToolTip(this.seqChannelPriorityBox, "If the sounds can not all be played at once, the one with the highest priority wi" +
         "ll play.");
@@ -3247,7 +3236,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.Location = new System.Drawing.Point(11, 106);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(322, 22);
+            this.label25.Size = new System.Drawing.Size(328, 22);
             this.label25.TabIndex = 18;
             this.label25.Text = "Channel Priority:";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3263,7 +3252,7 @@ namespace NitroStudio2 {
             0,
             0});
             this.seqVolumeBox.Name = "seqVolumeBox";
-            this.seqVolumeBox.Size = new System.Drawing.Size(319, 20);
+            this.seqVolumeBox.Size = new System.Drawing.Size(325, 20);
             this.seqVolumeBox.TabIndex = 17;
             this.toolTip.SetToolTip(this.seqVolumeBox, "The volume of the sequence.");
             // 
@@ -3273,7 +3262,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.Location = new System.Drawing.Point(11, 59);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(322, 22);
+            this.label24.Size = new System.Drawing.Size(328, 22);
             this.label24.TabIndex = 16;
             this.label24.Text = "Volume:";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3291,7 +3280,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 1;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel10.TabIndex = 15;
             // 
             // seqBankComboBox
@@ -3301,21 +3290,21 @@ namespace NitroStudio2 {
             this.seqBankComboBox.FormattingEnabled = true;
             this.seqBankComboBox.Location = new System.Drawing.Point(3, 3);
             this.seqBankComboBox.Name = "seqBankComboBox";
-            this.seqBankComboBox.Size = new System.Drawing.Size(265, 21);
+            this.seqBankComboBox.Size = new System.Drawing.Size(270, 21);
             this.seqBankComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.seqBankComboBox, "Bank to use with the sequence.");
             // 
             // seqBankBox
             // 
             this.seqBankBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.seqBankBox.Location = new System.Drawing.Point(274, 3);
+            this.seqBankBox.Location = new System.Drawing.Point(279, 3);
             this.seqBankBox.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.seqBankBox.Name = "seqBankBox";
-            this.seqBankBox.Size = new System.Drawing.Size(42, 20);
+            this.seqBankBox.Size = new System.Drawing.Size(43, 20);
             this.seqBankBox.TabIndex = 7;
             this.toolTip.SetToolTip(this.seqBankBox, "Id of the bank to use with the sequence.");
             // 
@@ -3325,7 +3314,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.Location = new System.Drawing.Point(11, 3);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(322, 22);
+            this.label23.Size = new System.Drawing.Size(328, 22);
             this.label23.TabIndex = 2;
             this.label23.Text = "Bank:";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3341,7 +3330,7 @@ namespace NitroStudio2 {
             this.playerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.playerPanel.Location = new System.Drawing.Point(0, 287);
             this.playerPanel.Name = "playerPanel";
-            this.playerPanel.Size = new System.Drawing.Size(346, 352);
+            this.playerPanel.Size = new System.Drawing.Size(352, 352);
             this.playerPanel.TabIndex = 15;
             this.playerPanel.Visible = false;
             // 
@@ -3377,14 +3366,14 @@ namespace NitroStudio2 {
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(319, 100);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(325, 100);
             this.tableLayoutPanel8.TabIndex = 10;
             this.toolTip.SetToolTip(this.tableLayoutPanel8, "Which channels the player is allowed to use.");
             // 
             // playerFlag15Box
             // 
             this.playerFlag15Box.AutoSize = true;
-            this.playerFlag15Box.Location = new System.Drawing.Point(240, 78);
+            this.playerFlag15Box.Location = new System.Drawing.Point(246, 78);
             this.playerFlag15Box.Name = "playerFlag15Box";
             this.playerFlag15Box.Size = new System.Drawing.Size(38, 17);
             this.playerFlag15Box.TabIndex = 15;
@@ -3394,7 +3383,7 @@ namespace NitroStudio2 {
             // playerFlag14Box
             // 
             this.playerFlag14Box.AutoSize = true;
-            this.playerFlag14Box.Location = new System.Drawing.Point(161, 78);
+            this.playerFlag14Box.Location = new System.Drawing.Point(165, 78);
             this.playerFlag14Box.Name = "playerFlag14Box";
             this.playerFlag14Box.Size = new System.Drawing.Size(38, 17);
             this.playerFlag14Box.TabIndex = 14;
@@ -3404,7 +3393,7 @@ namespace NitroStudio2 {
             // playerFlag13Box
             // 
             this.playerFlag13Box.AutoSize = true;
-            this.playerFlag13Box.Location = new System.Drawing.Point(82, 78);
+            this.playerFlag13Box.Location = new System.Drawing.Point(84, 78);
             this.playerFlag13Box.Name = "playerFlag13Box";
             this.playerFlag13Box.Size = new System.Drawing.Size(38, 17);
             this.playerFlag13Box.TabIndex = 13;
@@ -3424,7 +3413,7 @@ namespace NitroStudio2 {
             // playerFlag11Box
             // 
             this.playerFlag11Box.AutoSize = true;
-            this.playerFlag11Box.Location = new System.Drawing.Point(240, 53);
+            this.playerFlag11Box.Location = new System.Drawing.Point(246, 53);
             this.playerFlag11Box.Name = "playerFlag11Box";
             this.playerFlag11Box.Size = new System.Drawing.Size(38, 17);
             this.playerFlag11Box.TabIndex = 11;
@@ -3434,7 +3423,7 @@ namespace NitroStudio2 {
             // playerFlag10Box
             // 
             this.playerFlag10Box.AutoSize = true;
-            this.playerFlag10Box.Location = new System.Drawing.Point(161, 53);
+            this.playerFlag10Box.Location = new System.Drawing.Point(165, 53);
             this.playerFlag10Box.Name = "playerFlag10Box";
             this.playerFlag10Box.Size = new System.Drawing.Size(38, 17);
             this.playerFlag10Box.TabIndex = 10;
@@ -3444,7 +3433,7 @@ namespace NitroStudio2 {
             // playerFlag9Box
             // 
             this.playerFlag9Box.AutoSize = true;
-            this.playerFlag9Box.Location = new System.Drawing.Point(82, 53);
+            this.playerFlag9Box.Location = new System.Drawing.Point(84, 53);
             this.playerFlag9Box.Name = "playerFlag9Box";
             this.playerFlag9Box.Size = new System.Drawing.Size(32, 17);
             this.playerFlag9Box.TabIndex = 9;
@@ -3464,7 +3453,7 @@ namespace NitroStudio2 {
             // playerFlag7Box
             // 
             this.playerFlag7Box.AutoSize = true;
-            this.playerFlag7Box.Location = new System.Drawing.Point(240, 28);
+            this.playerFlag7Box.Location = new System.Drawing.Point(246, 28);
             this.playerFlag7Box.Name = "playerFlag7Box";
             this.playerFlag7Box.Size = new System.Drawing.Size(32, 17);
             this.playerFlag7Box.TabIndex = 7;
@@ -3474,7 +3463,7 @@ namespace NitroStudio2 {
             // playerFlag6Box
             // 
             this.playerFlag6Box.AutoSize = true;
-            this.playerFlag6Box.Location = new System.Drawing.Point(161, 28);
+            this.playerFlag6Box.Location = new System.Drawing.Point(165, 28);
             this.playerFlag6Box.Name = "playerFlag6Box";
             this.playerFlag6Box.Size = new System.Drawing.Size(32, 17);
             this.playerFlag6Box.TabIndex = 6;
@@ -3484,7 +3473,7 @@ namespace NitroStudio2 {
             // playerFlag5Box
             // 
             this.playerFlag5Box.AutoSize = true;
-            this.playerFlag5Box.Location = new System.Drawing.Point(82, 28);
+            this.playerFlag5Box.Location = new System.Drawing.Point(84, 28);
             this.playerFlag5Box.Name = "playerFlag5Box";
             this.playerFlag5Box.Size = new System.Drawing.Size(32, 17);
             this.playerFlag5Box.TabIndex = 5;
@@ -3504,7 +3493,7 @@ namespace NitroStudio2 {
             // playerFlag3Box
             // 
             this.playerFlag3Box.AutoSize = true;
-            this.playerFlag3Box.Location = new System.Drawing.Point(240, 3);
+            this.playerFlag3Box.Location = new System.Drawing.Point(246, 3);
             this.playerFlag3Box.Name = "playerFlag3Box";
             this.playerFlag3Box.Size = new System.Drawing.Size(32, 17);
             this.playerFlag3Box.TabIndex = 3;
@@ -3514,7 +3503,7 @@ namespace NitroStudio2 {
             // playerFlag2Box
             // 
             this.playerFlag2Box.AutoSize = true;
-            this.playerFlag2Box.Location = new System.Drawing.Point(161, 3);
+            this.playerFlag2Box.Location = new System.Drawing.Point(165, 3);
             this.playerFlag2Box.Name = "playerFlag2Box";
             this.playerFlag2Box.Size = new System.Drawing.Size(32, 17);
             this.playerFlag2Box.TabIndex = 2;
@@ -3524,7 +3513,7 @@ namespace NitroStudio2 {
             // playerFlag1Box
             // 
             this.playerFlag1Box.AutoSize = true;
-            this.playerFlag1Box.Location = new System.Drawing.Point(82, 3);
+            this.playerFlag1Box.Location = new System.Drawing.Point(84, 3);
             this.playerFlag1Box.Name = "playerFlag1Box";
             this.playerFlag1Box.Size = new System.Drawing.Size(32, 17);
             this.playerFlag1Box.TabIndex = 1;
@@ -3547,7 +3536,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.Location = new System.Drawing.Point(11, 93);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(322, 22);
+            this.label19.Size = new System.Drawing.Size(328, 22);
             this.label19.TabIndex = 9;
             this.label19.Text = "Channel Flags:";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3564,7 +3553,7 @@ namespace NitroStudio2 {
             0,
             0});
             this.playerHeapSizeBox.Name = "playerHeapSizeBox";
-            this.playerHeapSizeBox.Size = new System.Drawing.Size(319, 20);
+            this.playerHeapSizeBox.Size = new System.Drawing.Size(325, 20);
             this.playerHeapSizeBox.TabIndex = 8;
             this.toolTip.SetToolTip(this.playerHeapSizeBox, "How much memory to reserve in the sound heap for the player.");
             // 
@@ -3574,7 +3563,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.Location = new System.Drawing.Point(11, 48);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(322, 22);
+            this.label18.Size = new System.Drawing.Size(328, 22);
             this.label18.TabIndex = 7;
             this.label18.Text = "Heap Size:";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3590,7 +3579,7 @@ namespace NitroStudio2 {
             0,
             0});
             this.playerMaxSequencesBox.Name = "playerMaxSequencesBox";
-            this.playerMaxSequencesBox.Size = new System.Drawing.Size(319, 20);
+            this.playerMaxSequencesBox.Size = new System.Drawing.Size(325, 20);
             this.playerMaxSequencesBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.playerMaxSequencesBox, "Max number of sequences the player can play.");
             // 
@@ -3600,7 +3589,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.Location = new System.Drawing.Point(11, 3);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(322, 22);
+            this.label17.Size = new System.Drawing.Size(328, 22);
             this.label17.TabIndex = 5;
             this.label17.Text = "Max Sequences:";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3618,7 +3607,7 @@ namespace NitroStudio2 {
             this.stmPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.stmPanel.Location = new System.Drawing.Point(0, 287);
             this.stmPanel.Name = "stmPanel";
-            this.stmPanel.Size = new System.Drawing.Size(346, 352);
+            this.stmPanel.Size = new System.Drawing.Size(352, 352);
             this.stmPanel.TabIndex = 14;
             this.stmPanel.Visible = false;
             // 
@@ -3629,7 +3618,7 @@ namespace NitroStudio2 {
             this.stmMonoToStereoBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.stmMonoToStereoBox.Location = new System.Drawing.Point(11, 171);
             this.stmMonoToStereoBox.Name = "stmMonoToStereoBox";
-            this.stmMonoToStereoBox.Size = new System.Drawing.Size(322, 24);
+            this.stmMonoToStereoBox.Size = new System.Drawing.Size(328, 24);
             this.stmMonoToStereoBox.TabIndex = 17;
             this.toolTip.SetToolTip(this.stmMonoToStereoBox, "If the stream is mono, play it through two channels.");
             this.stmMonoToStereoBox.UseVisualStyleBackColor = true;
@@ -3640,7 +3629,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.Location = new System.Drawing.Point(11, 149);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(322, 22);
+            this.label16.Size = new System.Drawing.Size(328, 22);
             this.label16.TabIndex = 16;
             this.label16.Text = "Mono To Stereo:";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3651,7 +3640,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.Location = new System.Drawing.Point(11, 93);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(322, 22);
+            this.label15.Size = new System.Drawing.Size(328, 22);
             this.label15.TabIndex = 15;
             this.label15.Text = "Player:";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3669,7 +3658,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel7.TabIndex = 14;
             // 
             // stmPlayerComboBox
@@ -3679,21 +3668,21 @@ namespace NitroStudio2 {
             this.stmPlayerComboBox.FormattingEnabled = true;
             this.stmPlayerComboBox.Location = new System.Drawing.Point(3, 3);
             this.stmPlayerComboBox.Name = "stmPlayerComboBox";
-            this.stmPlayerComboBox.Size = new System.Drawing.Size(265, 21);
+            this.stmPlayerComboBox.Size = new System.Drawing.Size(270, 21);
             this.stmPlayerComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.stmPlayerComboBox, "The player to play the stream.");
             // 
             // stmPlayerBox
             // 
             this.stmPlayerBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stmPlayerBox.Location = new System.Drawing.Point(274, 3);
+            this.stmPlayerBox.Location = new System.Drawing.Point(279, 3);
             this.stmPlayerBox.Maximum = new decimal(new int[] {
             3,
             0,
             0,
             0});
             this.stmPlayerBox.Name = "stmPlayerBox";
-            this.stmPlayerBox.Size = new System.Drawing.Size(42, 20);
+            this.stmPlayerBox.Size = new System.Drawing.Size(43, 20);
             this.stmPlayerBox.TabIndex = 7;
             this.toolTip.SetToolTip(this.stmPlayerBox, "Id of the player to play the stream.");
             // 
@@ -3708,7 +3697,7 @@ namespace NitroStudio2 {
             0,
             0});
             this.stmPriorityBox.Name = "stmPriorityBox";
-            this.stmPriorityBox.Size = new System.Drawing.Size(319, 20);
+            this.stmPriorityBox.Size = new System.Drawing.Size(325, 20);
             this.stmPriorityBox.TabIndex = 7;
             this.toolTip.SetToolTip(this.stmPriorityBox, "If the sounds can not all be played at once, the one with the highest priority wi" +
         "ll play.");
@@ -3719,7 +3708,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.Location = new System.Drawing.Point(11, 48);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(322, 22);
+            this.label14.Size = new System.Drawing.Size(328, 22);
             this.label14.TabIndex = 6;
             this.label14.Text = "Priority:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3735,7 +3724,7 @@ namespace NitroStudio2 {
             0,
             0});
             this.stmVolumeBox.Name = "stmVolumeBox";
-            this.stmVolumeBox.Size = new System.Drawing.Size(319, 20);
+            this.stmVolumeBox.Size = new System.Drawing.Size(325, 20);
             this.stmVolumeBox.TabIndex = 5;
             this.toolTip.SetToolTip(this.stmVolumeBox, "The volume of the stream.");
             // 
@@ -3745,7 +3734,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.Location = new System.Drawing.Point(11, 3);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(322, 22);
+            this.label13.Size = new System.Drawing.Size(328, 22);
             this.label13.TabIndex = 4;
             this.label13.Text = "Volume:";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3758,7 +3747,7 @@ namespace NitroStudio2 {
             this.streamPlayerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.streamPlayerPanel.Location = new System.Drawing.Point(0, 287);
             this.streamPlayerPanel.Name = "streamPlayerPanel";
-            this.streamPlayerPanel.Size = new System.Drawing.Size(346, 352);
+            this.streamPlayerPanel.Size = new System.Drawing.Size(352, 352);
             this.streamPlayerPanel.TabIndex = 13;
             this.streamPlayerPanel.Visible = false;
             // 
@@ -3773,7 +3762,7 @@ namespace NitroStudio2 {
             "Stereo"});
             this.stmPlayerChannelType.Location = new System.Drawing.Point(14, 28);
             this.stmPlayerChannelType.Name = "stmPlayerChannelType";
-            this.stmPlayerChannelType.Size = new System.Drawing.Size(319, 21);
+            this.stmPlayerChannelType.Size = new System.Drawing.Size(325, 21);
             this.stmPlayerChannelType.TabIndex = 4;
             this.toolTip.SetToolTip(this.stmPlayerChannelType, "If the stream is stereo or mono.");
             // 
@@ -3783,7 +3772,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.Location = new System.Drawing.Point(11, 3);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(322, 22);
+            this.label12.Size = new System.Drawing.Size(328, 22);
             this.label12.TabIndex = 3;
             this.label12.Text = "Channel Type:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3804,7 +3793,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(319, 45);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(325, 45);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // stmPlayerLeftChannelBox
@@ -3817,30 +3806,30 @@ namespace NitroStudio2 {
             0,
             0});
             this.stmPlayerLeftChannelBox.Name = "stmPlayerLeftChannelBox";
-            this.stmPlayerLeftChannelBox.Size = new System.Drawing.Size(153, 20);
+            this.stmPlayerLeftChannelBox.Size = new System.Drawing.Size(156, 20);
             this.stmPlayerLeftChannelBox.TabIndex = 4;
             this.toolTip.SetToolTip(this.stmPlayerLeftChannelBox, "Channel to use for the stream.");
             // 
             // stmPlayerRightChannelBox
             // 
             this.stmPlayerRightChannelBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stmPlayerRightChannelBox.Location = new System.Drawing.Point(162, 25);
+            this.stmPlayerRightChannelBox.Location = new System.Drawing.Point(165, 25);
             this.stmPlayerRightChannelBox.Maximum = new decimal(new int[] {
             15,
             0,
             0,
             0});
             this.stmPlayerRightChannelBox.Name = "stmPlayerRightChannelBox";
-            this.stmPlayerRightChannelBox.Size = new System.Drawing.Size(154, 20);
+            this.stmPlayerRightChannelBox.Size = new System.Drawing.Size(157, 20);
             this.stmPlayerRightChannelBox.TabIndex = 3;
             this.toolTip.SetToolTip(this.stmPlayerRightChannelBox, "Channel to use for the stream.");
             // 
             // rightChannelLabel
             // 
             this.rightChannelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rightChannelLabel.Location = new System.Drawing.Point(162, 0);
+            this.rightChannelLabel.Location = new System.Drawing.Point(165, 0);
             this.rightChannelLabel.Name = "rightChannelLabel";
-            this.rightChannelLabel.Size = new System.Drawing.Size(154, 22);
+            this.rightChannelLabel.Size = new System.Drawing.Size(157, 22);
             this.rightChannelLabel.TabIndex = 2;
             this.rightChannelLabel.Text = "Right Channel:";
             this.rightChannelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3850,7 +3839,7 @@ namespace NitroStudio2 {
             this.leftChannelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.leftChannelLabel.Location = new System.Drawing.Point(3, 0);
             this.leftChannelLabel.Name = "leftChannelLabel";
-            this.leftChannelLabel.Size = new System.Drawing.Size(153, 22);
+            this.leftChannelLabel.Size = new System.Drawing.Size(156, 22);
             this.leftChannelLabel.TabIndex = 1;
             this.leftChannelLabel.Text = "Left Channel:";
             this.leftChannelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3861,7 +3850,7 @@ namespace NitroStudio2 {
             this.grpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpPanel.Location = new System.Drawing.Point(0, 287);
             this.grpPanel.Name = "grpPanel";
-            this.grpPanel.Size = new System.Drawing.Size(346, 352);
+            this.grpPanel.Size = new System.Drawing.Size(352, 352);
             this.grpPanel.TabIndex = 12;
             this.grpPanel.Visible = false;
             // 
@@ -3876,7 +3865,7 @@ namespace NitroStudio2 {
             this.grpEntries.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpEntries.Location = new System.Drawing.Point(0, 0);
             this.grpEntries.Name = "grpEntries";
-            this.grpEntries.Size = new System.Drawing.Size(346, 352);
+            this.grpEntries.Size = new System.Drawing.Size(352, 352);
             this.grpEntries.TabIndex = 0;
             // 
             // item
@@ -3907,7 +3896,7 @@ namespace NitroStudio2 {
             this.bankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bankPanel.Location = new System.Drawing.Point(0, 287);
             this.bankPanel.Name = "bankPanel";
-            this.bankPanel.Size = new System.Drawing.Size(346, 352);
+            this.bankPanel.Size = new System.Drawing.Size(352, 352);
             this.bankPanel.TabIndex = 11;
             this.bankPanel.Visible = false;
             // 
@@ -3924,7 +3913,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel5.TabIndex = 13;
             // 
             // bnkWar3ComboBox
@@ -3934,14 +3923,14 @@ namespace NitroStudio2 {
             this.bnkWar3ComboBox.FormattingEnabled = true;
             this.bnkWar3ComboBox.Location = new System.Drawing.Point(3, 3);
             this.bnkWar3ComboBox.Name = "bnkWar3ComboBox";
-            this.bnkWar3ComboBox.Size = new System.Drawing.Size(265, 21);
+            this.bnkWar3ComboBox.Size = new System.Drawing.Size(270, 21);
             this.bnkWar3ComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.bnkWar3ComboBox, "Wave archive to be used for the bank.");
             // 
             // bnkWar3Box
             // 
             this.bnkWar3Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bnkWar3Box.Location = new System.Drawing.Point(274, 3);
+            this.bnkWar3Box.Location = new System.Drawing.Point(279, 3);
             this.bnkWar3Box.Maximum = new decimal(new int[] {
             65534,
             0,
@@ -3953,7 +3942,7 @@ namespace NitroStudio2 {
             0,
             -2147483648});
             this.bnkWar3Box.Name = "bnkWar3Box";
-            this.bnkWar3Box.Size = new System.Drawing.Size(42, 20);
+            this.bnkWar3Box.Size = new System.Drawing.Size(43, 20);
             this.bnkWar3Box.TabIndex = 7;
             this.toolTip.SetToolTip(this.bnkWar3Box, "Id of the wave archive to use for this bank.");
             // 
@@ -3963,7 +3952,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.Location = new System.Drawing.Point(11, 171);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(322, 22);
+            this.label11.Size = new System.Drawing.Size(328, 22);
             this.label11.TabIndex = 12;
             this.label11.Text = "Wave Archive 3:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3981,7 +3970,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel4.TabIndex = 11;
             // 
             // bnkWar2ComboBox
@@ -3991,14 +3980,14 @@ namespace NitroStudio2 {
             this.bnkWar2ComboBox.FormattingEnabled = true;
             this.bnkWar2ComboBox.Location = new System.Drawing.Point(3, 3);
             this.bnkWar2ComboBox.Name = "bnkWar2ComboBox";
-            this.bnkWar2ComboBox.Size = new System.Drawing.Size(265, 21);
+            this.bnkWar2ComboBox.Size = new System.Drawing.Size(270, 21);
             this.bnkWar2ComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.bnkWar2ComboBox, "Wave archive to be used for the bank.");
             // 
             // bnkWar2Box
             // 
             this.bnkWar2Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bnkWar2Box.Location = new System.Drawing.Point(274, 3);
+            this.bnkWar2Box.Location = new System.Drawing.Point(279, 3);
             this.bnkWar2Box.Maximum = new decimal(new int[] {
             65534,
             0,
@@ -4010,7 +3999,7 @@ namespace NitroStudio2 {
             0,
             -2147483648});
             this.bnkWar2Box.Name = "bnkWar2Box";
-            this.bnkWar2Box.Size = new System.Drawing.Size(42, 20);
+            this.bnkWar2Box.Size = new System.Drawing.Size(43, 20);
             this.bnkWar2Box.TabIndex = 7;
             this.toolTip.SetToolTip(this.bnkWar2Box, "Id of the wave archive to use for this bank.");
             // 
@@ -4020,7 +4009,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.Location = new System.Drawing.Point(11, 115);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(322, 22);
+            this.label10.Size = new System.Drawing.Size(328, 22);
             this.label10.TabIndex = 10;
             this.label10.Text = "Wave Archive 2:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4038,7 +4027,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel3.TabIndex = 9;
             // 
             // bnkWar1ComboBox
@@ -4048,14 +4037,14 @@ namespace NitroStudio2 {
             this.bnkWar1ComboBox.FormattingEnabled = true;
             this.bnkWar1ComboBox.Location = new System.Drawing.Point(3, 3);
             this.bnkWar1ComboBox.Name = "bnkWar1ComboBox";
-            this.bnkWar1ComboBox.Size = new System.Drawing.Size(265, 21);
+            this.bnkWar1ComboBox.Size = new System.Drawing.Size(270, 21);
             this.bnkWar1ComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.bnkWar1ComboBox, "Wave archive to be used for the bank.");
             // 
             // bnkWar1Box
             // 
             this.bnkWar1Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bnkWar1Box.Location = new System.Drawing.Point(274, 3);
+            this.bnkWar1Box.Location = new System.Drawing.Point(279, 3);
             this.bnkWar1Box.Maximum = new decimal(new int[] {
             65534,
             0,
@@ -4067,7 +4056,7 @@ namespace NitroStudio2 {
             0,
             -2147483648});
             this.bnkWar1Box.Name = "bnkWar1Box";
-            this.bnkWar1Box.Size = new System.Drawing.Size(42, 20);
+            this.bnkWar1Box.Size = new System.Drawing.Size(43, 20);
             this.bnkWar1Box.TabIndex = 7;
             this.toolTip.SetToolTip(this.bnkWar1Box, "Id of the wave archive to use for this bank.");
             // 
@@ -4077,7 +4066,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.Location = new System.Drawing.Point(11, 59);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(322, 22);
+            this.label7.Size = new System.Drawing.Size(328, 22);
             this.label7.TabIndex = 8;
             this.label7.Text = "Wave Archive 1:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4095,7 +4084,7 @@ namespace NitroStudio2 {
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(319, 31);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 31);
             this.tableLayoutPanel2.TabIndex = 7;
             // 
             // bnkWar0ComboBox
@@ -4105,14 +4094,14 @@ namespace NitroStudio2 {
             this.bnkWar0ComboBox.FormattingEnabled = true;
             this.bnkWar0ComboBox.Location = new System.Drawing.Point(3, 3);
             this.bnkWar0ComboBox.Name = "bnkWar0ComboBox";
-            this.bnkWar0ComboBox.Size = new System.Drawing.Size(265, 21);
+            this.bnkWar0ComboBox.Size = new System.Drawing.Size(270, 21);
             this.bnkWar0ComboBox.TabIndex = 6;
             this.toolTip.SetToolTip(this.bnkWar0ComboBox, "Wave archive to be used for the bank.");
             // 
             // bnkWar0Box
             // 
             this.bnkWar0Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bnkWar0Box.Location = new System.Drawing.Point(274, 3);
+            this.bnkWar0Box.Location = new System.Drawing.Point(279, 3);
             this.bnkWar0Box.Maximum = new decimal(new int[] {
             65534,
             0,
@@ -4124,7 +4113,7 @@ namespace NitroStudio2 {
             0,
             -2147483648});
             this.bnkWar0Box.Name = "bnkWar0Box";
-            this.bnkWar0Box.Size = new System.Drawing.Size(42, 20);
+            this.bnkWar0Box.Size = new System.Drawing.Size(43, 20);
             this.bnkWar0Box.TabIndex = 7;
             this.toolTip.SetToolTip(this.bnkWar0Box, "Id of the wave archive to use for this bank.");
             // 
@@ -4134,7 +4123,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.Location = new System.Drawing.Point(11, 3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(322, 22);
+            this.label6.Size = new System.Drawing.Size(328, 22);
             this.label6.TabIndex = 2;
             this.label6.Text = "Wave Archive 0:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4144,7 +4133,7 @@ namespace NitroStudio2 {
             this.blankPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.blankPanel.Location = new System.Drawing.Point(0, 287);
             this.blankPanel.Name = "blankPanel";
-            this.blankPanel.Size = new System.Drawing.Size(346, 352);
+            this.blankPanel.Size = new System.Drawing.Size(352, 352);
             this.blankPanel.TabIndex = 10;
             this.blankPanel.Visible = false;
             // 
@@ -4155,7 +4144,7 @@ namespace NitroStudio2 {
             this.warPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.warPanel.Location = new System.Drawing.Point(0, 287);
             this.warPanel.Name = "warPanel";
-            this.warPanel.Size = new System.Drawing.Size(346, 352);
+            this.warPanel.Size = new System.Drawing.Size(352, 352);
             this.warPanel.TabIndex = 9;
             this.warPanel.Visible = false;
             // 
@@ -4166,7 +4155,7 @@ namespace NitroStudio2 {
             this.loadIndividuallyBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.loadIndividuallyBox.Location = new System.Drawing.Point(11, 25);
             this.loadIndividuallyBox.Name = "loadIndividuallyBox";
-            this.loadIndividuallyBox.Size = new System.Drawing.Size(322, 24);
+            this.loadIndividuallyBox.Size = new System.Drawing.Size(328, 24);
             this.loadIndividuallyBox.TabIndex = 1;
             this.toolTip.SetToolTip(this.loadIndividuallyBox, "If the wave archive should be loaded individually.");
             this.loadIndividuallyBox.UseVisualStyleBackColor = true;
@@ -4177,7 +4166,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.Location = new System.Drawing.Point(11, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(322, 22);
+            this.label9.Size = new System.Drawing.Size(328, 22);
             this.label9.TabIndex = 0;
             this.label9.Text = "Load Individually:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4189,7 +4178,7 @@ namespace NitroStudio2 {
             this.forceUniqueFilePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.forceUniqueFilePanel.Location = new System.Drawing.Point(0, 248);
             this.forceUniqueFilePanel.Name = "forceUniqueFilePanel";
-            this.forceUniqueFilePanel.Size = new System.Drawing.Size(346, 39);
+            this.forceUniqueFilePanel.Size = new System.Drawing.Size(352, 39);
             this.forceUniqueFilePanel.TabIndex = 8;
             this.forceUniqueFilePanel.Visible = false;
             // 
@@ -4200,7 +4189,7 @@ namespace NitroStudio2 {
             this.forceUniqueFileBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.forceUniqueFileBox.Location = new System.Drawing.Point(11, 19);
             this.forceUniqueFileBox.Name = "forceUniqueFileBox";
-            this.forceUniqueFileBox.Size = new System.Drawing.Size(322, 18);
+            this.forceUniqueFileBox.Size = new System.Drawing.Size(328, 18);
             this.forceUniqueFileBox.TabIndex = 1;
             this.toolTip.SetToolTip(this.forceUniqueFileBox, "Write this file in the sound archive as its own file, even if it has the exact sa" +
         "me data as another one. If this is not checked, files will be shared between ent" +
@@ -4213,7 +4202,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.Location = new System.Drawing.Point(11, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(322, 17);
+            this.label8.Size = new System.Drawing.Size(328, 17);
             this.label8.TabIndex = 0;
             this.label8.Text = "Force Unique File:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -4226,7 +4215,7 @@ namespace NitroStudio2 {
             this.indexPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.indexPanel.Location = new System.Drawing.Point(0, 167);
             this.indexPanel.Name = "indexPanel";
-            this.indexPanel.Size = new System.Drawing.Size(346, 81);
+            this.indexPanel.Size = new System.Drawing.Size(352, 81);
             this.indexPanel.TabIndex = 0;
             this.indexPanel.Visible = false;
             // 
@@ -4236,7 +4225,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.swapAtIndexButton.Location = new System.Drawing.Point(14, 49);
             this.swapAtIndexButton.Name = "swapAtIndexButton";
-            this.swapAtIndexButton.Size = new System.Drawing.Size(319, 25);
+            this.swapAtIndexButton.Size = new System.Drawing.Size(325, 25);
             this.swapAtIndexButton.TabIndex = 0;
             this.swapAtIndexButton.Text = "Swap With Index";
             this.toolTip.SetToolTip(this.swapAtIndexButton, "Swap this entry with the one at the new index. If that entry doesn\'t exist, simpl" +
@@ -4254,7 +4243,7 @@ namespace NitroStudio2 {
             0,
             0});
             this.itemIndexBox.Name = "itemIndexBox";
-            this.itemIndexBox.Size = new System.Drawing.Size(319, 20);
+            this.itemIndexBox.Size = new System.Drawing.Size(325, 20);
             this.itemIndexBox.TabIndex = 1;
             this.toolTip.SetToolTip(this.itemIndexBox, "The index of the item as referenced to by the game.");
             // 
@@ -4264,7 +4253,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.Location = new System.Drawing.Point(8, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(322, 20);
+            this.label5.Size = new System.Drawing.Size(328, 20);
             this.label5.TabIndex = 0;
             this.label5.Text = "Item Index:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4280,7 +4269,7 @@ namespace NitroStudio2 {
             this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.settingsPanel.Location = new System.Drawing.Point(0, 167);
             this.settingsPanel.Name = "settingsPanel";
-            this.settingsPanel.Size = new System.Drawing.Size(346, 472);
+            this.settingsPanel.Size = new System.Drawing.Size(352, 472);
             this.settingsPanel.TabIndex = 1;
             this.settingsPanel.Visible = false;
             // 
@@ -4295,7 +4284,7 @@ namespace NitroStudio2 {
             "Sseq2Midi"});
             this.seqExportModeBox.Location = new System.Drawing.Point(11, 126);
             this.seqExportModeBox.Name = "seqExportModeBox";
-            this.seqExportModeBox.Size = new System.Drawing.Size(322, 21);
+            this.seqExportModeBox.Size = new System.Drawing.Size(328, 21);
             this.seqExportModeBox.TabIndex = 5;
             this.toolTip.SetToolTip(this.seqExportModeBox, "What program should be used to export sequences. Nitro Studio is my custom export" +
         "er, while Sseq2Midi is the exe included. I recommend you use my exporter.");
@@ -4306,7 +4295,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.Location = new System.Drawing.Point(11, 101);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(322, 22);
+            this.label4.Size = new System.Drawing.Size(328, 22);
             this.label4.TabIndex = 4;
             this.label4.Text = "Sequence Export Mode:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4323,7 +4312,7 @@ namespace NitroStudio2 {
             "Nintendo Tools"});
             this.seqImportModeBox.Location = new System.Drawing.Point(11, 77);
             this.seqImportModeBox.Name = "seqImportModeBox";
-            this.seqImportModeBox.Size = new System.Drawing.Size(322, 21);
+            this.seqImportModeBox.Size = new System.Drawing.Size(328, 21);
             this.seqImportModeBox.TabIndex = 3;
             this.toolTip.SetToolTip(this.seqImportModeBox, resources.GetString("seqImportModeBox.ToolTip"));
             // 
@@ -4333,7 +4322,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.Location = new System.Drawing.Point(11, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(322, 22);
+            this.label3.Size = new System.Drawing.Size(328, 22);
             this.label3.TabIndex = 2;
             this.label3.Text = "Sequence Import Mode:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4345,7 +4334,7 @@ namespace NitroStudio2 {
             this.writeNamesBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.writeNamesBox.Location = new System.Drawing.Point(11, 25);
             this.writeNamesBox.Name = "writeNamesBox";
-            this.writeNamesBox.Size = new System.Drawing.Size(322, 24);
+            this.writeNamesBox.Size = new System.Drawing.Size(328, 24);
             this.writeNamesBox.TabIndex = 1;
             this.toolTip.SetToolTip(this.writeNamesBox, "If the editor should export names for the sound archive.");
             this.writeNamesBox.UseVisualStyleBackColor = true;
@@ -4356,7 +4345,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Location = new System.Drawing.Point(11, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(322, 22);
+            this.label2.Size = new System.Drawing.Size(328, 22);
             this.label2.TabIndex = 0;
             this.label2.Text = "Write Names:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -4367,7 +4356,7 @@ namespace NitroStudio2 {
             this.noInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.noInfoPanel.Location = new System.Drawing.Point(0, 167);
             this.noInfoPanel.Name = "noInfoPanel";
-            this.noInfoPanel.Size = new System.Drawing.Size(346, 472);
+            this.noInfoPanel.Size = new System.Drawing.Size(352, 472);
             this.noInfoPanel.TabIndex = 0;
             // 
             // label1
@@ -4375,7 +4364,7 @@ namespace NitroStudio2 {
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(346, 472);
+            this.label1.Size = new System.Drawing.Size(352, 472);
             this.label1.TabIndex = 0;
             this.label1.Text = "No Valid Info Selected!";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4386,7 +4375,7 @@ namespace NitroStudio2 {
             this.loopingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loopingPanel.Location = new System.Drawing.Point(0, 167);
             this.loopingPanel.Name = "loopingPanel";
-            this.loopingPanel.Size = new System.Drawing.Size(346, 472);
+            this.loopingPanel.Size = new System.Drawing.Size(352, 472);
             this.loopingPanel.TabIndex = 14;
             this.loopingPanel.Visible = false;
             // 
@@ -4480,7 +4469,7 @@ namespace NitroStudio2 {
             this.kermalisSoundPlayerPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.kermalisSoundPlayerPanel.Location = new System.Drawing.Point(0, 0);
             this.kermalisSoundPlayerPanel.Name = "kermalisSoundPlayerPanel";
-            this.kermalisSoundPlayerPanel.Size = new System.Drawing.Size(346, 167);
+            this.kermalisSoundPlayerPanel.Size = new System.Drawing.Size(352, 167);
             this.kermalisSoundPlayerPanel.TabIndex = 16;
             this.kermalisSoundPlayerPanel.Visible = false;
             // 
@@ -4492,7 +4481,7 @@ namespace NitroStudio2 {
             this.kermalisPosition.Location = new System.Drawing.Point(14, 127);
             this.kermalisPosition.Maximum = 100;
             this.kermalisPosition.Name = "kermalisPosition";
-            this.kermalisPosition.Size = new System.Drawing.Size(319, 45);
+            this.kermalisPosition.Size = new System.Drawing.Size(325, 45);
             this.kermalisPosition.TabIndex = 5;
             this.kermalisPosition.TickFrequency = 5;
             this.toolTip.SetToolTip(this.kermalisPosition, "Sound position.");
@@ -4520,15 +4509,15 @@ namespace NitroStudio2 {
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(319, 76);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(325, 76);
             this.tableLayoutPanel9.TabIndex = 4;
             // 
             // label20
             // 
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(238, 27);
+            this.label20.Location = new System.Drawing.Point(243, 27);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(78, 15);
+            this.label20.Size = new System.Drawing.Size(79, 15);
             this.label20.TabIndex = 6;
             this.label20.Text = "Preview Loop:";
             this.label20.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -4536,9 +4525,9 @@ namespace NitroStudio2 {
             // swavLoopLabel
             // 
             this.swavLoopLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.swavLoopLabel.Location = new System.Drawing.Point(146, 27);
+            this.swavLoopLabel.Location = new System.Drawing.Point(149, 27);
             this.swavLoopLabel.Name = "swavLoopLabel";
-            this.swavLoopLabel.Size = new System.Drawing.Size(86, 15);
+            this.swavLoopLabel.Size = new System.Drawing.Size(88, 15);
             this.swavLoopLabel.TabIndex = 5;
             this.swavLoopLabel.Text = "Looping Sample:";
             this.swavLoopLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -4549,7 +4538,7 @@ namespace NitroStudio2 {
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label21.Location = new System.Drawing.Point(3, 27);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(137, 15);
+            this.label21.Size = new System.Drawing.Size(140, 15);
             this.label21.TabIndex = 4;
             this.label21.Text = "Volume:";
             this.label21.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -4558,9 +4547,9 @@ namespace NitroStudio2 {
             // 
             this.tableLayoutPanel9.SetColumnSpan(this.kermalisStopButton, 2);
             this.kermalisStopButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kermalisStopButton.Location = new System.Drawing.Point(146, 3);
+            this.kermalisStopButton.Location = new System.Drawing.Point(149, 3);
             this.kermalisStopButton.Name = "kermalisStopButton";
-            this.kermalisStopButton.Size = new System.Drawing.Size(170, 21);
+            this.kermalisStopButton.Size = new System.Drawing.Size(173, 21);
             this.kermalisStopButton.TabIndex = 1;
             this.kermalisStopButton.Text = "Stop";
             this.kermalisStopButton.UseVisualStyleBackColor = true;
@@ -4570,7 +4559,7 @@ namespace NitroStudio2 {
             this.kermalisPauseButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kermalisPauseButton.Location = new System.Drawing.Point(3, 3);
             this.kermalisPauseButton.Name = "kermalisPauseButton";
-            this.kermalisPauseButton.Size = new System.Drawing.Size(137, 21);
+            this.kermalisPauseButton.Size = new System.Drawing.Size(140, 21);
             this.kermalisPauseButton.TabIndex = 0;
             this.kermalisPauseButton.Text = "Pause / Resume";
             this.kermalisPauseButton.UseVisualStyleBackColor = true;
@@ -4582,7 +4571,7 @@ namespace NitroStudio2 {
             this.kermalisVolumeSlider.Location = new System.Drawing.Point(3, 45);
             this.kermalisVolumeSlider.Maximum = 100;
             this.kermalisVolumeSlider.Name = "kermalisVolumeSlider";
-            this.kermalisVolumeSlider.Size = new System.Drawing.Size(137, 28);
+            this.kermalisVolumeSlider.Size = new System.Drawing.Size(140, 28);
             this.kermalisVolumeSlider.SmallChange = 5;
             this.kermalisVolumeSlider.TabIndex = 2;
             this.kermalisVolumeSlider.TickFrequency = 10;
@@ -4592,9 +4581,9 @@ namespace NitroStudio2 {
             // 
             this.swavLoopCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.swavLoopCheckbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.swavLoopCheckbox.Location = new System.Drawing.Point(146, 45);
+            this.swavLoopCheckbox.Location = new System.Drawing.Point(149, 45);
             this.swavLoopCheckbox.Name = "swavLoopCheckbox";
-            this.swavLoopCheckbox.Size = new System.Drawing.Size(86, 28);
+            this.swavLoopCheckbox.Size = new System.Drawing.Size(88, 28);
             this.swavLoopCheckbox.TabIndex = 6;
             this.swavLoopCheckbox.UseVisualStyleBackColor = true;
             this.swavLoopCheckbox.Visible = false;
@@ -4603,9 +4592,9 @@ namespace NitroStudio2 {
             // 
             this.kermalisLoopBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.kermalisLoopBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kermalisLoopBox.Location = new System.Drawing.Point(238, 45);
+            this.kermalisLoopBox.Location = new System.Drawing.Point(243, 45);
             this.kermalisLoopBox.Name = "kermalisLoopBox";
-            this.kermalisLoopBox.Size = new System.Drawing.Size(78, 28);
+            this.kermalisLoopBox.Size = new System.Drawing.Size(79, 28);
             this.kermalisLoopBox.TabIndex = 3;
             this.kermalisLoopBox.UseVisualStyleBackColor = true;
             // 
@@ -4615,7 +4604,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kermalisPlayButton.Location = new System.Drawing.Point(14, 25);
             this.kermalisPlayButton.Name = "kermalisPlayButton";
-            this.kermalisPlayButton.Size = new System.Drawing.Size(319, 21);
+            this.kermalisPlayButton.Size = new System.Drawing.Size(325, 21);
             this.kermalisPlayButton.TabIndex = 3;
             this.kermalisPlayButton.Text = "Play";
             this.kermalisPlayButton.UseVisualStyleBackColor = true;
@@ -4626,7 +4615,7 @@ namespace NitroStudio2 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.soundPlayerLabel.Location = new System.Drawing.Point(11, 3);
             this.soundPlayerLabel.Name = "soundPlayerLabel";
-            this.soundPlayerLabel.Size = new System.Drawing.Size(322, 22);
+            this.soundPlayerLabel.Size = new System.Drawing.Size(328, 22);
             this.soundPlayerLabel.TabIndex = 1;
             this.soundPlayerLabel.Text = "Kermalis Sound Player:";
             this.soundPlayerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4720,7 +4709,7 @@ namespace NitroStudio2 {
             this.pnlPianoKeys.Controls.Add(this.pkeyASharp5);
             this.pnlPianoKeys.Controls.Add(this.pkeyB5);
             this.pnlPianoKeys.Controls.Add(this.pkeyC8);
-            this.pnlPianoKeys.Location = new System.Drawing.Point(88, 579);
+            this.pnlPianoKeys.Location = new System.Drawing.Point(82, 579);
             this.pnlPianoKeys.Name = "pnlPianoKeys";
             this.pnlPianoKeys.Size = new System.Drawing.Size(565, 46);
             this.pnlPianoKeys.TabIndex = 6;
@@ -5801,7 +5790,7 @@ namespace NitroStudio2 {
             this.bankEditorWars.Controls.Add(this.label34);
             this.bankEditorWars.Controls.Add(this.tableLayoutPanel19);
             this.bankEditorWars.Controls.Add(this.label35);
-            this.bankEditorWars.Location = new System.Drawing.Point(359, 13);
+            this.bankEditorWars.Location = new System.Drawing.Point(353, 13);
             this.bankEditorWars.Name = "bankEditorWars";
             this.bankEditorWars.Size = new System.Drawing.Size(325, 240);
             this.bankEditorWars.TabIndex = 13;
@@ -6051,7 +6040,7 @@ namespace NitroStudio2 {
             treeNode1});
             this.tree.SelectedImageIndex = 0;
             this.tree.ShowLines = false;
-            this.tree.Size = new System.Drawing.Size(695, 639);
+            this.tree.Size = new System.Drawing.Size(689, 639);
             this.tree.TabIndex = 0;
             this.tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseClick);
             this.tree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_NodeMouseDoubleClick);
@@ -6087,7 +6076,7 @@ namespace NitroStudio2 {
             this.sequenceEditorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sequenceEditorPanel.Location = new System.Drawing.Point(0, 0);
             this.sequenceEditorPanel.Name = "sequenceEditorPanel";
-            this.sequenceEditorPanel.Size = new System.Drawing.Size(695, 639);
+            this.sequenceEditorPanel.Size = new System.Drawing.Size(689, 639);
             this.sequenceEditorPanel.TabIndex = 3;
             this.sequenceEditorPanel.Visible = false;
             // 
@@ -6097,7 +6086,7 @@ namespace NitroStudio2 {
             this.sequenceEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sequenceEditor.Location = new System.Drawing.Point(0, 0);
             this.sequenceEditor.Name = "sequenceEditor";
-            this.sequenceEditor.Size = new System.Drawing.Size(695, 639);
+            this.sequenceEditor.Size = new System.Drawing.Size(689, 639);
             this.sequenceEditor.TabIndex = 0;
             // 
             // openFileDialog
@@ -8216,13 +8205,8 @@ namespace NitroStudio2 {
             ed.Show();
         }
 
-        private void CreaveWaveToolStripMenuItem_Click(object sender, EventArgs e) {
-            CreateStreamTool ed = new CreateStreamTool(Mode.SwavMode);
-            ed.Show();
-        }
-
-        private void CreateStreamToolStripMenuItem_Click(object sender, EventArgs e) {
-            CreateStreamTool ed = new CreateStreamTool(Mode.StreamMode);
+        private void AudioConverterToolStripMenuItem_Click(object sender, EventArgs e) {
+            AudioConverter ed = new AudioConverter();
             ed.Show();
         }
 
