@@ -6555,9 +6555,11 @@ namespace NitroStudio2 {
             //Get the selected index.
             nodeIndices = new Stack<int>();
             nodeIndices.Push(tree.SelectedNode.Index);
-            while (tree.SelectedNode.Parent != null) {
-                tree.SelectedNode = tree.SelectedNode.Parent;
-                nodeIndices.Push(tree.SelectedNode.Index);
+
+            TreeNode selection = tree.SelectedNode;
+            while (selection.Parent != null) {
+                selection = selection.Parent;
+                nodeIndices.Push(selection.Index);
             }
 
             //Clear each node.
@@ -6596,7 +6598,10 @@ namespace NitroStudio2 {
                     nodeIndices.Clear();
                 }
             }
-            tree.SelectedNode.EnsureVisible();
+
+            if (tree.SelectedNode != null) {
+                tree.SelectedNode.EnsureVisible();
+            }
 
             //End update.
             tree.EndUpdate();
