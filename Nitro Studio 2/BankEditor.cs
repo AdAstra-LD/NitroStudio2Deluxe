@@ -335,7 +335,18 @@ namespace NitroStudio2 {
             currentNote.Text = "Playing Note " + NoteDown.ToString() + " (" + (int)(NoteDown) + ").";
             Player.Stop();
             Player.Banks[0] = BK;
-            Player.LoadSong(new List<GotaSequenceLib.SequenceCommand>() { new GotaSequenceLib.SequenceCommand() { CommandType = GotaSequenceLib.SequenceCommands.ProgramChange, Parameter = (uint)MainWindow.GetIdFromNode(tree.SelectedNode) }, new GotaSequenceLib.SequenceCommand() { CommandType = GotaSequenceLib.SequenceCommands.Note, Parameter = new GotaSequenceLib.NoteParameter() { Note = NoteDown, Length = 0xFFF, Velocity = 127 } }, new SequenceCommand() { CommandType = SequenceCommands.Fin } });
+            Player.LoadSong(new List<SequenceCommand>() {
+                new SequenceCommand() { 
+                    CommandType = SequenceCommands.ProgramChange, Parameter = (uint)MainWindow.GetIdFromNode(tree.SelectedNode) }, 
+                new SequenceCommand() { 
+                    CommandType = SequenceCommands.Note, Parameter = new NoteParameter() { 
+                        Note = NoteDown, Length = 0xFFF, Velocity = 127 
+                    } 
+                }, 
+                new SequenceCommand() { 
+                    CommandType = SequenceCommands.Fin 
+                }
+            });
             Player.Play();
         }
 
@@ -601,10 +612,26 @@ namespace NitroStudio2 {
         /// </summary>
         public void KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == ' ' && tree.SelectedNode.Parent != null) {
-                if (tree.SelectedNode.Parent == null) { return; }
+                if (tree.SelectedNode.Parent == null) { 
+                    return; 
+                }
+
                 Player.Stop();
                 Player.Banks[0] = BK;
-                Player.LoadSong(new List<GotaSequenceLib.SequenceCommand>() { new GotaSequenceLib.SequenceCommand() { CommandType = GotaSequenceLib.SequenceCommands.ProgramChange, Parameter = (uint)MainWindow.GetIdFromNode(tree.SelectedNode) }, new GotaSequenceLib.SequenceCommand() { CommandType = GotaSequenceLib.SequenceCommands.Note, Parameter = new GotaSequenceLib.NoteParameter() { Note = Notes.cn4, Length = 48 * 2, Velocity = 127 } }, new SequenceCommand() { CommandType = SequenceCommands.Fin } });
+                Player.LoadSong(new List<SequenceCommand>() { 
+                    new SequenceCommand() { 
+                        CommandType = SequenceCommands.ProgramChange, 
+                        Parameter = (uint)MainWindow.GetIdFromNode(tree.SelectedNode) 
+                    }, 
+                    new SequenceCommand() { 
+                        CommandType = SequenceCommands.Note, Parameter = new NoteParameter() { 
+                            Note = Notes.cn4, Length = 48 * 2, Velocity = 127 
+                        } 
+                    }, 
+                    new SequenceCommand() { 
+                        CommandType = SequenceCommands.Fin 
+                    } 
+                });
                 Player.Play();
             }
         }
@@ -616,7 +643,10 @@ namespace NitroStudio2 {
 
             //Get new index.
             int index = 0;
-            try { index = BK.Instruments.Last().Index + 1; } catch { }
+            try { 
+                index = BK.Instruments.Last().Index + 1; 
+            } catch { }
+
             if (index > 0xFFFF) {
                 for (int i = 0; i < 0xFFFF; i++) {
                     if (BK.Instruments.Where(x => x.Index == i).Count() < 1) {
@@ -843,23 +873,47 @@ namespace NitroStudio2 {
                 return;
             }
             if (MainWindow != null && MainWindow.SA != null) {
-                if (tree.SelectedNode.Parent == null) { return; }
+                if (tree.SelectedNode.Parent == null) { 
+                    return; 
+                }
+
                 int regionInd = e.RowIndex;
-                if (regionInd > BK.Instruments.Where(x => x.Index == MainWindow.GetIdFromNode(tree.SelectedNode)).FirstOrDefault().NoteInfo.Count - 1) {
+                int IDfromNode = MainWindow.GetIdFromNode(tree.SelectedNode);
+                Instrument inst = BK.Instruments.Where(x => x.Index == IDfromNode).FirstOrDefault();
+                if (regionInd > inst.NoteInfo.Count - 1) {
                     return;
                 }
-                byte prevNote = 0;
-                if (BK.Instruments.Where(x => x.Index == MainWindow.GetIdFromNode(tree.SelectedNode)).FirstOrDefault() as DrumSetInstrument != null) {
-                    prevNote = (BK.Instruments.Where(x => x.Index == MainWindow.GetIdFromNode(tree.SelectedNode)).FirstOrDefault() as DrumSetInstrument).Min;
-                }
-                byte nextNote = (byte)BK.Instruments.Where(x => x.Index == MainWindow.GetIdFromNode(tree.SelectedNode)).FirstOrDefault().NoteInfo[regionInd].Key;
-                if (regionInd > 0) {
-                    prevNote = (byte)BK.Instruments.Where(x => x.Index == MainWindow.GetIdFromNode(tree.SelectedNode)).FirstOrDefault().NoteInfo[regionInd - 1].Key;
-                }
-                Notes note = (Notes)((byte)((prevNote + nextNote) / 2));
+                
+                //byte prevNote = 0;
+                //if (inst as DrumSetInstrument != null) {
+                //    prevNote = (inst as DrumSetInstrument).Min;
+                //}
+                //
+                //byte nextNote = (byte)inst.NoteInfo[regionInd].Key;
+                //if (regionInd > 0) {
+                //    prevNote = (byte)inst.NoteInfo[regionInd - 1].Key;
+                //}
+                //
+                //Notes note = (Notes)(byte)((prevNote + nextNote) / 2);
+
+                Notes note = (Notes)Math.Min(inst.NoteInfo[regionInd].BaseNote, (byte)inst.NoteInfo[regionInd].Key);
                 Player.Stop();
                 Player.Banks[0] = BK;
-                Player.LoadSong(new List<GotaSequenceLib.SequenceCommand>() { new GotaSequenceLib.SequenceCommand() { CommandType = GotaSequenceLib.SequenceCommands.ProgramChange, Parameter = (uint)MainWindow.GetIdFromNode(tree.SelectedNode) }, new GotaSequenceLib.SequenceCommand() { CommandType = GotaSequenceLib.SequenceCommands.Note, Parameter = new GotaSequenceLib.NoteParameter() { Note = note, Length = 48 * 2, Velocity = 127 } }, new SequenceCommand() { CommandType = SequenceCommands.Fin } });
+                Player.LoadSong(new List<SequenceCommand>() { 
+                    new SequenceCommand() { 
+                        CommandType = SequenceCommands.ProgramChange, 
+                        Parameter = (uint)IDfromNode
+                    }, 
+                    new SequenceCommand() {
+                        CommandType = SequenceCommands.Note,
+                        Parameter = new NoteParameter() { 
+                            Note = note, Length = 48 * 2, Velocity = 127 
+                        }
+                    },
+                    new SequenceCommand() { 
+                        CommandType = SequenceCommands.Fin 
+                    } 
+                });
                 Player.Play();
             }
         }

@@ -1192,7 +1192,7 @@ namespace NitroStudio2 {
             // 
             this.blankFileToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Rename;
             this.blankFileToolStripMenuItem.Name = "blankFileToolStripMenuItem";
-            this.blankFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.blankFileToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.blankFileToolStripMenuItem.Text = "Blank File";
             this.blankFileToolStripMenuItem.Click += new System.EventHandler(this.blankFileToolStripMenuItem_Click);
             // 
@@ -1200,7 +1200,7 @@ namespace NitroStudio2 {
             // 
             this.importFileToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Import;
             this.importFileToolStripMenuItem.Name = "importFileToolStripMenuItem";
-            this.importFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importFileToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.importFileToolStripMenuItem.Text = "Import File";
             this.importFileToolStripMenuItem.Click += new System.EventHandler(this.importFileToolStripMenuItem_Click);
             // 
@@ -1208,7 +1208,7 @@ namespace NitroStudio2 {
             // 
             this.exportFileToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Export;
             this.exportFileToolStripMenuItem.Name = "exportFileToolStripMenuItem";
-            this.exportFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportFileToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.exportFileToolStripMenuItem.Text = "Export File";
             this.exportFileToolStripMenuItem.Click += new System.EventHandler(this.exportFileToolStripMenuItem_Click);
             // 
