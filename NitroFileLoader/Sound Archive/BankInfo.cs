@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace NitroFileLoader {
 
@@ -113,13 +114,13 @@ namespace NitroFileLoader {
         public void WriteTextFormat(string path, string name) {
 
             //Return.
-            List<string> ret = new List<string>();
+            List<string> ret = new List<string> {
+                //Path.
+                "@PATH \"../WaveArchives\"\n",
 
-            //Path.
-            ret.Add("@PATH \"../WaveArchives\"\n");
-
-            //Instrument list.
-            ret.Add("@INSTLIST");
+                //Instrument list.
+                "@INSTLIST"
+            };
             int lastGroup = -1;
             int keyNum = 0;
             int drumNum = 0;
@@ -189,11 +190,25 @@ namespace NitroFileLoader {
                     case InstrumentType.Null:
                         return "\t" + ind + " : NULL";
                     default:
-                        if (lastGroup != n.WarId) {
-                            ret.Add("@WGROUP " + n.WarId);
-                            lastGroup = n.WarId;
+                        int warId = n.WarId;
+
+                        if (warId >= WaveArchives.Length) {
+                            MessageBox.Show($"Error at instrument #{ind}: Attempted to reference Wave Archive #{warId}. Banks can only use up to 4!\nFalling back to Wave Archive #0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            warId = 0;
                         }
-                        return "\t" + ind + " : SWAV, \"" + WaveArchives[n.WarId].Name + "/" + n.WaveId.ToString("D4") + ".adpcm.swav" + "\", " + (Notes)n.BaseNote + ", " + n.Attack + ", " + n.Decay + ", " + n.Sustain + ", " + n.Release + ", " + n.Pan;
+
+                        if (lastGroup != warId) {
+                            ret.Add("@WGROUP " + warId);
+                            lastGroup = warId;
+                        }
+
+                        WaveArchiveInfo wai = WaveArchives[warId];
+                        if (wai == null) {
+                            MessageBox.Show($"Error at instrument {ind}: Attempted to reference Wave Archive #{n.WarId}, but it's not being used by the current bank [{this.Name}, #{this.Index}].", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            throw new Exception();
+                        }
+
+                        return "\t" + ind + " : SWAV, \"" + wai.Name + "/" + n.WaveId.ToString("D4") + ".adpcm.swav" + "\", " + (Notes)n.BaseNote + ", " + n.Attack + ", " + n.Decay + ", " + n.Sustain + ", " + n.Release + ", " + n.Pan;
                 }
             }
 

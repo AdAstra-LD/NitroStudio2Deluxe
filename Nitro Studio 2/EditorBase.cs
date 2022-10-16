@@ -1192,7 +1192,7 @@ namespace NitroStudio2 {
             // 
             this.blankFileToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Rename;
             this.blankFileToolStripMenuItem.Name = "blankFileToolStripMenuItem";
-            this.blankFileToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.blankFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.blankFileToolStripMenuItem.Text = "Blank File";
             this.blankFileToolStripMenuItem.Click += new System.EventHandler(this.blankFileToolStripMenuItem_Click);
             // 
@@ -1200,7 +1200,7 @@ namespace NitroStudio2 {
             // 
             this.importFileToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Import;
             this.importFileToolStripMenuItem.Name = "importFileToolStripMenuItem";
-            this.importFileToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.importFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importFileToolStripMenuItem.Text = "Import File";
             this.importFileToolStripMenuItem.Click += new System.EventHandler(this.importFileToolStripMenuItem_Click);
             // 
@@ -1208,7 +1208,7 @@ namespace NitroStudio2 {
             // 
             this.exportFileToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Export;
             this.exportFileToolStripMenuItem.Name = "exportFileToolStripMenuItem";
-            this.exportFileToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.exportFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportFileToolStripMenuItem.Text = "Export File";
             this.exportFileToolStripMenuItem.Click += new System.EventHandler(this.exportFileToolStripMenuItem_Click);
             // 
@@ -1242,7 +1242,7 @@ namespace NitroStudio2 {
             // 
             this.sequenceArchiveEditorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sequenceArchiveEditorToolStripMenuItem.Image")));
             this.sequenceArchiveEditorToolStripMenuItem.Name = "sequenceArchiveEditorToolStripMenuItem";
-            this.sequenceArchiveEditorToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.sequenceArchiveEditorToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.sequenceArchiveEditorToolStripMenuItem.Text = "Sequence Archive Editor";
             this.sequenceArchiveEditorToolStripMenuItem.Click += new System.EventHandler(this.SequenceArchiveEditorToolStripMenuItem_Click);
             // 
@@ -1250,7 +1250,7 @@ namespace NitroStudio2 {
             // 
             this.bankEditorToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.Bank;
             this.bankEditorToolStripMenuItem.Name = "bankEditorToolStripMenuItem";
-            this.bankEditorToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.bankEditorToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.bankEditorToolStripMenuItem.Text = "Bank Editor";
             this.bankEditorToolStripMenuItem.Click += new System.EventHandler(this.BankEditorToolStripMenuItem_Click);
             // 
@@ -1258,7 +1258,7 @@ namespace NitroStudio2 {
             // 
             this.waveArchiveEditorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("waveArchiveEditorToolStripMenuItem.Image")));
             this.waveArchiveEditorToolStripMenuItem.Name = "waveArchiveEditorToolStripMenuItem";
-            this.waveArchiveEditorToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.waveArchiveEditorToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.waveArchiveEditorToolStripMenuItem.Text = "Wave Archive Editor";
             this.waveArchiveEditorToolStripMenuItem.Click += new System.EventHandler(this.WaveArchiveEditorToolStripMenuItem_Click);
             // 
@@ -1266,7 +1266,7 @@ namespace NitroStudio2 {
             // 
             this.bankGeneratorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("bankGeneratorToolStripMenuItem.Image")));
             this.bankGeneratorToolStripMenuItem.Name = "bankGeneratorToolStripMenuItem";
-            this.bankGeneratorToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.bankGeneratorToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.bankGeneratorToolStripMenuItem.Text = "Bank Generator";
             this.bankGeneratorToolStripMenuItem.Click += new System.EventHandler(this.BankGeneratorToolStripMenuItem_Click);
             // 
@@ -1282,7 +1282,7 @@ namespace NitroStudio2 {
             // 
             this.exportSDKProjectToolStripMenuItem.Image = global::NitroStudio2.Properties.Resources.NSM;
             this.exportSDKProjectToolStripMenuItem.Name = "exportSDKProjectToolStripMenuItem";
-            this.exportSDKProjectToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.exportSDKProjectToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.exportSDKProjectToolStripMenuItem.Text = "Export SDK Project";
             this.exportSDKProjectToolStripMenuItem.Click += new System.EventHandler(this.ExportSDKProjectToolStripMenuItem_Click);
             // 
@@ -1290,7 +1290,7 @@ namespace NitroStudio2 {
             // 
             this.sF2ToDLSToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sF2ToDLSToolStripMenuItem.Image")));
             this.sF2ToDLSToolStripMenuItem.Name = "sF2ToDLSToolStripMenuItem";
-            this.sF2ToDLSToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.sF2ToDLSToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.sF2ToDLSToolStripMenuItem.Text = "SF2 To DLS";
             this.sF2ToDLSToolStripMenuItem.Click += new System.EventHandler(this.sF2ToDLSToolStripMenuItem_Click);
             // 
@@ -1298,7 +1298,7 @@ namespace NitroStudio2 {
             // 
             this.dLSToSF2ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("dLSToSF2ToolStripMenuItem.Image")));
             this.dLSToSF2ToolStripMenuItem.Name = "dLSToSF2ToolStripMenuItem";
-            this.dLSToSF2ToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.dLSToSF2ToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.dLSToSF2ToolStripMenuItem.Text = "DLS To SF2";
             this.dLSToSF2ToolStripMenuItem.Click += new System.EventHandler(this.dLSToSF2ToolStripMenuItem_Click);
             // 
@@ -1306,7 +1306,7 @@ namespace NitroStudio2 {
             // 
             this.batchExportMIDIDLSSF2ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("batchExportMIDIDLSSF2ToolStripMenuItem.Image")));
             this.batchExportMIDIDLSSF2ToolStripMenuItem.Name = "batchExportMIDIDLSSF2ToolStripMenuItem";
-            this.batchExportMIDIDLSSF2ToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.batchExportMIDIDLSSF2ToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.batchExportMIDIDLSSF2ToolStripMenuItem.Text = "Batch Export MIDI/DLS/SF2";
             // 
             // helpToolStripMenuItem
@@ -8221,11 +8221,12 @@ namespace NitroStudio2 {
                 RestoreDirectory = true
             };
             if (FilePath != null && FilePath != "") { 
-                s.FileName = Path.GetFileNameWithoutExtension(FilePath) + ".sprj"; 
+                s.FileName = (Path.GetFileNameWithoutExtension(FilePath) + ".sprj").Replace(' ', '_'); //whitespaces can be problematic in the rebuild phase
             }
             if (s.ShowDialog() == DialogResult.OK) {
                 DialogResult wav = MessageBox.Show("Do you want to save SWAV samples as WAV?", "Export WAV samples?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 (File as SoundArchive).ExportSDKProject(Path.GetDirectoryName(s.FileName), Path.GetFileNameWithoutExtension(s.FileName), writeWav: wav.Equals(DialogResult.Yes));
+                MessageBox.Show("Operation completed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
