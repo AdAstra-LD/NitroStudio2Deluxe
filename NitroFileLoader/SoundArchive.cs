@@ -208,9 +208,9 @@ namespace NitroFileLoader {
 
             //Read entries.
             uint numFiles = r.ReadUInt32();
-            List<Tuple<uint, uint>> fileOffs = new List<Tuple<uint, uint>>();
+            List<(uint offset, uint size)> fileOffs = new List<(uint offset, uint size)>();
             for (uint i = 0; i < numFiles; i++) {
-                fileOffs.Add(new Tuple<uint, uint>(r.ReadUInt32(), r.ReadUInt32()));
+                fileOffs.Add((r.ReadUInt32(), r.ReadUInt32()));
                 r.ReadUInt64();
             }
 
@@ -277,7 +277,7 @@ namespace NitroFileLoader {
                     WaveArchives.Add(r.Read<WaveArchiveInfo>());
                     WaveArchives.Last().Index = ind;
                     WaveArchives.Last().Name = ind > (warNames.Count - 1) ? "WAVE_ARCHIVE_" + ind : warNames[ind];
-                    r.Jump(fileOffs[(int)WaveArchives.Last().ReadingFileId].Item1, true);
+                    r.Jump(fileOffs[(int)WaveArchives.Last().ReadingFileId].offset, true);
                     WaveArchives.Last().File = r.ReadFile<WaveArchive>() as WaveArchive;
                     string md5 = WaveArchives.Last().File.Md5Sum;
                     
@@ -302,7 +302,7 @@ namespace NitroFileLoader {
                     Banks.Add(r.Read<BankInfo>());
                     Banks.Last().Index = ind;
                     Banks.Last().Name = ind > (bankNames.Count - 1) ? "BANK_" + ind : bankNames[ind];
-                    r.Jump(fileOffs[(int)Banks.Last().ReadingFileId].Item1, true);
+                    r.Jump(fileOffs[(int)Banks.Last().ReadingFileId].offset, true);
                     Banks.Last().File = r.ReadFile<Bank>() as Bank;
                     Banks.Last().WaveArchives[0] = Banks.Last().ReadingWave0Id == 0xFFFF ? null : WaveArchives.Where(x => x.Index == Banks.Last().ReadingWave0Id).FirstOrDefault();
                     Banks.Last().WaveArchives[1] = Banks.Last().ReadingWave1Id == 0xFFFF ? null : WaveArchives.Where(x => x.Index == Banks.Last().ReadingWave1Id).FirstOrDefault();
@@ -332,7 +332,7 @@ namespace NitroFileLoader {
                     Sequences.Add(r.Read<SequenceInfo>());
                     Sequences.Last().Index = ind;
                     Sequences.Last().Name = ind > (seqNames.Count - 1) ? "SEQ_" + ind : seqNames[ind];
-                    r.Jump(fileOffs[(int)Sequences.Last().ReadingFileId].Item1, true);
+                    r.Jump(fileOffs[(int)Sequences.Last().ReadingFileId].offset, true);
                     Sequences.Last().File = r.ReadFile<Sequence>() as Sequence;
                     Sequences.Last().Bank = Banks.Where(x => x.Index == Sequences.Last().ReadingBankId).FirstOrDefault();
                     Sequences.Last().Player = Players.Where(x => x.Index == Sequences.Last().ReadingPlayerId).FirstOrDefault();
@@ -358,7 +358,7 @@ namespace NitroFileLoader {
                     Streams.Add(r.Read<StreamInfo>());
                     Streams.Last().Index = ind;
                     Streams.Last().Name = ind > (streamNames.Count - 1) ? "STRM_" + ind : streamNames[ind];
-                    r.Jump(fileOffs[(int)Streams.Last().ReadingFileId].Item1, true);
+                    r.Jump(fileOffs[(int)Streams.Last().ReadingFileId].offset, true);
                     Streams.Last().File = r.ReadFile<Stream>() as Stream;
                     Streams.Last().Player = StreamPlayers.Where(x => x.Index == Streams.Last().ReadingPlayerId).FirstOrDefault();
                     string md5 = Streams.Last().File.Md5Sum;
@@ -383,7 +383,7 @@ namespace NitroFileLoader {
                     SequenceArchives.Add(r.Read<SequenceArchiveInfo>());
                     SequenceArchives.Last().Index = ind;
                     SequenceArchives.Last().Name = ind > (seqArcNames.Count - 1) ? "SEQARC_" + ind : seqArcNames[ind];
-                    r.Jump(fileOffs[(int)SequenceArchives.Last().ReadingFileId].Item1, true);
+                    r.Jump(fileOffs[(int)SequenceArchives.Last().ReadingFileId].offset, true);
                     SequenceArchives.Last().File = r.ReadFile<SequenceArchive>();
                     var labels = SequenceArchives.Last().File.Labels;
                     SequenceArchives.Last().File.Labels = new Dictionary<string, uint>();
