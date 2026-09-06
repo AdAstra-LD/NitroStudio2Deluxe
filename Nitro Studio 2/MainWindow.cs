@@ -37,7 +37,6 @@ namespace NitroStudio2 {
         /// <summary>
         /// Stream temp count.
         /// </summary>
-        public int StreamTempCount = 0;
 
         /// <summary>
         /// Mixer.
@@ -559,8 +558,7 @@ namespace NitroStudio2 {
                     var s = SA.Streams.Where(x => x.Index == GetIdFromNode(tree.SelectedNode)).FirstOrDefault();
                     RiffWave r = new RiffWave();
                     r.FromOtherStreamFile(s.File);
-                    r.Write(MainWindow.NitroPath + "/" + "tmpStream" + StreamTempCount++ + ".wav");
-                    StreamPlayer p = new StreamPlayer(this, MainWindow.NitroPath + "/" + "tmpStream" + (StreamTempCount - 1) + ".wav", s.Name);
+                    StreamPlayer p = new StreamPlayer(this, r, s.Name);
                     p.Show();
                 }
 

@@ -64,8 +64,7 @@ namespace NitroStudio2 {
                         NitroFileLoader.Stream s = new NitroFileLoader.Stream();
                         s.Read(args[0]);
                         r.FromOtherStreamFile(s);
-                        r.Write(MainWindow.NitroPath + "/" + "tmpStream" + 0 + ".wav");
-                        Application.Run(new StreamPlayer(null, MainWindow.NitroPath + "/" + "tmpStream" + 0 + ".wav", Path.GetFileNameWithoutExtension(args[0])));
+                        Application.Run(new StreamPlayer(null, r, Path.GetFileNameWithoutExtension(args[0])));
                         break;
 
                 }

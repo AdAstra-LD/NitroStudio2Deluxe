@@ -40,10 +40,6 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\AxInterop.WMPLib.dll</HintPath>
-    </Reference>
     <Reference Include="ColorSlider, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\lioncs.ColorSlider.1.0.0\lib\net452\ColorSlider.dll</HintPath>
     </Reference>
@@ -244,9 +240,6 @@
     <EmbeddedResource Include="SaveQuitDialog.resx">
       <DependentUpon>SaveQuitDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StreamPlayer.resx">
-      <DependentUpon>StreamPlayer.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -328,9 +321,6 @@
     <None Include="Resources\Ico.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AxInterop.WMPLib.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Hardware\DutyCycle1.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -359,9 +349,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="icon.ico" />
-    <Content Include="Interop.WMPLib.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="libgcc_s_dw2-1.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -383,17 +370,6 @@
     <None Include="Resources\sseq.ico" />
     <None Include="Resources\War.ico" />
     <None Include="Resources\waveArchive.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="WMPLib">
-      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

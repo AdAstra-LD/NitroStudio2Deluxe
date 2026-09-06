@@ -269,7 +269,7 @@ namespace NitroStudio2 {
                 bankRegions.Rows.Add(new DataGridViewRow());
                 var v = bankRegions.Rows[bankRegions.Rows.Count - 2];
                 ((DataGridViewButtonCell)v.Cells[0]).UseColumnTextForButtonValue = true;
-                ((DataGridViewComboBoxCell)v.Cells[1]).Value = ((DataGridViewComboBoxCell)v.Cells[1]).Items[(int)e.Key];
+                SetNoteCell((DataGridViewComboBoxCell)v.Cells[1], (byte)e.Key);
                 switch (e.InstrumentType) {
                     case InstrumentType.PCM:
                         ((DataGridViewComboBoxCell)v.Cells[2]).Value = "PCM";
@@ -289,7 +289,7 @@ namespace NitroStudio2 {
                 }
                 ((DataGridViewTextBoxCell)v.Cells[3]).Value = e.WaveId;
                 ((DataGridViewTextBoxCell)v.Cells[4]).Value = e.WarId;
-                ((DataGridViewComboBoxCell)v.Cells[5]).Value = ((DataGridViewComboBoxCell)v.Cells[5]).Items[e.BaseNote];
+                SetNoteCell((DataGridViewComboBoxCell)v.Cells[5], e.BaseNote);
                 ((DataGridViewTextBoxCell)v.Cells[6]).Value = e.Attack;
                 ((DataGridViewTextBoxCell)v.Cells[7]).Value = e.Decay;
                 ((DataGridViewTextBoxCell)v.Cells[8]).Value = e.Sustain;
@@ -303,6 +303,19 @@ namespace NitroStudio2 {
         /// <summary>
         /// Load wave archives.
         /// </summary>
+        // Adapted from LandonAndEmma's 8dbac53 (NitroShellMKDS/NitroStudio2Deluxe).
+        // Keep malformed values visible and unchanged until a valid note is selected.
+        private static void SetNoteCell(DataGridViewComboBoxCell cell, byte note) {
+            if (note < cell.Items.Count) {
+                cell.Value = cell.Items[note];
+            } else {
+                string value = note + " (invalid note)";
+                cell.Items.Add(value);
+                cell.Value = value;
+                cell.ErrorText = "Expected a MIDI note between 0 and 127.";
+            }
+        }
+
         public void LoadWaveArchives() {
             if (MainWindow == null) {
                 return;

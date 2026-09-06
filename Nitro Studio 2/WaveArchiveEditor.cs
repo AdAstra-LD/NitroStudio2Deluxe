@@ -17,6 +17,19 @@ namespace NitroStudio2 {
     /// Wave archive editor.
     /// </summary>
     public class WaveArchiveEditor : EditorBase {
+        private bool ChooseWaveLoop(RiffWave wave) {
+            using (var dialog = new LoopPointsDialog(wave)) {
+                var result = dialog.ShowDialog(this);
+                if (result != DialogResult.Yes && result != DialogResult.No) return false;
+                wave.Loops = result == DialogResult.Yes;
+                if (wave.Loops) {
+                    wave.LoopStart = dialog.loopStart;
+                    wave.LoopEnd = dialog.loopEnd;
+                    wave.LoopLength = dialog.loopLength;
+                }
+                return true;
+            }
+        }
         /// <summary>
         /// Determines whether a different SWAV element has been selected, 
         /// since the Wave Player was started.
@@ -352,16 +365,7 @@ namespace NitroStudio2 {
                 switch (Path.GetExtension(o.FileName)) {
                     case ".wav":
                         RiffWave r = new RiffWave(o.FileName);
-                        LoopPointsDialog lpd = new LoopPointsDialog(r);
-                        lpd.Show();
-
-                        if (lpd.DialogResult.Equals(DialogResult.Yes)) {
-                            r.LoopStart = lpd.loopStart;
-                            r.LoopEnd = lpd.loopStart;
-                            r.LoopStart = lpd.loopStart;
-                        } else {
-                            r.Loops = false;
-                        }
+                        if (!ChooseWaveLoop(r)) return;
 
                         w.FromOtherStreamFile(r);
                         break;
@@ -451,16 +455,7 @@ namespace NitroStudio2 {
                     case ".wav":
                         RiffWave r = new RiffWave(o.FileName);
                         
-                        LoopPointsDialog lpd = new LoopPointsDialog(r);
-                        lpd.ShowDialog();
-
-                        if (lpd.useLoop && lpd.DialogResult.Equals(DialogResult.Yes)) {
-                            r.LoopStart = lpd.loopStart;
-                            r.LoopEnd = lpd.loopEnd;
-                            r.LoopLength = lpd.loopLength / 8;
-                        } else if (lpd.DialogResult.Equals(DialogResult.No)){
-                            r.Loops = false;
-                        }
+                        if (!ChooseWaveLoop(r)) return;
 
                         w.FromOtherStreamFile(r);
                         break;
