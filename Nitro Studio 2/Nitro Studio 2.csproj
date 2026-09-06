@@ -170,6 +170,9 @@
     <Compile Include="MainWindow.Community.cs" />
     <Compile Include="SdatEntryImport.cs" />
     <Compile Include="ImportFromSdatDialog.cs" />
+    <Compile Include="EditorPreferences.cs" />
+    <Compile Include="PreferencesDialog.cs" />
+    <Compile Include="WaveListImport.cs" />
     <Compile Include="NitroStudio2Instrument.cs" />
     <Compile Include="NitroStudioInstrument.cs" />
     <Compile Include="PianoKey.cs">

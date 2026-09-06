@@ -11,6 +11,12 @@ namespace NitroStudio2 {
             editToolStripMenuItem.DropDownOpening += (s, e) => {
                 import.Enabled = FileOpen && SA != null && SdatEntryImport.Supports(tree.SelectedNode?.Parent?.Name);
             };
+            var waveList = new ToolStripMenuItem("Replace wave archive from list…", null, ImportWaveList);
+            editToolStripMenuItem.DropDownItems.Add(waveList);
+            editToolStripMenuItem.DropDownOpening += (s, e) => {
+                waveList.Enabled = FileOpen && SA != null && tree.SelectedNode?.Parent?.Name == "waveArchives";
+            };
+            toolsToolStripMenuItem.DropDownItems.Add(new ToolStripMenuItem("Preferences…", null, ShowPreferences));
 
             // Raven Penfold's Shift-click reference navigation, with missing-target guards.
             AddReferenceNavigation(seqBankComboBox, "banks", () => (int)seqBankBox.Value);
@@ -20,6 +26,40 @@ namespace NitroStudio2 {
             AddReferenceNavigation(bnkWar1ComboBox, "waveArchives", () => (int)bnkWar1Box.Value);
             AddReferenceNavigation(bnkWar2ComboBox, "waveArchives", () => (int)bnkWar2Box.Value);
             AddReferenceNavigation(bnkWar3ComboBox, "waveArchives", () => (int)bnkWar3Box.Value);
+        }
+
+        public override void newToolStripMenuItem_Click(object sender, EventArgs e) {
+            var previous = File;
+            base.newToolStripMenuItem_Click(sender, e);
+            if (SA != null && !ReferenceEquals(previous, File)) {
+                SA.SaveSymbols = EditorPreferences.Current.WriteNames;
+                DoInfoStuff();
+            }
+        }
+
+        private void ShowPreferences(object sender, EventArgs e) {
+            using (var dialog = new PreferencesDialog(seqImportModeBox.Items, seqExportModeBox.Items)) {
+                if (dialog.ShowDialog(this) != DialogResult.OK) return;
+                seqImportModeBox.SelectedIndex = EditorPreferences.Current.ImportMode;
+                seqExportModeBox.SelectedIndex = EditorPreferences.Current.ExportMode;
+            }
+        }
+
+        private void ImportWaveList(object sender, EventArgs e) {
+            if (SA == null || tree.SelectedNode?.Parent?.Name != "waveArchives") return;
+            int index = GetIdFromNode(tree.SelectedNode);
+            using (var open = new OpenFileDialog { Filter = "Ordered wave list|*.swls", RestoreDirectory = true }) {
+                if (open.ShowDialog(this) != DialogResult.OK) return;
+                try {
+                    var imported = WaveListImport.Read(open.FileName);
+                    Player?.Stop();
+                    SdatEntryImport.Replace(SA, "waveArchives", index, imported);
+                    UpdateNodes();
+                    DoInfoStuff();
+                } catch (Exception ex) {
+                    MessageBox.Show(this, ex.Message, "Wave list import failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void AddReferenceNavigation(ComboBox control, string category, Func<int> index) {

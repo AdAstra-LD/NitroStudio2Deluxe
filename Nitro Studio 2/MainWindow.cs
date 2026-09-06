@@ -87,8 +87,8 @@ namespace NitroStudio2 {
             
             //Settings.
             writeNamesBox.CheckedChanged += new EventHandler(WriteNamesChanged);
-            seqImportModeBox.SelectedIndex = 0;
-            seqExportModeBox.SelectedIndex = 0;
+            seqImportModeBox.SelectedIndex = Math.Min(EditorPreferences.Current.ImportMode, seqImportModeBox.Items.Count - 1);
+            seqExportModeBox.SelectedIndex = Math.Min(EditorPreferences.Current.ExportMode, seqExportModeBox.Items.Count - 1);
 
             //Index panel.
             swapAtIndexButton.Click += new EventHandler(SwapAtIndexButtonPressed);
