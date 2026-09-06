@@ -22,7 +22,7 @@ namespace NitroStudio2 {
     /// <summary>
     /// Main window.
     /// </summary>
-    public class MainWindow : EditorBase {
+    public partial class MainWindow : EditorBase {
 
         /// <summary>
         /// Nitro path.
@@ -79,6 +79,7 @@ namespace NitroStudio2 {
         /// Initialize.
         /// </summary>
         public void Init() {
+            InitializeCommunityWorkflows();
 
             //Window stuff.
             Icon = Properties.Resources.Icon;

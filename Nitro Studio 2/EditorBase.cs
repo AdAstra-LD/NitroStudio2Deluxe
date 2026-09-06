@@ -577,7 +577,7 @@ namespace NitroStudio2 {
         private ToolStripMenuItem collapseToolStripMenuItem;
         public Panel noInfoPanel;
         private Label label1;
-        private ToolTip toolTip;
+        protected ToolTip toolTip;
         public ToolStripMenuItem fileMenu;
         public ContextMenuStrip nodeMenu;
         private ToolStripMenuItem addAboveToolStripMenuItem1;
