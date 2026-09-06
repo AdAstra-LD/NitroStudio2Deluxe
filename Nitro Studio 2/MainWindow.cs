@@ -118,6 +118,9 @@ namespace NitroStudio2 {
             playbackPause.Image = paused ? PlaybackIcons.Play : PlaybackIcons.Pause;
             playbackPause.AccessibleName = playbackPause.Text;
             playbackStop.Enabled = playing || paused;
+            bool selectedIsPlaying = playingSequence != null && ReferenceEquals(SelectedSequence(), playingSequence);
+            kermalisPauseButton.Enabled = selectedIsPlaying && (playing || paused);
+            kermalisStopButton.Enabled = selectedIsPlaying && (playing || paused);
             playbackStatus.Text = playing || paused
                 ? (paused ? "Paused: " : "Playing: ") + playingSequenceName
                 : "Stopped";
@@ -1667,6 +1670,7 @@ namespace NitroStudio2 {
         /// Pause click.
         /// </summary>
         public void PauseClick(object sender, EventArgs e) {
+            if (ReferenceEquals(sender, kermalisPauseButton) && !ReferenceEquals(SelectedSequence(), playingSequence)) return;
             if (Player != null && (Player.State == PlayerState.Playing || Player.State == PlayerState.Paused)) {
                 Player.Pause();
             }
@@ -1677,6 +1681,7 @@ namespace NitroStudio2 {
         /// Stop click.
         /// </summary>
         public void StopClick(object sender, EventArgs e) {
+            if (ReferenceEquals(sender, kermalisStopButton) && !ReferenceEquals(SelectedSequence(), playingSequence)) return;
             Player?.Stop();
             UpdatePlaybackBar();
         }

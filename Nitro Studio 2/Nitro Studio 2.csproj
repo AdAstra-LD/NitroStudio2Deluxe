@@ -161,7 +161,9 @@
     <Compile Include="AudioConverter.Designer.cs">
       <DependentUpon>AudioConverter.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditorBase.cs" />
+    <Compile Include="EditorBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
