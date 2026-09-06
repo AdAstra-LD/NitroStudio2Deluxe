@@ -58,6 +58,68 @@ namespace NitroStudio2 {
         /// </summary>
         public bool PositionBarFree = true;
 
+        private Button playbackPlay;
+        private Button playbackPause;
+        private Button playbackStop;
+        private ToolStripLabel playbackStatus;
+        private string playingSequenceName;
+        private object playingSequence;
+
+        private object SelectedSequence() {
+            if (!HasSelectedSequence()) return null;
+            int index = GetIdFromNode(tree.SelectedNode);
+            if (tree.SelectedNode.Parent.Name == "sequences")
+                return SA.Sequences.FirstOrDefault(x => x.Index == index);
+            var archive = SA.SequenceArchives.FirstOrDefault(x => x.Index == GetIdFromNode(tree.SelectedNode.Parent));
+            return archive?.File.Sequences.FirstOrDefault(x => x.Index == index);
+        }
+
+        private static Button PlaybackButton(string text, EventHandler click) {
+            var button = new Button { Text = text, AutoSize = true, UseVisualStyleBackColor = true };
+            button.Click += click;
+            return button;
+        }
+
+        private bool HasSelectedSequence() {
+            var node = tree.SelectedNode;
+            return FileOpen && SA != null && node?.Parent != null &&
+                (node.Parent.Name == "sequences" || node.Parent.Parent?.Name == "sequenceArchives");
+        }
+
+        private void InitializePlaybackBar() {
+            var bar = new ToolStrip {
+                Dock = DockStyle.Bottom,
+                GripStyle = ToolStripGripStyle.Hidden,
+                AccessibleName = "Sequence playback"
+            };
+            playbackPlay = PlaybackButton("Play Selected", PlayClick);
+            playbackPause = PlaybackButton("Pause", PauseClick);
+            playbackStop = PlaybackButton("Stop", StopClick);
+            playbackStatus = new ToolStripLabel();
+            bar.Items.AddRange(new ToolStripItem[] {
+                new ToolStripControlHost(playbackPlay) { Overflow = ToolStripItemOverflow.Never },
+                new ToolStripControlHost(playbackPause) { Overflow = ToolStripItemOverflow.Never },
+                new ToolStripControlHost(playbackStop) { Overflow = ToolStripItemOverflow.Never },
+                new ToolStripSeparator(), playbackStatus
+            });
+            Controls.Add(bar);
+            bar.SendToBack();
+            UpdatePlaybackBar();
+        }
+
+        private void UpdatePlaybackBar() {
+            if (playbackStatus == null) return;
+            bool playing = Player != null && Player.State == PlayerState.Playing;
+            bool paused = Player != null && Player.State == PlayerState.Paused;
+            playbackPlay.Enabled = HasSelectedSequence();
+            playbackPause.Enabled = playing || paused;
+            playbackPause.Text = paused ? "Resume" : "Pause";
+            playbackStop.Enabled = playing || paused;
+            playbackStatus.Text = playing || paused
+                ? (paused ? "Paused: " : "Playing: ") + playingSequenceName
+                : "Stopped";
+        }
+
         /// <summary>
         /// Create a new main window.
         /// </summary>
@@ -159,6 +221,7 @@ namespace NitroStudio2 {
 
             //Player.
             Player = new Player(Mixer);
+            InitializePlaybackBar();
             kermalisPlayButton.Click += new EventHandler(PlayClick);
             kermalisPauseButton.Click += new EventHandler(PauseClick);
             kermalisStopButton.Click += new EventHandler(StopClick);
@@ -1534,6 +1597,7 @@ namespace NitroStudio2 {
         /// Play click.
         /// </summary>
         public void PlayClick(object sender, EventArgs e) {
+            if (!HasSelectedSequence()) return;
             if (tree.SelectedNode.Parent.Name == "sequences") {
                 var s = SA.Sequences.Where(x => x.Index == GetIdFromNode(tree.SelectedNode)).FirstOrDefault();
                 try { Player.PrepareForSong(new PlayableBank[] { s.Bank.File }, s.Bank.GetAssociatedWaves()); } catch { MessageBox.Show("Sequence entry has no valid bank hooked up to it!"); return; }
@@ -1542,7 +1606,10 @@ namespace NitroStudio2 {
                 kermalisPosition.Maximum = (int)Player.MaxTicks;
                 kermalisPosition.TickFrequency = kermalisPosition.Maximum / 10;
                 kermalisPosition.LargeChange = kermalisPosition.Maximum / 20;
+                playingSequence = s;
+                playingSequenceName = s.Name;
                 Player.Play();
+                UpdatePlaybackBar();
             } else {
                 var a = SA.SequenceArchives.Where(x => x.Index == GetIdFromNode(tree.SelectedNode.Parent)).FirstOrDefault();
                 var s = a.File.Sequences.Where(x => x.Index == GetIdFromNode(tree.SelectedNode)).FirstOrDefault();
@@ -1552,7 +1619,10 @@ namespace NitroStudio2 {
                 kermalisPosition.Maximum = (int)Player.MaxTicks;
                 kermalisPosition.TickFrequency = kermalisPosition.Maximum / 10;
                 kermalisPosition.LargeChange = kermalisPosition.Maximum / 20;
+                playingSequence = s;
+                playingSequenceName = s.Name;
                 Player.Play();
+                UpdatePlaybackBar();
             }
         }
 
@@ -1560,7 +1630,13 @@ namespace NitroStudio2 {
         /// Position tick.
         /// </summary>
         public void PositionTick(object sender, EventArgs e) {
-            if (Player != null && PositionBarFree) {
+            UpdatePlaybackBar();
+            bool selectedIsPlaying = playingSequence != null && ReferenceEquals(SelectedSequence(), playingSequence);
+            kermalisPosition.Enabled = selectedIsPlaying;
+            if (!selectedIsPlaying) {
+                kermalisPosition.Value = 0;
+                PositionBarFree = true;
+            } else if (Player != null && PositionBarFree) {
                 kermalisPosition.Value = Player.GetCurrentPosition() > kermalisPosition.Maximum ? kermalisPosition.Maximum : (int)Player.GetCurrentPosition();
             }
         }
@@ -1578,7 +1654,7 @@ namespace NitroStudio2 {
         /// Mouse up.
         /// </summary>
         public void PositionMouseUp(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left && Player != null && Player.Events != null) {
+            if (e.Button == MouseButtons.Left && Player != null && Player.Events != null && ReferenceEquals(SelectedSequence(), playingSequence)) {
                 Player.SetCurrentPosition(kermalisPosition.Value);
                 PositionBarFree = true;
             }
@@ -1588,14 +1664,18 @@ namespace NitroStudio2 {
         /// Pause click.
         /// </summary>
         public void PauseClick(object sender, EventArgs e) {
-            Player.Pause();
+            if (Player != null && (Player.State == PlayerState.Playing || Player.State == PlayerState.Paused)) {
+                Player.Pause();
+            }
+            UpdatePlaybackBar();
         }
 
         /// <summary>
         /// Stop click.
         /// </summary>
         public void StopClick(object sender, EventArgs e) {
-            Player.Stop();
+            Player?.Stop();
+            UpdatePlaybackBar();
         }
 
         /// <summary>
