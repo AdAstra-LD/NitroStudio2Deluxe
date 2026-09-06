@@ -48,6 +48,7 @@ namespace NitroStudio2 {
         /// </summary>
         public BankGenerator(MainWindow m) {
             InitializeComponent();
+            PlaybackIcons.Apply(this);
             MainWindow = m;
             if (SA.Banks.Where(x => x.File.Instruments.Count > 0).Count() < 1) {
                 MessageBox.Show("There must be at least one bank that has an instrument.");

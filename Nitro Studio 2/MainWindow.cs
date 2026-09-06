@@ -77,6 +77,7 @@ namespace NitroStudio2 {
         private static Button PlaybackButton(string text, EventHandler click) {
             var button = new Button { Text = text, AutoSize = true, UseVisualStyleBackColor = true };
             button.Click += click;
+            PlaybackIcons.Apply(button);
             return button;
         }
 
@@ -114,6 +115,8 @@ namespace NitroStudio2 {
             playbackPlay.Enabled = HasSelectedSequence();
             playbackPause.Enabled = playing || paused;
             playbackPause.Text = paused ? "Resume" : "Pause";
+            playbackPause.Image = paused ? PlaybackIcons.Play : PlaybackIcons.Pause;
+            playbackPause.AccessibleName = playbackPause.Text;
             playbackStop.Enabled = playing || paused;
             playbackStatus.Text = playing || paused
                 ? (paused ? "Paused: " : "Playing: ") + playingSequenceName

@@ -44,6 +44,7 @@ namespace NitroStudio2 {
 
             //Init.
             InitializeComponent();
+            PlaybackIcons.Apply(this);
             mapGrid.CellContentClick += new DataGridViewCellEventHandler(PlayRegionButtonClick);
             if (hideId) { mapGrid.Columns[1].Visible = false; }
             FormClosing += new FormClosingEventHandler(OnClosing);

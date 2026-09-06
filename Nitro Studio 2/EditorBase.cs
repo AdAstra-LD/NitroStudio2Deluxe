@@ -13,7 +13,6 @@ using GotaSoundBank.DLS;
 using static NitroStudio2.AudioConverter;
 
 namespace NitroStudio2 {
-
     /// <summary>
     /// An editor base for files.
     /// </summary>
@@ -434,6 +433,7 @@ namespace NitroStudio2 {
 
             //Initialize component.
             InitializeComponent();
+            PlaybackIcons.Apply(this);
 
             //Set main window.
             MainWindow = mainWindow;
@@ -472,6 +472,7 @@ namespace NitroStudio2 {
 
             //Initialize component.
             InitializeComponent();
+            PlaybackIcons.Apply(this);
 
             //Set main window.
             MainWindow = mainWindow;
@@ -518,6 +519,7 @@ namespace NitroStudio2 {
 
             //Initialize component.
             InitializeComponent();
+            PlaybackIcons.Apply(this);
 
             //Set main window.
             MainWindow = mainWindow;
@@ -8478,5 +8480,74 @@ namespace NitroStudio2 {
             }
         }
     }
+
+    internal static class PlaybackIcons {
+        internal static readonly Image Play = Create(0);
+        internal static readonly Image Pause = Create(1);
+        internal static readonly Image Stop = Create(2);
+
+        private static Image Create(int kind) {
+            var image = new Bitmap(16, 16);
+            using (var graphics = Graphics.FromImage(image)) {
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                using (var brush = new SolidBrush(SystemColors.ControlText)) {
+                    if (kind == 0) {
+                        graphics.FillPolygon(brush, new[] { new Point(4, 2), new Point(14, 8), new Point(4, 14) });
+                    } else if (kind == 1) {
+                        graphics.FillRectangle(brush, 3, 2, 4, 12);
+                        graphics.FillRectangle(brush, 10, 2, 4, 12);
+                    } else {
+                        graphics.FillRectangle(brush, 3, 3, 10, 10);
+                    }
+                }
+            }
+            return image;
+        }
+
+        private static Image ForText(string text) {
+            switch (text) {
+                case "Play":
+                case "Play Selected":
+                case "Play Sample":
+                case "Resume": return Play;
+                case "Pause":
+                case "Pause / Resume": return Pause;
+                case "Stop": return Stop;
+                default: return null;
+            }
+        }
+
+        internal static void Apply(Control control) {
+            if (control is Button button) {
+                var icon = ForText(button.Text);
+                if (icon != null) {
+                    button.Image = icon;
+                    button.TextImageRelation = TextImageRelation.ImageBeforeText;
+                    button.AccessibleName = button.Text;
+                }
+            }
+            if (control is DataGridView grid) {
+                grid.CellPainting -= PaintPlaybackCell;
+                grid.CellPainting += PaintPlaybackCell;
+            }
+            foreach (Control child in control.Controls) Apply(child);
+        }
+
+        private static void PaintPlaybackCell(object sender, DataGridViewCellPaintingEventArgs e) {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            var grid = (DataGridView)sender;
+            if (!(grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn column)) return;
+            var icon = ForText(column.Text);
+            if (icon == null) return;
+            e.Paint(e.ClipBounds, e.PaintParts & ~DataGridViewPaintParts.ContentForeground);
+            int size = Math.Min(e.CellBounds.Height - 6, (int)(16 * e.Graphics.DpiX / 96));
+            if (size > 0) {
+                e.Graphics.DrawImage(icon, new Rectangle(e.CellBounds.X + (e.CellBounds.Width - size) / 2,
+                    e.CellBounds.Y + (e.CellBounds.Height - size) / 2, size, size));
+            }
+            e.Handled = true;
+        }
+    }
+
 
 }

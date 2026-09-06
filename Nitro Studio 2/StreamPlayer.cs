@@ -31,6 +31,7 @@ namespace NitroStudio2 {
             layout.Controls.Add(elapsed);
             layout.Controls.Add(controls);
             Controls.Add(layout);
+            PlaybackIcons.Apply(this);
             play.Click += (s, e) => { if (reader != null && reader.Position >= reader.Length) reader.Position = 0; output?.Play(); };
             pause.Click += (s, e) => output?.Pause();
             stop.Click += (s, e) => { output?.Stop(); if (reader != null) reader.Position = 0; };

@@ -44,6 +44,7 @@ namespace NitroStudio2 {
 
             //Init.
             InitializeComponent();
+            PlaybackIcons.Apply(this);
             instGrid.CellContentClick += new DataGridViewCellEventHandler(PlayRegionButtonClick);
             wavs = waves;
             Player = new Player(Mixer);
