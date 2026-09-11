@@ -126,6 +126,12 @@
     <Compile Include="BankGenerator.Designer.cs">
       <DependentUpon>BankGenerator.cs</DependentUpon>
     </Compile>
+    <Compile Include="SF2ExportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SF2ExportDialog.Designer.cs">
+      <DependentUpon>SF2ExportDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoopingPointsDialog.cs">
       <SubType>Form</SubType>
     </Compile>

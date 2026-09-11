@@ -2379,8 +2379,14 @@ namespace NitroStudio2 {
 
                     //SF2.
                     case ".sf2":
-                        var sf2 = SA.Banks.Where(x => x.Index == ind).FirstOrDefault().File.ToSoundFont(SA, SA.Banks.Where(x => x.Index == ind).FirstOrDefault());
-                        sf2.Write(s.FileName);
+                        using (SF2ExportDialog sf2Dialog = new SF2ExportDialog()) {
+                            if (sf2Dialog.ShowDialog(this) != DialogResult.OK) {
+                                break;
+                            }
+                            var sf2Bank = SA.Banks.Where(x => x.Index == ind).FirstOrDefault();
+                            var sf2 = sf2Bank.File.ToSoundFont(SA, sf2Bank, sf2Dialog.Options);
+                            sf2.Write(s.FileName);
+                        }
                         break;
 
                     //DLS.
