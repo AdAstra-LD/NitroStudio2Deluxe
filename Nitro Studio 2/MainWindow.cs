@@ -439,7 +439,8 @@ namespace NitroStudio2 {
                         SetWaveArchiveIndex(SA, bnkWar1Box, e.WaveArchives[1] == null ? e.ReadingWave1Id : (ushort)e.WaveArchives[1].Index);
                         SetWaveArchiveIndex(SA, bnkWar2Box, e.WaveArchives[2] == null ? e.ReadingWave2Id : (ushort)e.WaveArchives[2].Index);
                         SetWaveArchiveIndex(SA, bnkWar3Box, e.WaveArchives[3] == null ? e.ReadingWave3Id : (ushort)e.WaveArchives[3].Index);
-                        status.Text = "[" + e.Index + "] " + e.Name + " Selected. File Is " + GetBytesSize(e.File) + ".";
+                        long waveSize = e.WaveArchives.Where(x => x != null).Distinct().Sum(x => x.File.Write().Length);
+                        status.Text = "[" + e.Index + "] " + e.Name + " Selected. File Is " + GetBytesSize(e.File) + ". Wave size is " + GetBytesSize(waveSize) + ".";
                     }
 
                     //Wave archive.
@@ -659,7 +660,15 @@ namespace NitroStudio2 {
         /// <param name="f">The file.</param>
         /// <returns>The amount of bytes.</returns>
         public static string GetBytesSize(IOFile f) {
-            long byteCount = f.Write().Length;
+            return GetBytesSize(f.Write().Length);
+        }
+
+        /// <summary>
+        /// Get the amount of bytes for a byte count.
+        /// </summary>
+        /// <param name="byteCount">The byte count.</param>
+        /// <returns>The formatted byte count.</returns>
+        public static string GetBytesSize(long byteCount) {
             string[] suf = { "Bytes", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
             if (byteCount == 0)
                 return "0" + suf[0];
