@@ -26,6 +26,7 @@ namespace NitroStudio2 {
             resampleCheckBox.Checked = defaults.Resample;
             sampleRateNumericUpDown.Value = Math.Max(sampleRateNumericUpDown.Minimum, Math.Min(sampleRateNumericUpDown.Maximum, defaults.TargetSampleRate));
             quantizeCheckBox.Checked = defaults.Quantize;
+            hardwareCheckBox.Checked = defaults.BoostHardwareSamples;
             bitDepthNumericUpDown.Value = Math.Max(bitDepthNumericUpDown.Minimum, Math.Min(bitDepthNumericUpDown.Maximum, defaults.BitDepth));
             namesCheckBox.Checked = defaults.EmbedInstrumentNames;
             namesPathTextBox.Text = defaults.InstrumentNamesPath ?? "";
@@ -67,6 +68,7 @@ namespace NitroStudio2 {
                 TargetSampleRate = (uint)sampleRateNumericUpDown.Value,
                 Quantize = quantizeCheckBox.Checked,
                 BitDepth = (int)bitDepthNumericUpDown.Value,
+                BoostHardwareSamples = hardwareCheckBox.Checked,
                 EmbedInstrumentNames = namesCheckBox.Checked,
                 InstrumentNamesPath = namesPathTextBox.Text
             };

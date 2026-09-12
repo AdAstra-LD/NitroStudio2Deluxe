@@ -30,6 +30,7 @@
             this.quantizeCheckBox = new System.Windows.Forms.CheckBox();
             this.bitDepthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.bitDepthLabel = new System.Windows.Forms.Label();
+            this.hardwareCheckBox = new System.Windows.Forms.CheckBox();
             this.envelopeGroupBox = new System.Windows.Forms.GroupBox();
             this.envelopeLabel = new System.Windows.Forms.Label();
             this.namesGroupBox = new System.Windows.Forms.GroupBox();
@@ -54,9 +55,10 @@
             this.samplesGroupBox.Controls.Add(this.quantizeCheckBox);
             this.samplesGroupBox.Controls.Add(this.bitDepthNumericUpDown);
             this.samplesGroupBox.Controls.Add(this.bitDepthLabel);
+            this.samplesGroupBox.Controls.Add(this.hardwareCheckBox);
             this.samplesGroupBox.Location = new System.Drawing.Point(12, 12);
             this.samplesGroupBox.Name = "samplesGroupBox";
-            this.samplesGroupBox.Size = new System.Drawing.Size(440, 82);
+            this.samplesGroupBox.Size = new System.Drawing.Size(440, 110);
             this.samplesGroupBox.TabIndex = 0;
             this.samplesGroupBox.TabStop = false;
             this.samplesGroupBox.Text = "Sample processing";
@@ -122,10 +124,20 @@
             this.bitDepthLabel.TabIndex = 5;
             this.bitDepthLabel.Text = "bits (stored as 16-bit PCM)";
             //
+            // hardwareCheckBox
+            //
+            this.hardwareCheckBox.AutoSize = true;
+            this.hardwareCheckBox.Location = new System.Drawing.Point(12, 80);
+            this.hardwareCheckBox.Name = "hardwareCheckBox";
+            this.hardwareCheckBox.Size = new System.Drawing.Size(300, 17);
+            this.hardwareCheckBox.TabIndex = 6;
+            this.hardwareCheckBox.Text = "Boost PSG and noise waves to full scale (DS output level)";
+            this.hardwareCheckBox.UseVisualStyleBackColor = true;
+            //
             // envelopeGroupBox
             //
             this.envelopeGroupBox.Controls.Add(this.envelopeLabel);
-            this.envelopeGroupBox.Location = new System.Drawing.Point(12, 100);
+            this.envelopeGroupBox.Location = new System.Drawing.Point(12, 128);
             this.envelopeGroupBox.Name = "envelopeGroupBox";
             this.envelopeGroupBox.Size = new System.Drawing.Size(440, 60);
             this.envelopeGroupBox.TabIndex = 1;
@@ -147,7 +159,7 @@
             this.namesGroupBox.Controls.Add(this.namesPathTextBox);
             this.namesGroupBox.Controls.Add(this.namesBrowseButton);
             this.namesGroupBox.Controls.Add(this.namesHintLabel);
-            this.namesGroupBox.Location = new System.Drawing.Point(12, 166);
+            this.namesGroupBox.Location = new System.Drawing.Point(12, 194);
             this.namesGroupBox.Name = "namesGroupBox";
             this.namesGroupBox.Size = new System.Drawing.Size(440, 96);
             this.namesGroupBox.TabIndex = 2;
@@ -194,7 +206,7 @@
             //
             // exportButton
             //
-            this.exportButton.Location = new System.Drawing.Point(296, 274);
+            this.exportButton.Location = new System.Drawing.Point(296, 302);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(75, 23);
             this.exportButton.TabIndex = 3;
@@ -205,7 +217,7 @@
             // cancelButton
             //
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(377, 274);
+            this.cancelButton.Location = new System.Drawing.Point(377, 302);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 4;
@@ -219,7 +231,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(464, 309);
+            this.ClientSize = new System.Drawing.Size(464, 337);
             this.Controls.Add(this.samplesGroupBox);
             this.Controls.Add(this.envelopeGroupBox);
             this.Controls.Add(this.namesGroupBox);
@@ -252,6 +264,7 @@
         private System.Windows.Forms.CheckBox quantizeCheckBox;
         private System.Windows.Forms.NumericUpDown bitDepthNumericUpDown;
         private System.Windows.Forms.Label bitDepthLabel;
+        private System.Windows.Forms.CheckBox hardwareCheckBox;
         private System.Windows.Forms.GroupBox envelopeGroupBox;
         private System.Windows.Forms.Label envelopeLabel;
         private System.Windows.Forms.GroupBox namesGroupBox;
